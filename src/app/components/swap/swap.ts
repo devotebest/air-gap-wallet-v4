@@ -94,7 +94,7 @@ export class SwapComponent {
     this.expandWalletSelection = false;
   }
 
-  doRadio() {
+  async doRadio() {
     const protocols = [];
     this.supportedProtocols.forEach(supportedProtocol => {
       try {
@@ -104,12 +104,15 @@ export class SwapComponent {
       }
     });
 
-    const modal = this.modalController.create(ProtocolSelectPage, {
-      selectedProtocol: this.selectedProtocol.identifier,
-      protocols: protocols
+    const modal = await this.modalController.create({
+      component: ProtocolSelectPage,
+      componentProps: {
+        selectedProtocol: this.selectedProtocol.identifier,
+        protocols: protocols
+      }
     });
 
-    modal.onDidDismiss((protocolIdentifier: string) => {
+    modal.dismiss((protocolIdentifier: string) => {
       if (protocolIdentifier) {
         this.protocolSetEmitter.emit(
           getProtocolByIdentifier(protocolIdentifier)

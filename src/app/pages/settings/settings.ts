@@ -35,9 +35,9 @@ export class SettingsPage {
   ) {}
 
   public about() {
-    this.navCtrl
+    /*this.navCtrl
       .push(AboutPage)
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   public share() {
@@ -65,8 +65,9 @@ export class SettingsPage {
 
   public introduction() {
     this.modalController
-      .create(IntroductionPage)
-      .present()
+      .create({
+        component: IntroductionPage
+      })
       .catch(handleErrorSentry(ErrorCategory.IONIC_MODAL));
   }
 
@@ -75,35 +76,51 @@ export class SettingsPage {
   }
 
   public telegram() {
-    let alert = this.alertCtrl.create({
-      title: this.translateService.instant("settings.alert_title")
-    });
-    alert.addInput({
-      type: "radio",
-      label: this.translateService.instant("settings.channel.international"),
-      value: "International",
-      checked: true
-    });
-    alert.addInput({
-      type: "radio",
-      label: this.translateService.instant("settings.channel.chinese"),
-      value: "Chinese"
-    });
-    alert.addButton(this.translateService.instant("settings.alert_cancel"));
-    alert.addButton({
-      text: this.translateService.instant("settings.telegram_label"),
-      handler: data => {
-        switch (data) {
-          case "International":
-            this.openUrl("https://t.me/AirGap");
-            break;
-          case "Chinese":
-            this.openUrl("https://t.me/AirGap_cn");
-            break;
-        }
-      }
-    });
-    alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+    let alert = this.alertCtrl
+      .create({
+        header: this.translateService.instant("settings.alert_title"),
+        inputs: [
+          {
+            type: "radio",
+            label: this.translateService.instant(
+              "settings.channel.international"
+            ),
+            value: "International",
+            checked: true
+          },
+          {
+            type: "radio",
+            label: this.translateService.instant("settings.channel.chinese"),
+            value: "Chinese"
+          }
+        ],
+        buttons: [
+          {
+            text: this.translateService.instant("settings.alert_cancel"),
+            role: "cancel",
+            cssClass: "secondary",
+            handler: () => {
+              console.log("Confirm Cancel");
+            }
+          },
+          {
+            text: this.translateService.instant("settings.telegram_label"),
+            handler: data => {
+              switch (data) {
+                case "International":
+                  this.openUrl("https://t.me/AirGap");
+                  break;
+                case "Chinese":
+                  this.openUrl("https://t.me/AirGap_cn");
+                  break;
+              }
+            }
+          }
+        ]
+      })
+      .then(alert => {
+        alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+      });
   }
 
   public translate() {

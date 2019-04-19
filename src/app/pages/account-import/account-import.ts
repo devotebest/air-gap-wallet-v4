@@ -42,11 +42,17 @@ export class AccountImportPage {
     this.platform
       .ready()
       .then(() => {
-        const loading = this.loadingCtrl.create({
-          content: "Syncing..."
-        });
-
-        loading.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        let loading: any;
+        this.loadingCtrl
+          .create({
+            message: "Syncing..."
+          })
+          .then(loading => {
+            loading = loading;
+            loading
+              .present()
+              .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+          });
 
         this.walletAlreadyExists = false;
         this.wallet = this.navParams.get("wallet"); // TODO: Catch error if wallet cannot be imported
@@ -72,12 +78,15 @@ export class AccountImportPage {
           );
 
           if (!this.walletImportable) {
-            let alert = this.alertCtrl.create({
-              title: "Account Not Supported",
-              message:
-                "We currently only support Ethereum and Aeternity accounts."
-            });
-            alert.present();
+            let alert = this.alertCtrl
+              .create({
+                header: "Account Not Supported",
+                message:
+                  "We currently only support Ethereum and Aeternity accounts."
+              })
+              .then(alert => {
+                alert.present();
+              });
           }
         }
 
@@ -115,7 +124,7 @@ export class AccountImportPage {
 
   async import() {
     await this.wallets.addWallet(this.wallet);
-    this.viewCtrl
+    /*this.viewCtrl
       .dismiss()
       .then(async v => {
         console.log("WalletImportPage dismissed");
@@ -127,6 +136,6 @@ export class AccountImportPage {
           tabs.select(0);
         }
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 }

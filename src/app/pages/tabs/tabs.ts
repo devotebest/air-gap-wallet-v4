@@ -53,12 +53,17 @@ export class TabsPage {
     const introduction = await this.storageProvider.get(settingsKey);
     if (!introduction) {
       return new Promise(resolve => {
-        const modal = this.modalController.create(page);
-        modal.onDidDismiss(async () => {
-          await this.storageProvider.set(settingsKey, true);
-          resolve();
-        });
-        modal.present().catch(console.error);
+        const modal = this.modalController
+          .create({
+            component: page
+          })
+          .then(modal => {
+            modal.dismiss(async () => {
+              await this.storageProvider.set(settingsKey, true);
+              resolve();
+            });
+            modal.present().catch(console.error);
+          });
       });
     }
   }

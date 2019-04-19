@@ -206,13 +206,13 @@ export class TransactionPreparePage {
         fee
       );
 
-      this.navController
+      /*this.navController
         .push(InteractionSelectionPage, {
           wallet: this.wallet,
           airGapTx: airGapTx,
           data: "airgap-vault://?d=" + serializedTx
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     } catch (error) {
       //
     }
@@ -222,11 +222,11 @@ export class TransactionPreparePage {
     let callback = address => {
       this.transactionForm.controls.address.setValue(address);
     };
-    this.navController
+    /*this.navController
       .push(ScanAddressPage, {
         callback: callback
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   public toggleMaxAmount() {

@@ -56,9 +56,9 @@ export class TransactionConfirmPage {
   ) {}
 
   dismiss() {
-    this.navController
+    /*this.navController
       .popToRoot()
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   async ionViewWillEnter() {
@@ -72,9 +72,9 @@ export class TransactionConfirmPage {
     );
   }
 
-  broadcastTransaction() {
-    let loading = this.loadingCtrl.create({
-      content: "Broadcasting..."
+  async broadcastTransaction() {
+    let loading = await this.loadingCtrl.create({
+      message: "Broadcasting..."
     });
 
     loading.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
@@ -92,17 +92,21 @@ export class TransactionConfirmPage {
 
     let interval = setTimeout(() => {
       loading.dismiss().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-      let toast = this.toastCtrl.create({
-        duration: TOAST_DURATION,
-        message:
-          "Transaction queued. It might take some time until your TX shows up!",
-        showCloseButton: true,
-        position: "bottom"
-      });
-      toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-      this.navController
+      let toast = this.toastCtrl
+        .create({
+          duration: TOAST_DURATION,
+          message:
+            "Transaction queued. It might take some time until your TX shows up!",
+          showCloseButton: true,
+          position: "bottom"
+        })
+        .then(toast => {
+          toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        });
+
+      /*this.navController
         .popToRoot()
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     }, TIMEOUT_TRANSACTION_QUEUED);
 
     this.protocol
@@ -169,42 +173,48 @@ export class TransactionConfirmPage {
           .catch(handleErrorSentry(ErrorCategory.STORAGE));
 
         loading.dismiss().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-        let alert = this.alertCtrl.create({
-          title: "Transaction broadcasted!",
-          message: "Your transaction has been successfully broadcasted",
-          buttons: [
-            {
-              text: "Open Blockexplorer",
-              handler: () => {
-                if (blockexplorer) {
-                  this.openUrl(blockexplorer.replace("{{txId}}", txId));
-                } else {
-                  let toast = this.toastCtrl.create({
-                    duration: TOAST_DURATION,
-                    message: "Unable to open blockexplorer",
-                    showCloseButton: true,
-                    position: "bottom"
-                  });
-                  toast
-                    .present()
-                    .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        let alert = this.alertCtrl
+          .create({
+            header: "Transaction broadcasted!",
+            message: "Your transaction has been successfully broadcasted",
+            buttons: [
+              {
+                text: "Open Blockexplorer",
+                handler: () => {
+                  if (blockexplorer) {
+                    this.openUrl(blockexplorer.replace("{{txId}}", txId));
+                  } else {
+                    let toast = this.toastCtrl
+                      .create({
+                        duration: TOAST_DURATION,
+                        message: "Unable to open blockexplorer",
+                        showCloseButton: true,
+                        position: "bottom"
+                      })
+                      .then(toast => {
+                        toast
+                          .present()
+                          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+                      });
+                  }
+                  /*this.navController
+                  .popToRoot()
+                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
                 }
-                this.navController
+              },
+              {
+                text: "Ok",
+                handler: () => {
+                  /*this.navController
                   .popToRoot()
-                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+                }
               }
-            },
-            {
-              text: "Ok",
-              handler: () => {
-                this.navController
-                  .popToRoot()
-                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-              }
-            }
-          ]
-        });
-        alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+            ]
+          })
+          .then(alert => {
+            alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+          });
       })
       .catch(error => {
         if (interval) {
@@ -215,16 +225,20 @@ export class TransactionConfirmPage {
 
         loading.dismiss().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
 
-        let toast = this.toastCtrl.create({
-          duration: TOAST_ERROR_DURATION,
-          message: "Transaction broadcasting failed: " + error,
-          showCloseButton: true,
-          position: "bottom"
-        });
-        toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-        this.navController
+        let toast = this.toastCtrl
+          .create({
+            duration: TOAST_ERROR_DURATION,
+            message: "Transaction broadcasting failed: " + error,
+            showCloseButton: true,
+            position: "bottom"
+          })
+          .then(toast => {
+            toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+          });
+
+        /*this.navController
           .popToRoot()
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
       });
   }
 

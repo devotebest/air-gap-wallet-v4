@@ -28,10 +28,12 @@ export class IntroductionPage {
       .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
-  public openIntroductionDownloadPage() {
-    const modal = this.modalController.create(IntroductionDownloadPage);
+  public async openIntroductionDownloadPage() {
+    const modal = await this.modalController.create({
+      component: IntroductionDownloadPage
+    });
 
-    modal.onDidDismiss(shouldCloseAllModals => {
+    modal.dismiss(shouldCloseAllModals => {
       if (shouldCloseAllModals) {
         this.dismiss();
       }
