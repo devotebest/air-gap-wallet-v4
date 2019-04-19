@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Diagnostic } from "@ionic-native/diagnostic";
+import { Diagnostic } from "@ionic-native/diagnostic/ngx";
 import { Platform, AlertController } from "@ionic/angular";
 import {
   handleErrorSentry,
@@ -114,25 +114,28 @@ export class PermissionsProvider {
   }
 
   private showAlert(title: string, message: string) {
-    const alert = this.alertCtrl.create({
-      title,
-      message,
-      buttons: [
-        {
-          text: "Cancel",
-          role: "cancel"
-        },
-        {
-          text: "Open settings",
-          handler: () => {
-            this.diagnostic
-              .switchToSettings()
-              .catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN));
+    const alert = this.alertCtrl
+      .create({
+        header: title,
+        message,
+        buttons: [
+          {
+            text: "Cancel",
+            role: "cancel"
+          },
+          {
+            text: "Open settings",
+            handler: () => {
+              this.diagnostic
+                .switchToSettings()
+                .catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN));
+            }
           }
-        }
-      ]
-    });
-    alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+        ]
+      })
+      .then(alert => {
+        alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+      });
   }
 
   private isGranted(permission: string): boolean {

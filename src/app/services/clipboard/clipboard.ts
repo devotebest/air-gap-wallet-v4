@@ -4,7 +4,7 @@ import {
   handleErrorSentry,
   ErrorCategory
 } from "../sentry-error-handler/sentry-error-handler";
-import { Clipboard } from "@ionic-native/clipboard";
+import { Clipboard } from "@ionic-native/clipboard/ngx";
 
 @Injectable({
   providedIn: "root"
@@ -49,13 +49,16 @@ export class ClipboardProvider {
   }
 
   private async showToast(message: string) {
-    let toast = this.toastController.create({
-      message: message,
-      duration: 1000,
-      position: "top",
-      showCloseButton: true,
-      closeButtonText: "Ok"
-    });
-    toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+    this.toastController
+      .create({
+        message: message,
+        duration: 1000,
+        position: "top",
+        showCloseButton: true,
+        closeButtonText: "Ok"
+      })
+      .then(toast => {
+        toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+      });
   }
 }

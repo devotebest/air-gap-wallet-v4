@@ -61,18 +61,21 @@ export class DeepLinkProvider {
         "deep-link.not-supported-alert.ok"
       ])
       .subscribe(translated => {
-        let alert = this.alertCtrl.create({
-          title: translated["deep-link.not-supported-alert.title"],
-          message: translated["deep-link.not-supported-alert.message"],
-          enableBackdropDismiss: false,
-          buttons: [
-            {
-              text: translated["deep-link.not-supported-alert.ok"],
-              role: "cancel"
-            }
-          ]
-        });
-        alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+        let alert = this.alertCtrl
+          .create({
+            header: translated["deep-link.not-supported-alert.title"],
+            message: translated["deep-link.not-supported-alert.message"],
+            backdropDismiss: false,
+            buttons: [
+              {
+                text: translated["deep-link.not-supported-alert.ok"],
+                role: "cancel"
+              }
+            ]
+          })
+          .then(alert => {
+            alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+          });
       });
   }
 
@@ -89,18 +92,21 @@ export class DeepLinkProvider {
         }
       )
       .subscribe(translated => {
-        let alert = this.alertCtrl.create({
-          title: translated["deep-link.app-not-found.title"],
-          message: translated["deep-link.app-not-found.message"],
-          enableBackdropDismiss: false,
-          buttons: [
-            {
-              text: translated["deep-link.app-not-found.ok"],
-              role: "cancel"
-            }
-          ]
-        });
-        alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+        let alert = this.alertCtrl
+          .create({
+            header: translated["deep-link.app-not-found.title"],
+            message: translated["deep-link.app-not-found.message"],
+            backdropDismiss: false,
+            buttons: [
+              {
+                text: translated["deep-link.app-not-found.ok"],
+                role: "cancel"
+              }
+            ]
+          })
+          .then(alert => {
+            alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
+          });
       });
   }
   // TODO: Move to provider

@@ -1,12 +1,7 @@
 import { SelectWalletPage } from "../../pages/select-wallet/select-wallet";
 import { AccountProvider } from "../account/account.provider";
 import { Injectable } from "@angular/core";
-import {
-  AlertController,
-  AlertButton,
-  App,
-  NavController
-} from "@ionic/angular";
+import { AlertController, NavController } from "@ionic/angular";
 import {
   DeserializedSyncProtocol,
   SyncProtocolUtils,
@@ -37,7 +32,6 @@ export class SchemeRoutingProvider {
   ) => Promise<boolean>)[] = [];
 
   constructor(
-    protected app: App,
     private alertController: AlertController,
     private accountProvider: AccountProvider
   ) {
@@ -102,13 +96,13 @@ export class SchemeRoutingProvider {
         rawString
       );
       if (compatibleWallets.length > 0) {
-        this.navController
+        /*this.navController
           .push(SelectWalletPage, {
             address: rawString,
             compatibleWallets,
             incompatibleWallets
           })
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
       }
     }
   }
@@ -126,7 +120,7 @@ export class SchemeRoutingProvider {
       walletSync.derivationPath
     );
     if (this.navController) {
-      this.navController
+      /*this.navController
         .push(AccountImportPage, {
           wallet: wallet
         })
@@ -135,7 +129,7 @@ export class SchemeRoutingProvider {
           // this.navController.push(PortfolioPage)
         })
         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-
+*/
       /*
         const cancelButton = {
         text: 'Okay!',
@@ -158,7 +152,7 @@ export class SchemeRoutingProvider {
     scanAgainCallback: Function
   ) {
     if (this.navController) {
-      this.navController
+      /*this.navController
         .push(TransactionConfirmPage, {
           signedTransactionSync: deserializedSync
         })
@@ -166,6 +160,7 @@ export class SchemeRoutingProvider {
           console.log("TransactionConfirmPage opened", v);
         })
         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        */
     }
   }
 
@@ -226,17 +221,16 @@ export class SchemeRoutingProvider {
     ).catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
-  public async showAlert(
-    title: string,
-    message: string,
-    buttons: AlertButton[]
-  ) {
-    let alert = this.alertController.create({
-      title,
-      message,
-      enableBackdropDismiss: false,
-      buttons
-    });
-    alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+  public async showAlert(title: string, message: string, buttons: any) {
+    let alert = this.alertController
+      .create({
+        header: title,
+        message,
+        backdropDismiss: false,
+        buttons
+      })
+      .then(alert => {
+        alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      });
   }
 }

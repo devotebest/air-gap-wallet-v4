@@ -6,7 +6,7 @@ import {
   PushObject,
   PushOptions,
   RegistrationEventResponse
-} from "@ionic-native/push";
+} from "@ionic-native/push/ngx";
 import { TranslateService } from "@ngx-translate/core";
 import {
   handleErrorSentry,
@@ -74,9 +74,11 @@ export class PushProvider {
       );
       if (!hasShownPushModal) {
         await this.storageProvider.set(SettingsKey.PUSH_INTRODUCTION, true);
-        const modal = this.modalController.create(IntroductionPushPage);
+        const modal = await this.modalController.create({
+          component: IntroductionPushPage
+        });
 
-        modal.onDidDismiss(askForPermissions => {
+        modal.dismiss(askForPermissions => {
           if (askForPermissions) {
             this.register();
           }
@@ -158,8 +160,9 @@ export class PushProvider {
             duration: 3000,
             position: "top"
           })
-          .present()
-          .catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+          .then(toast => {
+            toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+          });
       });
 
     pushObject

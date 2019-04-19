@@ -13,7 +13,7 @@ import { RawTezosTransaction } from "airgap-coin-lib/dist/serializer/unsigned-tr
 import { RawEthereumTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/ethereum-transactions.serializer";
 import { RawBitcoinTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/bitcoin-transactions.serializer";
 import { RawAeternityTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/aeternity-transactions.serializer";
-import { LoadingController, Loading, ToastController } from "@ionic/angular";
+import { LoadingController, ToastController } from "@ionic/angular";
 import {
   handleErrorSentry,
   ErrorCategory
@@ -23,6 +23,7 @@ import { map } from "rxjs/operators";
 import BigNumber from "bignumber.js";
 import { AccountProvider } from "../account/account.provider";
 import { ProtocolSymbols } from "../protocols/protocols";
+import { load } from "@angular/core/src/render3";
 
 export enum ActionType {
   IMPORT_ACCOUNT,
@@ -173,9 +174,9 @@ export class OperationsProvider {
           duration: 3000,
           position: "bottom"
         })
-        .present()
-        .catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
-
+        .then(toast => {
+          toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+        });
       throw error;
     } finally {
       this.hideLoader(loader);
@@ -244,15 +245,15 @@ export class OperationsProvider {
   }
 
   private async getAndShowLoader() {
-    const loader = this.loadingController.create({
-      content: "Preparing transaction..."
+    const loader = await this.loadingController.create({
+      message: "Preparing transaction..."
     });
-    await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
-
+    //await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
+    await loader.present();
     return loader;
   }
 
-  private hideLoader(loader: Loading) {
+  private hideLoader(loader: any) {
     loader.dismiss().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
   }
 

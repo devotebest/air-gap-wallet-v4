@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import {
   AlertController,
   NavParams,
-  ViewController,
+  ModalController,
   NavController
 } from "@ionic/angular";
 import { AirGapMarketWallet } from "airgap-coin-lib";
@@ -55,7 +55,7 @@ export class AccountEditPopoverComponent {
     private navCtrl: NavController,
     private navParams: NavParams,
     private walletsProvider: AccountProvider,
-    private viewCtrl: ViewController,
+    private viewCtrl: ModalController,
     private clipboardProvider: ClipboardProvider,
     private operationsProvider: OperationsProvider
   ) {

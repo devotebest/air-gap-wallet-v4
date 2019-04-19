@@ -1,5 +1,5 @@
 import { Platform } from "@ionic/angular";
-import { AppVersion } from "@ionic-native/app-version";
+import { AppVersion } from "@ionic-native/app-version/ngx";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -9,7 +9,7 @@ export class AppInfoProvider {
   public appName = "APP_NAME";
   public packageName = "PACKAGE_NAME";
   public versionNumber = "VERSION_NUMBER";
-  public versionCode = "VERSION_CODE";
+  public versionCode: any = "VERSION_CODE";
 
   private isInitialized: Promise<void>;
 

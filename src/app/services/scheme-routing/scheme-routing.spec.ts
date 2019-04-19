@@ -4,7 +4,6 @@ import {
   NavParams,
   Platform,
   AlertController,
-  App,
   LoadingController
 } from "@ionic/angular";
 import { StatusBar } from "@ionic-native/status-bar";
@@ -17,11 +16,11 @@ import {
   SplashScreenMock,
   NavParamsMock,
   AlertControllerMock
-} from "../../../test-config/mocks-ionic";
+} from "../../../../test-config/mocks-ionic";
 import { NavControllerMock, AppMock, LoadingControllerMock } from "ionic-mocks";
 import { SchemeRoutingProvider } from "./scheme-routing";
 
-import { StorageMock } from "../../../test-config/storage-mock";
+import { StorageMock } from "../../../../test-config/storage-mock";
 import { Storage } from "@ionic/storage";
 
 describe("SchemeRoutingProvider Provider", () => {
@@ -33,7 +32,7 @@ describe("SchemeRoutingProvider Provider", () => {
     TestBed.configureTestingModule({
       providers: [
         SchemeRoutingProvider,
-        { provide: App, useClass: AppMock },
+        { useClass: AppMock },
         {
           provide: AlertController,
           useValue: AlertControllerMock

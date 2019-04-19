@@ -1,4 +1,4 @@
-import { IonicErrorHandler } from "@ionic/angular";
+import { ErrorHandler, Injectable } from "@angular/core";
 import {
   init,
   captureException,
@@ -86,7 +86,7 @@ export {
   handleErrorSentry
 };
 
-export class SentryErrorHandler extends IonicErrorHandler {
+export class SentryErrorHandler extends ErrorHandler {
   handleError(error) {
     super.handleError(error);
     handleErrorSentry(error);
