@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from "@angular/core";
 import {
   AirGapMarketWallet,
   TezosKtProtocol,
@@ -7,19 +7,22 @@ import {
   DelegationInfo,
   IAirGapTransaction,
   TezosProtocol
-} from 'airgap-coin-lib'
-import { InteractionSelectionPage } from '../../pages/interaction-selection/interaction-selection'
-import { RawTezosTransaction } from 'airgap-coin-lib/dist/serializer/unsigned-transactions/tezos-transactions.serializer'
-import { RawEthereumTransaction } from 'airgap-coin-lib/dist/serializer/unsigned-transactions/ethereum-transactions.serializer'
-import { RawBitcoinTransaction } from 'airgap-coin-lib/dist/serializer/unsigned-transactions/bitcoin-transactions.serializer'
-import { RawAeternityTransaction } from 'airgap-coin-lib/dist/serializer/unsigned-transactions/aeternity-transactions.serializer'
-import { LoadingController, Loading, ToastController } from 'ionic-angular'
-import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
-import { BehaviorSubject } from 'rxjs'
-import { map } from 'rxjs/operators'
-import BigNumber from 'bignumber.js'
-import { AccountProvider } from '../account/account.provider'
-import { ProtocolSymbols } from '../protocols/protocols'
+} from "airgap-coin-lib";
+import { InteractionSelectionPage } from "../../pages/interaction-selection/interaction-selection";
+import { RawTezosTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/tezos-transactions.serializer";
+import { RawEthereumTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/ethereum-transactions.serializer";
+import { RawBitcoinTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/bitcoin-transactions.serializer";
+import { RawAeternityTransaction } from "airgap-coin-lib/dist/serializer/unsigned-transactions/aeternity-transactions.serializer";
+import { LoadingController, Loading, ToastController } from "@ionic/angular";
+import {
+  handleErrorSentry,
+  ErrorCategory
+} from "../sentry-error-handler/sentry-error-handler";
+import { BehaviorSubject } from "rxjs";
+import { map } from "rxjs/operators";
+import BigNumber from "bignumber.js";
+import { AccountProvider } from "../account/account.provider";
+import { ProtocolSymbols } from "../protocols/protocols";
 
 export enum ActionType {
   IMPORT_ACCOUNT,
@@ -28,10 +31,12 @@ export enum ActionType {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class OperationsProvider {
-  private delegationStatuses: BehaviorSubject<Map<string, boolean>> = new BehaviorSubject(new Map())
+  private delegationStatuses: BehaviorSubject<
+    Map<string, boolean>
+  > = new BehaviorSubject(new Map());
 
   constructor(
     private readonly accountProvider: AccountProvider,
@@ -40,64 +45,84 @@ export class OperationsProvider {
   ) {}
 
   public setDelegationStatusOfAddress(address: string, delegated: boolean) {
-    this.delegationStatuses.next(this.delegationStatuses.getValue().set(address, delegated))
+    this.delegationStatuses.next(
+      this.delegationStatuses.getValue().set(address, delegated)
+    );
   }
 
-  public async getDelegationStatusOfAddress(address: string, refresh: boolean = false) {
-    const delegationStatus = this.delegationStatuses.getValue().get(address)
+  public async getDelegationStatusOfAddress(
+    address: string,
+    refresh: boolean = false
+  ) {
+    const delegationStatus = this.delegationStatuses.getValue().get(address);
     if (refresh || delegationStatus === undefined) {
-      const { isDelegated } = await this.checkDelegated(address)
-      this.setDelegationStatusOfAddress(address, isDelegated)
-      return isDelegated
+      const { isDelegated } = await this.checkDelegated(address);
+      this.setDelegationStatusOfAddress(address, isDelegated);
+      return isDelegated;
     } else {
-      return delegationStatus
+      return delegationStatus;
     }
   }
 
   public async getDelegationStatusObservableOfAddress(address) {
-    await this.getDelegationStatusOfAddress(address)
-    return this.delegationStatuses.pipe(map(delegationStatuses => delegationStatuses.get(address)))
+    await this.getDelegationStatusOfAddress(address);
+    return this.delegationStatuses.pipe(
+      map(delegationStatuses => delegationStatuses.get(address))
+    );
   }
 
   public refreshAllDelegationStatuses() {
     Array.from(this.delegationStatuses.getValue().entries()).forEach(entry => {
-      this.getDelegationStatusOfAddress(entry[0], true).catch(handleErrorSentry(ErrorCategory.OPERATIONS_PROVIDER))
-    })
+      this.getDelegationStatusOfAddress(entry[0], true).catch(
+        handleErrorSentry(ErrorCategory.OPERATIONS_PROVIDER)
+      );
+    });
   }
 
   public async prepareOriginate(wallet: AirGapMarketWallet, delegate?: string) {
-    const loader = await this.getAndShowLoader()
+    const loader = await this.getAndShowLoader();
 
-    const protocol = new TezosProtocol()
+    const protocol = new TezosProtocol();
 
     try {
-      const originateTx = await protocol.originate(wallet.publicKey, delegate)
-      const serializedTx = await this.serializeTx(wallet, originateTx)
-      return this.getPageDetails(wallet, originateTx, serializedTx)
+      const originateTx = await protocol.originate(wallet.publicKey, delegate);
+      const serializedTx = await this.serializeTx(wallet, originateTx);
+      return this.getPageDetails(wallet, originateTx, serializedTx);
     } finally {
-      this.hideLoader(loader)
+      this.hideLoader(loader);
     }
   }
 
-  public async prepareDelegate(wallet: AirGapMarketWallet, delegateTargetAddress?: string) {
-    const loader = await this.getAndShowLoader()
+  public async prepareDelegate(
+    wallet: AirGapMarketWallet,
+    delegateTargetAddress?: string
+  ) {
+    const loader = await this.getAndShowLoader();
 
-    const protocol = new TezosKtProtocol()
+    const protocol = new TezosKtProtocol();
 
     try {
-      const delegateTx = await protocol.delegate(wallet.publicKey, wallet.receivingPublicAddress, delegateTargetAddress)
-      const serializedTx = await this.serializeTx(wallet, delegateTx)
-      return this.getPageDetails(wallet, delegateTx, serializedTx)
+      const delegateTx = await protocol.delegate(
+        wallet.publicKey,
+        wallet.receivingPublicAddress,
+        delegateTargetAddress
+      );
+      const serializedTx = await this.serializeTx(wallet, delegateTx);
+      return this.getPageDetails(wallet, delegateTx, serializedTx);
     } finally {
-      this.hideLoader(loader)
+      this.hideLoader(loader);
     }
   }
 
   private async serializeTx(
     wallet: AirGapMarketWallet,
-    transaction: RawTezosTransaction | RawEthereumTransaction | RawBitcoinTransaction | RawAeternityTransaction
+    transaction:
+      | RawTezosTransaction
+      | RawEthereumTransaction
+      | RawBitcoinTransaction
+      | RawAeternityTransaction
   ) {
-    const syncProtocol = new SyncProtocolUtils()
+    const syncProtocol = new SyncProtocolUtils();
     return syncProtocol.serialize({
       version: 1,
       protocol: wallet.coinProtocol.identifier,
@@ -105,14 +130,14 @@ export class OperationsProvider {
       payload: {
         publicKey: wallet.publicKey,
         transaction: transaction,
-        callback: 'airgap-wallet://?d='
+        callback: "airgap-wallet://?d="
       }
-    })
+    });
   }
 
   public async checkDelegated(address: string): Promise<DelegationInfo> {
-    const protocol = new TezosKtProtocol()
-    return protocol.isAddressDelegated(address)
+    const protocol = new TezosKtProtocol();
+    return protocol.isAddressDelegated(address);
   }
 
   public async prepareTransaction(
@@ -121,43 +146,55 @@ export class OperationsProvider {
     amount: BigNumber,
     fee: BigNumber
   ): Promise<{ airGapTx: IAirGapTransaction; serializedTx: string }> {
-    const loader = await this.getAndShowLoader()
+    const loader = await this.getAndShowLoader();
 
     try {
       // TODO: This is an UnsignedTransaction, not an IAirGapTransaction
-      const rawUnsignedTx: any = await wallet.prepareTransaction([address], [amount], fee)
+      const rawUnsignedTx: any = await wallet.prepareTransaction(
+        [address],
+        [amount],
+        fee
+      );
 
       const airGapTx = await wallet.coinProtocol.getTransactionDetails({
         publicKey: wallet.publicKey,
         transaction: rawUnsignedTx
-      })
+      });
 
-      const serializedTx = await this.serializeTx(wallet, rawUnsignedTx)
+      const serializedTx = await this.serializeTx(wallet, rawUnsignedTx);
 
-      return { airGapTx, serializedTx }
+      return { airGapTx, serializedTx };
     } catch (error) {
-      handleErrorSentry(ErrorCategory.COINLIB)(error)
+      handleErrorSentry(ErrorCategory.COINLIB)(error);
 
       this.toastController
         .create({
           message: error,
           duration: 3000,
-          position: 'bottom'
+          position: "bottom"
         })
         .present()
-        .catch(handleErrorSentry(ErrorCategory.IONIC_TOAST))
+        .catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
 
-      throw error
+      throw error;
     } finally {
-      this.hideLoader(loader)
+      this.hideLoader(loader);
     }
   }
 
-  public async addKtAddress(xtzWallet: AirGapMarketWallet, index: number, ktAddresses: string[]): Promise<AirGapMarketWallet> {
-    let wallet = this.accountProvider.walletByPublicKeyAndProtocolAndAddressIndex(xtzWallet.publicKey, ProtocolSymbols.XTZ_KT, index)
+  public async addKtAddress(
+    xtzWallet: AirGapMarketWallet,
+    index: number,
+    ktAddresses: string[]
+  ): Promise<AirGapMarketWallet> {
+    let wallet = this.accountProvider.walletByPublicKeyAndProtocolAndAddressIndex(
+      xtzWallet.publicKey,
+      ProtocolSymbols.XTZ_KT,
+      index
+    );
 
     if (wallet) {
-      return wallet
+      return wallet;
     }
 
     wallet = new AirGapMarketWallet(
@@ -166,28 +203,34 @@ export class OperationsProvider {
       xtzWallet.isExtendedPublicKey,
       xtzWallet.derivationPath,
       index
-    )
-    wallet.addresses = ktAddresses
-    await wallet.synchronize().catch(handleErrorSentry(ErrorCategory.COINLIB))
-    await this.accountProvider.addWallet(wallet).catch(handleErrorSentry(ErrorCategory.WALLET_PROVIDER))
+    );
+    wallet.addresses = ktAddresses;
+    await wallet.synchronize().catch(handleErrorSentry(ErrorCategory.COINLIB));
+    await this.accountProvider
+      .addWallet(wallet)
+      .catch(handleErrorSentry(ErrorCategory.WALLET_PROVIDER));
 
-    return wallet
+    return wallet;
   }
 
   private async getPageDetails(
     wallet: AirGapMarketWallet,
-    transaction: RawTezosTransaction | RawEthereumTransaction | RawBitcoinTransaction | RawAeternityTransaction,
+    transaction:
+      | RawTezosTransaction
+      | RawEthereumTransaction
+      | RawBitcoinTransaction
+      | RawAeternityTransaction,
     serializedTx: string
   ) {
-    let airGapTx
+    let airGapTx;
 
     try {
       airGapTx = await wallet.coinProtocol.getTransactionDetails({
         publicKey: wallet.publicKey,
         transaction: transaction
-      })
+      });
     } catch (e) {
-      handleErrorSentry(ErrorCategory.COINLIB)(e)
+      handleErrorSentry(ErrorCategory.COINLIB)(e);
     }
 
     return {
@@ -195,33 +238,33 @@ export class OperationsProvider {
       params: {
         wallet: wallet,
         airGapTx: airGapTx,
-        data: 'airgap-vault://?d=' + serializedTx
+        data: "airgap-vault://?d=" + serializedTx
       }
-    }
+    };
   }
 
   private async getAndShowLoader() {
     const loader = this.loadingController.create({
-      content: 'Preparing transaction...'
-    })
-    await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER))
+      content: "Preparing transaction..."
+    });
+    await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
 
-    return loader
+    return loader;
   }
 
   private hideLoader(loader: Loading) {
-    loader.dismiss().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER))
+    loader.dismiss().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
   }
 
   public getActionsForCoin(identifier: string): ActionType[] {
     if (identifier === ProtocolSymbols.ETH) {
-      return [ActionType.ADD_TOKEN]
+      return [ActionType.ADD_TOKEN];
     } else if (identifier === ProtocolSymbols.XTZ) {
-      return [ActionType.IMPORT_ACCOUNT, ActionType.DELEGATE]
+      return [ActionType.IMPORT_ACCOUNT, ActionType.DELEGATE];
     } else if (identifier === ProtocolSymbols.XTZ_KT) {
-      return [ActionType.DELEGATE]
+      return [ActionType.DELEGATE];
     } else {
-      return []
+      return [];
     }
   }
 }

@@ -1,25 +1,46 @@
-import { SelectWalletPage } from '../../pages/select-wallet/select-wallet'
-import { AccountProvider } from '../account/account.provider'
-import { Injectable } from '@angular/core'
-import { AlertController, AlertButton, App, NavController } from 'ionic-angular'
-import { DeserializedSyncProtocol, SyncProtocolUtils, EncodedType, SyncWalletRequest, AirGapMarketWallet } from 'airgap-coin-lib'
-import { AccountImportPage } from '../../pages/account-import/account-import'
-import { TransactionConfirmPage } from '../../pages/transaction-confirm/transaction-confirm'
-import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
+import { SelectWalletPage } from "../../pages/select-wallet/select-wallet";
+import { AccountProvider } from "../account/account.provider";
+import { Injectable } from "@angular/core";
+import {
+  AlertController,
+  AlertButton,
+  App,
+  NavController
+} from "@ionic/angular";
+import {
+  DeserializedSyncProtocol,
+  SyncProtocolUtils,
+  EncodedType,
+  SyncWalletRequest,
+  AirGapMarketWallet
+} from "airgap-coin-lib";
+import { AccountImportPage } from "../../pages/account-import/account-import";
+import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
+import {
+  handleErrorSentry,
+  ErrorCategory
+} from "../sentry-error-handler/sentry-error-handler";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class SchemeRoutingProvider {
-  private navController: NavController
+  private navController: NavController;
   /* TS 2.7 feature
   private syncSchemeHandlers: {
     [key in EncodedType]: (deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) => Promise<boolean>
   }
   */
-  private syncSchemeHandlers: ((deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) => Promise<boolean>)[] = []
+  private syncSchemeHandlers: ((
+    deserializedSync: DeserializedSyncProtocol,
+    scanAgainCallback: Function
+  ) => Promise<boolean>)[] = [];
 
-  constructor(protected app: App, private alertController: AlertController, private accountProvider: AccountProvider) {
+  constructor(
+    protected app: App,
+    private alertController: AlertController,
+    private accountProvider: AccountProvider
+  ) {
     /* TS 2.7 feature
     this.syncSchemeHandlers = {
       [EncodedType.WALLET_SYNC]: this.handleWalletSync.bind(this),
@@ -27,9 +48,15 @@ export class SchemeRoutingProvider {
       [EncodedType.SIGNED_TRANSACTION]: this.handleSignedTransaction.bind(this)
     }
     */
-    this.syncSchemeHandlers[EncodedType.WALLET_SYNC] = this.handleWalletSync.bind(this)
-    this.syncSchemeHandlers[EncodedType.UNSIGNED_TRANSACTION] = this.syncTypeNotSupportedAlert.bind(this)
-    this.syncSchemeHandlers[EncodedType.SIGNED_TRANSACTION] = this.handleSignedTransaction.bind(this)
+    this.syncSchemeHandlers[
+      EncodedType.WALLET_SYNC
+    ] = this.handleWalletSync.bind(this);
+    this.syncSchemeHandlers[
+      EncodedType.UNSIGNED_TRANSACTION
+    ] = this.syncTypeNotSupportedAlert.bind(this);
+    this.syncSchemeHandlers[
+      EncodedType.SIGNED_TRANSACTION
+    ] = this.handleSignedTransaction.bind(this);
   }
 
   async handleNewSyncRequest(
@@ -39,57 +66,75 @@ export class SchemeRoutingProvider {
       /* */
     }
   ) {
-    this.navController = navCtrl
-    const syncProtocol = new SyncProtocolUtils()
+    this.navController = navCtrl;
+    const syncProtocol = new SyncProtocolUtils();
 
     try {
-      let url = new URL(rawString)
-      let data = rawString // Fallback to support raw data QRs
-      data = url.searchParams.get('d')
+      let url = new URL(rawString);
+      let data = rawString; // Fallback to support raw data QRs
+      data = url.searchParams.get("d");
 
       try {
-        const deserializedSync = await syncProtocol.deserialize(data)
+        const deserializedSync = await syncProtocol.deserialize(data);
 
         if (deserializedSync.type in EncodedType) {
           // Only handle types that we know
-          return this.syncSchemeHandlers[deserializedSync.type](deserializedSync, scanAgainCallback)
+          return this.syncSchemeHandlers[deserializedSync.type](
+            deserializedSync,
+            scanAgainCallback
+          );
         } else {
-          return this.syncTypeNotSupportedAlert(deserializedSync, scanAgainCallback)
+          return this.syncTypeNotSupportedAlert(
+            deserializedSync,
+            scanAgainCallback
+          );
         }
       } catch (error) {
-        console.error('Deserialization of sync failed', error)
+        console.error("Deserialization of sync failed", error);
       }
     } catch (error) {
-      console.warn(error)
+      console.warn(error);
 
-      const { compatibleWallets, incompatibleWallets } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(rawString)
+      const {
+        compatibleWallets,
+        incompatibleWallets
+      } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(
+        rawString
+      );
       if (compatibleWallets.length > 0) {
         this.navController
-          .push(SelectWalletPage, { address: rawString, compatibleWallets, incompatibleWallets })
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+          .push(SelectWalletPage, {
+            address: rawString,
+            compatibleWallets,
+            incompatibleWallets
+          })
+          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       }
     }
   }
 
-  async handleWalletSync(deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) {
+  async handleWalletSync(
+    deserializedSync: DeserializedSyncProtocol,
+    scanAgainCallback: Function
+  ) {
     // tslint:disable-next-line:no-unnecessary-type-assertion
-    const walletSync = deserializedSync.payload as SyncWalletRequest
+    const walletSync = deserializedSync.payload as SyncWalletRequest;
     const wallet = new AirGapMarketWallet(
       deserializedSync.protocol,
       walletSync.publicKey,
       walletSync.isExtendedPublicKey,
       walletSync.derivationPath
-    )
+    );
     if (this.navController) {
       this.navController
         .push(AccountImportPage, {
           wallet: wallet
         })
         .then(v => {
-          console.log('WalletImportPage openend', v)
+          console.log("WalletImportPage openend", v);
           // this.navController.push(PortfolioPage)
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
 
       /*
         const cancelButton = {
@@ -108,16 +153,19 @@ export class SchemeRoutingProvider {
     }
   }
 
-  async handleSignedTransaction(deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) {
+  async handleSignedTransaction(
+    deserializedSync: DeserializedSyncProtocol,
+    scanAgainCallback: Function
+  ) {
     if (this.navController) {
       this.navController
         .push(TransactionConfirmPage, {
           signedTransactionSync: deserializedSync
         })
         .then(v => {
-          console.log('TransactionConfirmPage opened', v)
+          console.log("TransactionConfirmPage opened", v);
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
     }
   }
 
@@ -160,26 +208,35 @@ export class SchemeRoutingProvider {
     }
   }
 */
-  private async syncTypeNotSupportedAlert(deserializedSyncProtocol: DeserializedSyncProtocol, scanAgainCallback: Function) {
+  private async syncTypeNotSupportedAlert(
+    deserializedSyncProtocol: DeserializedSyncProtocol,
+    scanAgainCallback: Function
+  ) {
     const cancelButton = {
-      text: 'Okay!',
-      role: 'cancel',
+      text: "Okay!",
+      role: "cancel",
       handler: () => {
-        scanAgainCallback()
+        scanAgainCallback();
       }
-    }
-    this.showAlert('Sync type not supported', 'Please use another app to scan this QR.', [cancelButton]).catch(
-      handleErrorSentry(ErrorCategory.NAVIGATION)
-    )
+    };
+    this.showAlert(
+      "Sync type not supported",
+      "Please use another app to scan this QR.",
+      [cancelButton]
+    ).catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
-  public async showAlert(title: string, message: string, buttons: AlertButton[]) {
+  public async showAlert(
+    title: string,
+    message: string,
+    buttons: AlertButton[]
+  ) {
     let alert = this.alertController.create({
       title,
       message,
       enableBackdropDismiss: false,
       buttons
-    })
-    alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    });
+    alert.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

@@ -1,19 +1,24 @@
-import { Component } from '@angular/core'
-import { ViewController } from 'ionic-angular'
-import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
+import { Component } from "@angular/core";
+import { ViewController } from "@ionic/angular";
+import {
+  handleErrorSentry,
+  ErrorCategory
+} from "../../services/sentry-error-handler/sentry-error-handler";
 
 @Component({
-  selector: 'page-introduction-push',
-  templateUrl: 'introduction-push.html'
+  selector: "page-introduction-push",
+  templateUrl: "introduction-push.html"
 })
 export class IntroductionPushPage {
   constructor(public viewCtrl: ViewController) {}
 
   dismiss(askForPermissions: boolean = false) {
-    this.viewCtrl.dismiss(askForPermissions).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.viewCtrl
+      .dismiss(askForPermissions)
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   promptForPushPermission() {
-    this.dismiss(true)
+    this.dismiss(true);
   }
 }

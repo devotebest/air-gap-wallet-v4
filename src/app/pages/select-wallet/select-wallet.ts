@@ -1,26 +1,33 @@
-import { ErrorCategory, handleErrorSentry } from '../../services/sentry-error-handler/sentry-error-handler'
-import { AirGapMarketWallet } from 'airgap-coin-lib'
-import { AccountProvider } from '../../services/account/account.provider'
-import { Component } from '@angular/core'
-import { NavController, NavParams } from 'ionic-angular'
-import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
+import {
+  ErrorCategory,
+  handleErrorSentry
+} from "../../services/sentry-error-handler/sentry-error-handler";
+import { AirGapMarketWallet } from "airgap-coin-lib";
+import { AccountProvider } from "../../services/account/account.provider";
+import { Component } from "@angular/core";
+import { NavController, NavParams } from "@ionic/angular";
+import { TransactionPreparePage } from "../transaction-prepare/transaction-prepare";
 
 @Component({
-  selector: 'page-select-wallet',
-  templateUrl: 'select-wallet.html'
+  selector: "page-select-wallet",
+  templateUrl: "select-wallet.html"
 })
 export class SelectWalletPage {
-  public compatibleWallets: AirGapMarketWallet[] = []
-  public incompatibleWallets: AirGapMarketWallet[] = []
+  public compatibleWallets: AirGapMarketWallet[] = [];
+  public incompatibleWallets: AirGapMarketWallet[] = [];
 
-  private address: string
+  private address: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public accountProvider: AccountProvider) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public accountProvider: AccountProvider
+  ) {}
 
   async ionViewWillLoad() {
-    this.address = this.navParams.get('address')
-    this.compatibleWallets = this.navParams.get('compatibleWallets')
-    this.incompatibleWallets = this.navParams.get('incompatibleWallets')
+    this.address = this.navParams.get("address");
+    this.compatibleWallets = this.navParams.get("compatibleWallets");
+    this.incompatibleWallets = this.navParams.get("incompatibleWallets");
   }
 
   openPreparePage(wallet: AirGapMarketWallet) {
@@ -29,6 +36,6 @@ export class SelectWalletPage {
         wallet: wallet,
         address: this.address
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

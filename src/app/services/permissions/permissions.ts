@@ -1,45 +1,54 @@
-import { Injectable } from '@angular/core'
-import { Diagnostic } from '@ionic-native/diagnostic'
-import { Platform, AlertController } from 'ionic-angular'
-import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
+import { Injectable } from "@angular/core";
+import { Diagnostic } from "@ionic-native/diagnostic";
+import { Platform, AlertController } from "@ionic/angular";
+import {
+  handleErrorSentry,
+  ErrorCategory
+} from "../sentry-error-handler/sentry-error-handler";
 
 export enum PermissionStatus {
-  GRANTED = 'GRANTED',
-  NOT_REQUESTED = 'NOT_REQUESTED',
-  DENIED_ALWAYS = 'DENIED_ALWAYS',
-  DENIED = 'DENIED',
-  UNKNOWN = 'UNKNOWN'
+  GRANTED = "GRANTED",
+  NOT_REQUESTED = "NOT_REQUESTED",
+  DENIED_ALWAYS = "DENIED_ALWAYS",
+  DENIED = "DENIED",
+  UNKNOWN = "UNKNOWN"
 }
 
 export enum PermissionTypes {
-  CAMERA = 'CAMERA',
-  MICROPHONE = 'MICROPHONE'
+  CAMERA = "CAMERA",
+  MICROPHONE = "MICROPHONE"
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class PermissionsProvider {
-  constructor(private platform: Platform, private diagnostic: Diagnostic, private alertCtrl: AlertController) {}
+  constructor(
+    private platform: Platform,
+    private diagnostic: Diagnostic,
+    private alertCtrl: AlertController
+  ) {}
 
   async hasCameraPermission(): Promise<PermissionStatus> {
-    const permission = await this.diagnostic.getCameraAuthorizationStatus(false)
-    return this.getPermissionStatus(permission)
+    const permission = await this.diagnostic.getCameraAuthorizationStatus(
+      false
+    );
+    return this.getPermissionStatus(permission);
   }
 
   async requestPermissions(permissions: PermissionTypes[]): Promise<void> {
-    if (this.platform.is('android')) {
-      const permissionsToRequest = []
+    if (this.platform.is("android")) {
+      const permissionsToRequest = [];
       if (permissions.indexOf(PermissionTypes.CAMERA) >= 0) {
-        permissionsToRequest.push(this.diagnostic.permission.CAMERA)
+        permissionsToRequest.push(this.diagnostic.permission.CAMERA);
       }
-      await this.diagnostic.requestRuntimePermissions(permissionsToRequest)
-    } else if (this.platform.is('ios')) {
+      await this.diagnostic.requestRuntimePermissions(permissionsToRequest);
+    } else if (this.platform.is("ios")) {
       if (permissions.indexOf(PermissionTypes.CAMERA) >= 0) {
-        await this.diagnostic.requestCameraAuthorization(false)
+        await this.diagnostic.requestCameraAuthorization(false);
       }
     } else {
-      console.warn('requesting permission in browser')
+      console.warn("requesting permission in browser");
     }
   }
 
@@ -49,48 +58,58 @@ export class PermissionsProvider {
    * link to the settings.
    */
   async userRequestsPermissions(permissions: PermissionTypes[]) {
-    let canRequestPermission = false
+    let canRequestPermission = false;
     for (const p of permissions) {
-      canRequestPermission = (await this.canAskForPermission(p)) || canRequestPermission
+      canRequestPermission =
+        (await this.canAskForPermission(p)) || canRequestPermission;
     }
     if (canRequestPermission) {
-      await this.requestPermissions(permissions)
+      await this.requestPermissions(permissions);
     } else {
-      this.showSettingsAlert()
+      this.showSettingsAlert();
     }
   }
 
   showSettingsAlert() {
-    this.showAlert('Settings', 'You can enable the missing permissions in the device settings.')
+    this.showAlert(
+      "Settings",
+      "You can enable the missing permissions in the device settings."
+    );
   }
 
-  private async canAskForPermission(permission: PermissionTypes): Promise<boolean> {
-    let canAskForPermission = true
-    if (this.platform.is('android')) {
+  private async canAskForPermission(
+    permission: PermissionTypes
+  ): Promise<boolean> {
+    let canAskForPermission = true;
+    if (this.platform.is("android")) {
       if (permission === PermissionTypes.CAMERA) {
-        let permissionStatus = await this.hasCameraPermission()
-        canAskForPermission = !(permissionStatus === PermissionStatus.DENIED_ALWAYS)
+        let permissionStatus = await this.hasCameraPermission();
+        canAskForPermission = !(
+          permissionStatus === PermissionStatus.DENIED_ALWAYS
+        );
       }
-    } else if (this.platform.is('ios')) {
+    } else if (this.platform.is("ios")) {
       if (permission === PermissionTypes.CAMERA) {
-        let permissionStatus = await this.hasCameraPermission()
-        canAskForPermission = !(permissionStatus === PermissionStatus.DENIED)
+        let permissionStatus = await this.hasCameraPermission();
+        canAskForPermission = !(permissionStatus === PermissionStatus.DENIED);
       }
     }
-    return canAskForPermission
+    return canAskForPermission;
   }
 
-  private async getPermissionStatus(permission: string): Promise<PermissionStatus> {
+  private async getPermissionStatus(
+    permission: string
+  ): Promise<PermissionStatus> {
     if (this.isGranted(permission)) {
-      return PermissionStatus.GRANTED
+      return PermissionStatus.GRANTED;
     } else if (this.isNotRequested(permission)) {
-      return PermissionStatus.NOT_REQUESTED
+      return PermissionStatus.NOT_REQUESTED;
     } else if (this.isDeniedAlways(permission)) {
-      return PermissionStatus.DENIED_ALWAYS
+      return PermissionStatus.DENIED_ALWAYS;
     } else if (this.isDenied(permission)) {
-      return PermissionStatus.DENIED
+      return PermissionStatus.DENIED;
     } else {
-      return PermissionStatus.UNKNOWN
+      return PermissionStatus.UNKNOWN;
     }
   }
 
@@ -100,33 +119,41 @@ export class PermissionsProvider {
       message,
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel'
+          text: "Cancel",
+          role: "cancel"
         },
         {
-          text: 'Open settings',
+          text: "Open settings",
           handler: () => {
-            this.diagnostic.switchToSettings().catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN))
+            this.diagnostic
+              .switchToSettings()
+              .catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN));
           }
         }
       ]
-    })
-    alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT))
+    });
+    alert.present().catch(handleErrorSentry(ErrorCategory.IONIC_ALERT));
   }
 
   private isGranted(permission: string): boolean {
-    return permission === this.diagnostic.permissionStatus.GRANTED || permission === this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE
+    return (
+      permission === this.diagnostic.permissionStatus.GRANTED ||
+      permission === this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE
+    );
   }
 
   private isNotRequested(permission: string): boolean {
-    return permission === this.diagnostic.permissionStatus.NOT_REQUESTED
+    return permission === this.diagnostic.permissionStatus.NOT_REQUESTED;
   }
 
   private isDeniedAlways(permission: string): boolean {
-    return permission === this.diagnostic.permissionStatus.DENIED_ALWAYS || permission === this.diagnostic.permissionStatus.RESTRICTED
+    return (
+      permission === this.diagnostic.permissionStatus.DENIED_ALWAYS ||
+      permission === this.diagnostic.permissionStatus.RESTRICTED
+    );
   }
 
   private isDenied(permission: string): boolean {
-    return !(this.isGranted(permission) || this.isNotRequested(permission))
+    return !(this.isGranted(permission) || this.isNotRequested(permission));
   }
 }
