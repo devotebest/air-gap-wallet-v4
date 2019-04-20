@@ -10,7 +10,7 @@
 <ion-content>
   <ion-row padding-horizontal>
     <ion-item no-lines no-padding *ngIf="bakerConfig; else bakerAvatarSkeleton">
-      <ion-avatar item-start
+      <ion-avatar slot="start"
         ><identicon [address]="bakerConfig?.address"></identicon
       ></ion-avatar>
       <h2 class="font--weight__bold" ion-text color="black">
@@ -21,7 +21,7 @@
     <ng-template #bakerAvatarSkeleton>
       <div class="skeleton--loading">
         <ion-item no-lines no-padding>
-          <ion-avatar item-start><identicon></identicon></ion-avatar>
+          <ion-avatar slot="start"><identicon></identicon></ion-avatar>
           <h2></h2>
           <p></p>
         </ion-item>
@@ -72,7 +72,7 @@
     <ion-card>
       <ion-item no-lines>
         <ion-avatar
-          item-start
+          slot="start"
           class="content--align__center-center border--container"
         >
           <ion-icon md-name="attach_money"></ion-icon>
@@ -92,7 +92,7 @@
       </ion-item>
       <ion-item no-lines>
         <ion-avatar
-          item-start
+          slot="start"
           class="content--align__center-center border--container"
           ><ion-icon md-name="replay"></ion-icon
         ></ion-avatar>
@@ -122,7 +122,7 @@
     <ion-card>
       <ion-item no-lines>
         <ion-avatar
-          item-start
+          slot="start"
           class="content--align__center-center border--container"
         >
           <ion-icon md-name="account_balance_wallet"></ion-icon>
@@ -135,7 +135,7 @@
       </ion-item>
       <ion-item no-lines>
         <ion-avatar
-          item-start
+          slot="start"
           class="content--align__center-center border--container"
         >
           <ion-icon md-name="monetization_on"></ion-icon>
@@ -156,7 +156,7 @@
       </ion-item>
       <ion-item no-lines>
         <ion-avatar
-          item-start
+          slot="start"
           class="content--align__center-center border--container"
           ><ion-icon md-name="update"></ion-icon
         ></ion-avatar>
@@ -189,7 +189,7 @@
     <tezos-delegation-stats [wallet]="wallet"></tezos-delegation-stats>
   </ng-container>
 
-  <ion-fab bottom right>
+  <ion-fab vertical="bottom" horizontal="end">
     <ion-button
       *ngIf="isDelegated"
       shape="round"

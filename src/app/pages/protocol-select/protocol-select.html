@@ -19,15 +19,17 @@
 
 <ion-content padding>
   <ion-list
-    radio-group
     [(ngModel)]="selectedProtocol"
     (ngModelChange)="onModelChange($event)"
     no-lines
   >
-    <currency-item
-      *ngFor="let protocol of filteredProtocols"
-      [protocol]="protocol"
-      [radioList]="true"
-    ></currency-item>
+    <ion-radio-group>
+      <currency-item
+        *ngFor="let protocol of filteredProtocols"
+        [protocol]="protocol"
+        [radioList]="true"
+      >
+      </currency-item>
+    </ion-radio-group>
   </ion-list>
 </ion-content>

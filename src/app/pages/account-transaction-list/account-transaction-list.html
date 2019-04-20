@@ -8,8 +8,8 @@
       'account-transaction-list.title' | translate }}</ion-title
     >
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentEditPopover($event)"
-        ><ion-icon name="more"></ion-icon
+      <ion-button (click)="presentEditPopover($event)"
+        ><ion-icon slot="icon-only" name="more"></ion-icon
       ></ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -196,7 +196,7 @@
       *ngFor="let t of transactions"
       (click)="openTransactionDetailPage(t)"
     >
-      <ion-avatar item-start>
+      <ion-avatar slot="start">
         <identicon *ngIf="t.isInbound" [address]="t.from[0]"></identicon>
         <identicon *ngIf="!t.isInbound" [address]="t.to[0]"></identicon>
       </ion-avatar>
@@ -249,7 +249,7 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <ion-fab bottom>
+  <ion-fab vertical="bottom">
     <ion-row>
       <ion-col>
         <ion-button
@@ -258,9 +258,8 @@
           color="primary"
           (click)="openReceivePage()"
           shape="round"
-          icon-start
         >
-          <ion-icon md-name="call_received"></ion-icon>
+          <ion-icon slot="start" md-name="call_received"></ion-icon>
           {{ 'account-transaction-list.receive_label' | translate }}
         </ion-button>
       </ion-col>

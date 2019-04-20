@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, ViewController } from "@ionic/angular";
+import { NavController, NavParams, ModalController } from "@ionic/angular";
 import { ICoinProtocol } from "airgap-coin-lib";
 
 @Component({
@@ -16,7 +16,7 @@ export class ProtocolSelectPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public viewCtrl: ViewController
+    public viewCtrl: ModalController
   ) {
     this.selectedProtocol = this.navParams.get("selectedProtocol");
     this.protocols = this.navParams.get("protocols");

@@ -332,9 +332,9 @@ export class AccountTransactionListPage {
     }
   }
 
-  async doInfinite(infiniteScroll) {
+  async doInfinite(event) {
     if (!this.infiniteEnabled) {
-      return infiniteScroll.complete();
+      return event.target.complete();
     }
 
     const offset = this.txOffset - (this.txOffset % this.TRANSACTION_LIMIT);
@@ -358,7 +358,7 @@ export class AccountTransactionListPage {
       this.infiniteEnabled = false;
     }
 
-    infiniteScroll.complete();
+    event.target.complete();
   }
 
   async loadInitialTransactions(): Promise<void> {
@@ -416,26 +416,26 @@ export class AccountTransactionListPage {
     );
   }
 
-  presentEditPopover(event) {
-    let popover = this.popoverCtrl.create(AccountEditPopoverComponent, {
-      wallet: this.wallet,
-      onDelete: () => {
+  async presentEditPopover(event) {
+    let popover = await this.popoverCtrl.create({
+      component: AccountEditPopoverComponent,
+      componentProps: {
+        wallet: this.wallet
+      },
+      event: event
+      /*tonDelete: () => {
         this.navCtrl.pop().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       },
       onUndelegate: async () => {
         const pageOptions = await this.operationsProvider.prepareDelegate(
           this.wallet
         );
-        this.navCtrl
+        his.navCtrl
           .push(pageOptions.page, pageOptions.params)
           .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-      }
+    }*/
     });
-    popover
-      .present({
-        ev: event
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    popover.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   // Tezos

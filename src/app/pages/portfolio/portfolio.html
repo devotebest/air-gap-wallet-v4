@@ -56,7 +56,7 @@
     </ion-list>
   </ng-template>
 
-  <ion-fab right bottom>
+  <ion-fab vertical="bottom" horizontal="end">
     <ng-container *ngIf="(wallets | async) as walletsArray">
       <ion-button
         *ngIf="walletsArray.length > 0"

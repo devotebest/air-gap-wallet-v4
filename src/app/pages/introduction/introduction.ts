@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ViewController, ModalController, Platform } from "@ionic/angular";
+import { ModalController, Platform } from "@ionic/angular";
 import { IntroductionDownloadPage } from "../introduction-download/introduction-download";
 import {
   handleErrorSentry,
@@ -16,14 +16,13 @@ export class IntroductionPage {
 
   constructor(
     public platform: Platform,
-    private viewController: ViewController,
     public modalController: ModalController
   ) {
     this.isBrowser = !this.platform.is("cordova");
   }
 
   public dismiss() {
-    this.viewController
+    this.modalController
       .dismiss()
       .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }

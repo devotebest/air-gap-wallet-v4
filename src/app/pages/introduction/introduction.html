@@ -9,20 +9,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding no-bounce>
+<ion-content padding forceOverflow="false">
   <ion-segment [(ngModel)]="security" color="secondary" *ngIf="!isBrowser">
-    <ion-segment-button value="highest"
-      >{{ 'introduction.highest.label' | translate }}</ion-segment-button
-    >
-    <ion-segment-button value="medium"
-      >{{ 'introduction.medium.label' | translate }}</ion-segment-button
-    >
+    <ion-segment-button value="highest">
+      <ion-label>{{ 'introduction.highest.label' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="medium">
+      <ion-label>{{ 'introduction.medium.label' | translate }}</ion-label>
+    </ion-segment-button>
   </ion-segment>
 
   <ng-container *ngIf="security === 'highest'">
-    <ion-row
-      ><p [innerHTML]="'introduction.highest.text' | translate"></p
-    ></ion-row>
+    <ion-row>
+      <p [innerHTML]="'introduction.highest.text' | translate"></p>
+    </ion-row>
 
     <ion-row padding-top align-items-center>
       <ion-col col-5 *ngIf="isBrowser"
@@ -60,9 +60,9 @@
   </ng-container>
 
   <ng-container *ngIf="security === 'medium'">
-    <ion-row
-      ><p [innerHTML]="'introduction.medium.text' | translate"></p
-    ></ion-row>
+    <ion-row>
+      <p [innerHTML]="'introduction.medium.text' | translate"></p>
+    </ion-row>
 
     <ion-row padding-top align-items-center>
       <ion-col col-5
@@ -96,7 +96,7 @@
     </ion-row>
   </ng-container>
 
-  <ion-fab bottom right>
+  <ion-fab vertical="bottom" horizontal="end">
     <ion-button
       shape="round"
       color="secondary"
@@ -105,7 +105,7 @@
       {{ 'introduction.vault-install_label' | translate }}
     </ion-button>
     <ion-button shape="round" color="primary" (click)="dismiss()"
-      >{{ 'introduction.continue_label' | translate }}</ion-button
-    >
+      >{{ 'introduction.continue_label' | translate }}
+    </ion-button>
   </ion-fab>
 </ion-content>

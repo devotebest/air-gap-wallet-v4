@@ -18,26 +18,28 @@ import { ProtocolSymbols } from "../../services/protocols/protocols";
 @Component({
   template: `
     <ion-list no-lines no-detail>
-      <ion-list-header>{{
-        "wallet-edit-popover-component.settings_label" | translate
-      }}</ion-list-header>
-      <ion-button ion-item detail-none (click)="copyAddressToClipboard()">
-        <ion-icon name="clipboard" color="dark" item-end></ion-icon>
+      <ion-list-header
+        ><ion-label>{{
+          "wallet-edit-popover-component.settings_label" | translate
+        }}</ion-label></ion-list-header
+      >
+      <ion-item button detail="false" (click)="copyAddressToClipboard()">
+        <ion-icon name="clipboard" color="dark" slot="end"></ion-icon>
         {{ "wallet-edit-popover-component.copy-address_label" | translate }}
-      </ion-button>
-      <ion-button ion-item detail-none (click)="delete()">
-        <ion-icon name="trash" color="dark" item-end></ion-icon>
+      </ion-item>
+      <ion-item button detail="false" (click)="delete()">
+        <ion-icon name="trash" color="dark" slot="end"></ion-icon>
         {{ "wallet-edit-popover-component.delete_label" | translate }}
-      </ion-button>
-      <ion-button
+      </ion-item>
+      <ion-item
         *ngIf="isTezosKT && isDelegated"
-        ion-item
-        detail-none
+        button
+        detail="false"
         (click)="undelegate()"
       >
-        <ion-icon name="close" color="dark" item-end></ion-icon>
+        <ion-icon name="close" color="dark" slot="end"></ion-icon>
         {{ "wallet-edit-popover-component.undelegate_label" | translate }}
-      </ion-button>
+      </ion-item>
     </ion-list>
   `
 })
