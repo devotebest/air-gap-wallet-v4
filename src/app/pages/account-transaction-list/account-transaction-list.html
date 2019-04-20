@@ -254,7 +254,7 @@
   </ion-list>
 
   <ion-infinite-scroll
-    [enabled]="infiniteEnabled"
+    [disabled]="infiniteEnabled"
     (ionInfinite)="doInfinite($event)"
   >
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

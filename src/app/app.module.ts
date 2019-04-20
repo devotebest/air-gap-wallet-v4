@@ -77,6 +77,8 @@ import { ProtocolSelectPage } from "./pages/protocol-select/protocol-select";
 import { IntroductionPushPage } from "./pages/introduction-push/introduction-push";
 import { PushProvider } from "./services/push/push";
 import { PushBackendProvider } from "./services/push-backend/push-backend";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -85,80 +87,25 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    AccountTransactionListPage,
-    PortfolioPage,
-    TransactionPreparePage,
-    IntroductionPage,
-    SettingsPage,
+    //PortfolioPage,
     ScanPage,
-    TabsPage,
-    AboutPage,
-    AccountAddressPage,
-    TransactionConfirmPage,
-    TransactionDetailPage,
-    TransactionQrPage,
-    ScanAddressPage,
-    ScanSyncPage,
-    AccountImportPage,
-    IntroductionDownloadPage,
-    AccountAddPage,
-    SubAccountAddPage,
-    SubAccountImportPage,
-    AccountImportOnboardingPage,
-    InteractionSelectionPage,
-    SubAccountSelectPage,
-    ExchangePage,
-    ExchangeConfirmPage,
-    SelectWalletPage,
-    DelegationBakerDetailPage,
-    DisclaimerWebExtensionPage,
-    ProtocolSelectPage,
-    IntroductionPushPage
-  ],
-  entryComponents: [
-    AppComponent,
-    AccountTransactionListPage,
-    PortfolioPage,
-    TransactionPreparePage,
     SettingsPage,
-    ScanPage,
-    IntroductionPage,
-    TabsPage,
-    AboutPage,
-    AccountAddressPage,
-    TransactionConfirmPage,
-    TransactionDetailPage,
-    TransactionQrPage,
-    ScanAddressPage,
-    ScanSyncPage,
-    AccountImportPage,
-    AccountEditPopoverComponent,
-    IntroductionDownloadPage,
-    AccountAddPage,
-    SubAccountAddPage,
-    SubAccountImportPage,
-    AccountImportOnboardingPage,
-    InteractionSelectionPage,
-    SubAccountSelectPage,
-    ExchangePage,
-    ExchangeConfirmPage,
-    SelectWalletPage,
-    SubAccountSelectPage,
-    DelegationBakerDetailPage,
-    SubAccountSelectPage,
-    DisclaimerWebExtensionPage,
-    ProtocolSelectPage,
-    IntroductionPushPage
+    ExchangePage
   ],
+  entryComponents: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
     ZXingScannerModule,
     HttpClientModule,
     MaterialIconsModule,
     MomentModule,
     LottieAnimationViewModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -166,41 +113,17 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(),
     IonicStorageModule.forRoot({
       name: "__airgap_storage",
       driverOrder: ["sqlite", "webExtensionLocalStorage", "localstorage"]
     }),
     ComponentsModule,
-    PipesModule,
-    AppRoutingModule
+    PipesModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    BarcodeScanner,
-    Keyboard,
-    Deeplinks,
-    Clipboard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ScannerProvider,
-    AppVersion,
-    Diagnostic,
-    AccountProvider,
-    StorageProvider,
-    SchemeRoutingProvider,
-    ClipboardProvider,
-    PermissionsProvider,
-    ProtocolsProvider,
-    DeepLinkProvider,
-    OperationsProvider,
-    ExchangeProvider,
-    RemoteConfigProvider,
-    WebExtensionProvider,
-    AppInfoProvider,
-    PushProvider,
-    Push,
-    PushBackendProvider
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

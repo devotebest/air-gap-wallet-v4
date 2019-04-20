@@ -16,7 +16,7 @@
         [disabled]="!swapSell"
         type="number"
         id="buy-input"
-        [ngModel]="exchangeAmount?.toFixed()"
+        [(ngModel)]="exchangeAmount"
         (input)="amountSet($event.target.value)"
         placeholder="0.0"
       ></ion-input>

@@ -132,8 +132,8 @@
       <ion-col col-3 no-padding>
         <ion-buttons slot="end">
           <ion-button
-            [outline]="sendMaxAmount ? null : ''"
-            small
+            [fill]="sendMaxAmount ? outline : ''"
+            size="small"
             color="secondary"
             shape="round"
             (click)="toggleMaxAmount()"
