@@ -1,10 +1,15 @@
 <ion-header>
-  <ion-navbar color="whiteSecondaryContrast">
-    <ion-title>{{ 'introduction-download.title' | translate }}</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="dismiss()"><ion-icon name="md-close"></ion-icon></button>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-  </ion-navbar>
+    <ion-title>{{ 'introduction-download.title' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()"
+        ><ion-icon name="md-close"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -12,28 +17,51 @@
 
   <p padding-bottom>{{ 'introduction-download.text' | translate }}</p>
 
-  <button id="btn-generate-secret" ion-button color="primary" (click)="downloadAndroid()" round icon-left margin-top>
+  <ion-button
+    id="btn-generate-secret"
+    color="primary"
+    (click)="downloadAndroid()"
+    shape="round"
+    icon-left
+    margin-top
+  >
     <ion-icon md-name="android"></ion-icon>
     Android
-  </button>
+  </ion-button>
 
-  <p padding-bottom>{{ 'introduction-download.play-store_text' | translate }}</p>
+  <p padding-bottom>
+    {{ 'introduction-download.play-store_text' | translate }}
+  </p>
 
-  <button id="btn-import-secret" ion-button color="primary" (click)="downloadIos()" round icon-left>
+  <ion-button
+    id="btn-import-secret"
+    color="primary"
+    (click)="downloadIos()"
+    shape="round"
+    icon-left
+  >
     <ion-icon md-name="smartphone"></ion-icon>
     iOS
-  </button>
+  </ion-button>
 
   <p padding-bottom>{{ 'introduction-download.app-store_text' | translate }}</p>
 
-  <button id="btn-recover-secret" ion-button color="primary" (click)="downloadDistribution()" round icon-left>
+  <ion-button
+    id="btn-recover-secret"
+    color="primary"
+    (click)="downloadDistribution()"
+    shape="round"
+    icon-left
+  >
     <ion-icon md-name="computer"></ion-icon>
     {{ 'introduction-download.linux-distro_label' | translate }}
-  </button>
+  </ion-button>
 
   <p>{{ 'introduction-download.install-distro_text' | translate }}</p>
 
   <ion-fab bottom right>
-    <button ion-button round color="primary" (click)="dismiss()">{{ 'introduction-download.go_label' | translate }}</button>
+    <ion-button shape="round" color="primary" (click)="dismiss()"
+      >{{ 'introduction-download.go_label' | translate }}</ion-button
+    >
   </ion-fab>
 </ion-content>

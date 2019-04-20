@@ -1,29 +1,52 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'exchange.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ng-container *ngIf="exchangePageState === exchangePageStates.ONBOARDING">
     <ion-row padding class="onboarding__container">
       <h3 [innerHTML]="'exchange.onboarding.heading' | translate"></h3>
-      <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
-      <p no-margin padding-bottom>{{ 'exchange.onboarding.description' | translate }}</p>
-      <button (click)="dismissExchangeOnboarding()" round ion-button color="primary" block>
+      <ion-col no-padding class="content--align__center-center"
+        ><img src="assets/img/token_swap.svg"
+      /></ion-col>
+      <p no-margin padding-bottom>
+        {{ 'exchange.onboarding.description' | translate }}
+      </p>
+      <ion-button
+        (click)="dismissExchangeOnboarding()"
+        shape="round"
+        color="primary"
+        block
+      >
         {{ 'exchange.onboarding.exchange_label' | translate }}
-      </button>
+      </ion-button>
     </ion-row>
   </ng-container>
 
-  <ng-container *ngIf="exchangePageState === exchangePageStates.NOT_ENOUGH_CURRENCIES">
+  <ng-container
+    *ngIf="exchangePageState === exchangePageStates.NOT_ENOUGH_CURRENCIES"
+  >
     <ion-row padding class="onboarding__container">
       <h3 [innerHTML]="'exchange.no-currencies.heading' | translate"></h3>
-      <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
-      <p no-margin padding-bottom>{{ 'exchange.no-currencies.description' | translate }}</p>
-      <button (click)="goToAddCoinPage()" round ion-button color="primary" block>
+      <ion-col no-padding class="content--align__center-center"
+        ><img src="assets/img/token_swap.svg"
+      /></ion-col>
+      <p no-margin padding-bottom>
+        {{ 'exchange.no-currencies.description' | translate }}
+      </p>
+      <ion-button
+        (click)="goToAddCoinPage()"
+        shape="round"
+        color="primary"
+        block
+      >
         {{ 'exchange.no-currencies.exchange_label' | translate }}
-      </button>
+      </ion-button>
     </ion-row>
   </ng-container>
 
@@ -57,7 +80,7 @@
       <img src="assets/img/changelly_logo.svg" />
     </ion-row>
     <ion-fab right bottom>
-      <button
+      <ion-button
         color="primary"
         [disabled]="
           amount?.isNaN() ||
@@ -66,12 +89,11 @@
           amount?.isGreaterThan(fromWallet.currentBalance.shiftedBy(-1 * fromWallet.coinProtocol.decimals))
         "
         (click)="startExchange()"
-        ion-button
-        round
+        shape="round"
         icon-left
       >
         {{ 'exchange.exchange_label' | translate }}
-      </button>
+      </ion-button>
     </ion-fab>
   </ng-container>
 </ion-content>

@@ -1,11 +1,18 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'exchange-confirm.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding-right>
-  <h3 padding-bottom padding-left [innerHTML]="'exchange-confirm.heading' | translate"></h3>
+  <h3
+    padding-bottom
+    padding-left
+    [innerHTML]="'exchange-confirm.heading' | translate"
+  ></h3>
   <address-row
     [address]="fromWallet.receivingPublicAddress"
     label="{{ 'exchange-confirm.sell_label' | translate }}"
@@ -18,15 +25,24 @@
       <ion-row justify-content-center><div class="line--first"></div></ion-row>
     </ion-col>
     <ion-col col-9 padding-bottom>
-      <ion-label stacked class="typography--uppercase">{{ 'exchange-confirm.sell-amount_label' | translate }}</ion-label>
+      <ion-label stacked class="typography--uppercase"
+        >{{ 'exchange-confirm.sell-amount_label' | translate }}</ion-label
+      >
       <div class="typography--mono" item-content>
-        <span class="typography--mono">{{ exchangeResult.amountExpectedFrom }} (~${{ fromFiatAmount | number: '1.2-2' }})</span>
+        <span class="typography--mono"
+          >{{ exchangeResult.amountExpectedFrom }} (~${{ fromFiatAmount |
+          number: '1.2-2' }})</span
+        >
       </div>
 
       <ng-container>
-        <ion-label stacked class="typography--uppercase">{{ 'exchange-confirm.fee_label' | translate }}</ion-label>
+        <ion-label stacked class="typography--uppercase"
+          >{{ 'exchange-confirm.fee_label' | translate }}</ion-label
+        >
         <div class="typography--mono" item-content>
-          <span class="typography--mono">{{ fee }} (~${{ feeFiatAmount | number: '1.2-2' }})</span>
+          <span class="typography--mono"
+            >{{ fee }} (~${{ feeFiatAmount | number: '1.2-2' }})</span
+          >
         </div>
       </ng-container>
     </ion-col>
@@ -44,9 +60,14 @@
       <ion-row justify-content-center><div class="line--second"></div></ion-row>
     </ion-col>
     <ion-col col-9 padding-bottom>
-      <ion-label stacked class="typography--uppercase">{{ 'exchange-confirm.buy-amount_label' | translate }}</ion-label>
+      <ion-label stacked class="typography--uppercase"
+        >{{ 'exchange-confirm.buy-amount_label' | translate }}</ion-label
+      >
       <div class="typography--mono" item-content>
-        <span class="typography--mono">{{ exchangeResult.amountExpectedTo }} (~${{ toFiatAmount | number: '1.2-2' }})</span>
+        <span class="typography--mono"
+          >{{ exchangeResult.amountExpectedTo }} (~${{ toFiatAmount | number:
+          '1.2-2' }})</span
+        >
       </div>
     </ion-col>
   </ion-row>
@@ -63,8 +84,8 @@
   </ion-row>
 
   <ion-fab right bottom>
-    <button color="primary" ion-button round (click)="prepareTransaction()">
+    <ion-button color="primary" shape="round" (click)="prepareTransaction()">
       {{ 'exchange-confirm.confirm-exchange_label' | translate }}
-    </button>
+    </ion-button>
   </ion-fab>
 </ion-content>

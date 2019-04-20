@@ -1,13 +1,23 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'scan.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content no-bounce [class.transparent]="hasCameraPermission">
-  <p ion-text color="white" padding no-margin text-center>{{ 'scan.text' | translate }}</p>
+  <p ion-text color="white" padding no-margin text-center>
+    {{ 'scan.text' | translate }}
+  </p>
 
-  <ion-row [hidden]="!hasCameraPermission" justify-content-center align-items-center class="row--height__100">
+  <ion-row
+    [hidden]="!hasCameraPermission"
+    justify-content-center
+    align-items-center
+    class="row--height__100"
+  >
     <ion-col class="guides--container content--align__center-center">
       <img class="guides--container__img" src="assets/img/qr_code_guides.svg" />
     </ion-col>
@@ -20,11 +30,22 @@
     ></zxing-scanner>
   </ion-row>
 
-  <ion-row [hidden]="hasCameraPermission" (click)="requestPermission()" justify-content-center align-items-center class="row--height__100">
+  <ion-row
+    [hidden]="hasCameraPermission"
+    (click)="requestPermission()"
+    justify-content-center
+    align-items-center
+    class="row--height__100"
+  >
     <ion-col text-center>
       <img src="../assets/img/permission_onboarding_camera.svg" />
-      <h3 padding-horizontal [innerHTML]="'scan.empty-state_heading' | translate"></h3>
-      <button round ion-button color="primary">{{ 'scan.grant-permission_label' | translate }}</button>
+      <h3
+        padding-horizontal
+        [innerHTML]="'scan.empty-state_heading' | translate"
+      ></h3>
+      <ion-button shape="round" color="primary"
+        >{{ 'scan.grant-permission_label' | translate }}</ion-button
+      >
     </ion-col>
   </ion-row>
 </ion-content>

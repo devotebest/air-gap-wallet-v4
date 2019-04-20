@@ -1,7 +1,10 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'transaction-detail.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -15,9 +18,14 @@
   </ion-list>
 
   <ion-fab bottom right>
-    <button ion-button color="primary" (click)="openBlockexplorer()" round icon-left>
+    <ion-button
+      color="primary"
+      (click)="openBlockexplorer()"
+      shape="round"
+      icon-left
+    >
       <ion-icon md-name="open_in_new"></ion-icon>
       {{ 'transaction-detail.open-blockexplorer_label' | translate }}
-    </button>
+    </ion-button>
   </ion-fab>
 </ion-content>

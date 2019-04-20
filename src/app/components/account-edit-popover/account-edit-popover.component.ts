@@ -21,15 +21,15 @@ import { ProtocolSymbols } from "../../services/protocols/protocols";
       <ion-list-header>{{
         "wallet-edit-popover-component.settings_label" | translate
       }}</ion-list-header>
-      <button ion-item detail-none (click)="copyAddressToClipboard()">
+      <ion-button ion-item detail-none (click)="copyAddressToClipboard()">
         <ion-icon name="clipboard" color="dark" item-end></ion-icon>
         {{ "wallet-edit-popover-component.copy-address_label" | translate }}
-      </button>
-      <button ion-item detail-none (click)="delete()">
+      </ion-button>
+      <ion-button ion-item detail-none (click)="delete()">
         <ion-icon name="trash" color="dark" item-end></ion-icon>
         {{ "wallet-edit-popover-component.delete_label" | translate }}
-      </button>
-      <button
+      </ion-button>
+      <ion-button
         *ngIf="isTezosKT && isDelegated"
         ion-item
         detail-none
@@ -37,7 +37,7 @@ import { ProtocolSymbols } from "../../services/protocols/protocols";
       >
         <ion-icon name="close" color="dark" item-end></ion-icon>
         {{ "wallet-edit-popover-component.undelegate_label" | translate }}
-      </button>
+      </ion-button>
     </ion-list>
   `
 })

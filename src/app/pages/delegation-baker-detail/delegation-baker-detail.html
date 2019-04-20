@@ -1,14 +1,21 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'delegation-baker-detail.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-row padding-horizontal>
     <ion-item no-lines no-padding *ngIf="bakerConfig; else bakerAvatarSkeleton">
-      <ion-avatar item-start><identicon [address]="bakerConfig?.address"></identicon></ion-avatar>
-      <h2 class="font--weight__bold" ion-text color="black">{{ bakerConfig?.name }}</h2>
+      <ion-avatar item-start
+        ><identicon [address]="bakerConfig?.address"></identicon
+      ></ion-avatar>
+      <h2 class="font--weight__bold" ion-text color="black">
+        {{ bakerConfig?.name }}
+      </h2>
       <p>{{ bakerConfig?.address }}</p>
     </ion-item>
     <ng-template #bakerAvatarSkeleton>
@@ -27,13 +34,18 @@
     </ion-col>
     <ion-col col-12 no-padding>
       <div class="progress--container">
-        <div class="progress--current" [style.width]="bakerInfo?.bakerUsage.toNumber() * 100 + '%'"></div>
+        <div
+          class="progress--current"
+          [style.width]="bakerInfo?.bakerUsage.toNumber() * 100 + '%'"
+        ></div>
       </div>
     </ion-col>
     <ion-col col-12 no-padding>
       <ion-row>
         <ion-col col-6 no-padding>
-          <small *ngIf="bakerInfo; else bakerInfoSkeleton">{{ bakerInfo?.bakerUsage.toNumber() * 100 | number }}%</small>
+          <small *ngIf="bakerInfo; else bakerInfoSkeleton"
+            >{{ bakerInfo?.bakerUsage.toNumber() * 100 | number }}%</small
+          >
           <ng-template #bakerInfoSkeleton>
             <div class="skeleton--loading">
               <p no-margin></p>
@@ -42,8 +54,10 @@
         </ion-col>
         <ion-col col-6 text-right no-padding>
           <small *ngIf="bakerInfo; else bakerInfoBalanceSkeleton">
-            {{ bakerInfo?.stakingBalance.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }} /
-            {{ bakerInfo?.bakerCapacity.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }}
+            {{ bakerInfo?.stakingBalance.toFixed() | amountConverter: {
+            protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }} /
+            {{ bakerInfo?.bakerCapacity.toFixed() | amountConverter: {
+            protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }}
           </small>
           <ng-template #bakerInfoBalanceSkeleton>
             <div class="skeleton--loading justify--content__end">
@@ -57,10 +71,18 @@
   <ion-row padding-bottom>
     <ion-card>
       <ion-item no-lines>
-        <ion-avatar item-start class="content--align__center-center border--container">
+        <ion-avatar
+          item-start
+          class="content--align__center-center border--container"
+        >
           <ion-icon md-name="attach_money"></ion-icon>
         </ion-avatar>
-        <h2 class="font--weight__bold" ion-text color="black" *ngIf="bakerConfig; else bakerConfigSkeleton">
+        <h2
+          class="font--weight__bold"
+          ion-text
+          color="black"
+          *ngIf="bakerConfig; else bakerConfigSkeleton"
+        >
           {{ bakerConfig?.fee.toNumber() * 100 | number }} %
         </h2>
         <ng-template #bakerConfigSkeleton>
@@ -69,9 +91,19 @@
         <h3>{{ 'delegation-baker-detail.fee' | translate }}</h3>
       </ion-item>
       <ion-item no-lines>
-        <ion-avatar item-start class="content--align__center-center border--container"><ion-icon md-name="replay"></ion-icon></ion-avatar>
-        <h2 class="font--weight__bold" ion-text color="black" *ngIf="bakerConfig; else bakerConfigSkeleton">
-          {{ 'delegation-baker-detail.cycles' | translate: { cycles: bakerConfig?.payout.cycles } }}
+        <ion-avatar
+          item-start
+          class="content--align__center-center border--container"
+          ><ion-icon md-name="replay"></ion-icon
+        ></ion-avatar>
+        <h2
+          class="font--weight__bold"
+          ion-text
+          color="black"
+          *ngIf="bakerConfig; else bakerConfigSkeleton"
+        >
+          {{ 'delegation-baker-detail.cycles' | translate: { cycles:
+          bakerConfig?.payout.cycles } }}
           <small>{{ bakerConfig?.payout.time }}</small>
         </h2>
         <ng-template #bakerConfigSkeleton>
@@ -89,20 +121,33 @@
   <ion-row padding-bottom>
     <ion-card>
       <ion-item no-lines>
-        <ion-avatar item-start class="content--align__center-center border--container">
+        <ion-avatar
+          item-start
+          class="content--align__center-center border--container"
+        >
           <ion-icon md-name="account_balance_wallet"></ion-icon>
         </ion-avatar>
         <h2 class="font--weight__bold" ion-text color="black">
-          {{ wallet.currentBalance?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}
+          {{ wallet.currentBalance?.toNumber() | amountConverter: {
+          protocolIdentifier: wallet.protocolIdentifier } }}
         </h2>
         <h3>{{ 'delegation-baker-detail.your-balance' | translate }}</h3>
       </ion-item>
       <ion-item no-lines>
-        <ion-avatar item-start class="content--align__center-center border--container">
+        <ion-avatar
+          item-start
+          class="content--align__center-center border--container"
+        >
           <ion-icon md-name="monetization_on"></ion-icon>
         </ion-avatar>
-        <h2 class="font--weight__bold" ion-text color="black" *ngIf="avgRoIPerCycle; else avgRoiSkeleton">
-          {{ avgRoIPerCycle?.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' } }}
+        <h2
+          class="font--weight__bold"
+          ion-text
+          color="black"
+          *ngIf="avgRoIPerCycle; else avgRoiSkeleton"
+        >
+          {{ avgRoIPerCycle?.toFixed() | amountConverter: { protocolIdentifier:
+          wallet.protocolIdentifier, maxDigits: '10' } }}
         </h2>
         <ng-template #avgRoiSkeleton>
           <div class="skeleton--loading"><h2></h2></div>
@@ -110,14 +155,26 @@
         <h3>{{ 'delegation-baker-detail.estimated-return' | translate }}</h3>
       </ion-item>
       <ion-item no-lines>
-        <ion-avatar item-start class="content--align__center-center border--container"><ion-icon md-name="update"></ion-icon></ion-avatar>
-        <h2 class="font--weight__bold" ion-text color="black" *ngIf="nextPayout; else nextPayoutSkeleton">
+        <ion-avatar
+          item-start
+          class="content--align__center-center border--container"
+          ><ion-icon md-name="update"></ion-icon
+        ></ion-avatar>
+        <h2
+          class="font--weight__bold"
+          ion-text
+          color="black"
+          *ngIf="nextPayout; else nextPayoutSkeleton"
+        >
           {{ nextPayout | amTimeAgo }}
         </h2>
         <ng-template #nextPayoutSkeleton>
           <div class="skeleton--loading"><h2></h2></div>
         </ng-template>
-        <h3>{{ (isDelegated ? 'delegation-baker-detail.next-payout' : 'delegation-baker-detail.first-payout') | translate }}</h3>
+        <h3>
+          {{ (isDelegated ? 'delegation-baker-detail.next-payout' :
+          'delegation-baker-detail.first-payout') | translate }}
+        </h3>
       </ion-item>
     </ion-card>
   </ion-row>
@@ -133,19 +190,23 @@
   </ng-container>
 
   <ion-fab bottom right>
-    <button *ngIf="isDelegated" ion-button round color="primary" (click)="done()">
+    <ion-button
+      *ngIf="isDelegated"
+      shape="round"
+      color="primary"
+      (click)="done()"
+    >
       {{ 'delegation-baker-detail.done' | translate }}
-    </button>
+    </ion-button>
 
-    <button
+    <ion-button
       *ngIf="!isDelegated"
-      ion-button
-      round
+      shape="round"
       color="primary"
       (click)="delegate()"
       [disabled]="!bakerConfig?.enabled || !bakerInfo?.bakingActive || bakerInfo?.bakerUsage >= 1"
     >
       {{ 'delegation-baker-detail.delegate' | translate }}
-    </button>
+    </ion-button>
   </ion-fab>
 </ion-content>

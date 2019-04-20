@@ -1,7 +1,10 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ 'account-import.title' | translate }}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -11,12 +14,21 @@
 
   <portfolio-item [wallet]="wallet" [maxDigits]="8"></portfolio-item>
 
-  <ion-item *ngIf="walletAlreadyExists" color="danger" margin-top text-wrap>{{ 'account-import.warning' | translate }}</ion-item>
+  <ion-item *ngIf="walletAlreadyExists" color="danger" margin-top text-wrap
+    >{{ 'account-import.warning' | translate }}</ion-item
+  >
 
   <ion-fab bottom right>
-    <button ion-button round color="white" (click)="dismiss()">{{ 'account-import.cancel_label' | translate }}</button>
-    <button ion-button round color="secondary" *ngIf="!walletAlreadyExists && walletImportable" (click)="import()">
+    <ion-button shape="round" color="white" (click)="dismiss()"
+      >{{ 'account-import.cancel_label' | translate }}</ion-button
+    >
+    <ion-button
+      shape="round"
+      color="secondary"
+      *ngIf="!walletAlreadyExists && walletImportable"
+      (click)="import()"
+    >
       {{ 'account-import.import_label' | translate }}
-    </button>
+    </ion-button>
   </ion-fab>
 </ion-content>

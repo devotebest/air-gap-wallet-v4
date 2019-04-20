@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "@ionic/angular";
 import {
   handleErrorSentry,
   ErrorCategory
@@ -16,11 +15,7 @@ export class AboutPage {
   public versionNumber = "";
   public versionCode = "";
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private appInfoProvider: AppInfoProvider
-  ) {
+  constructor(private appInfoProvider: AppInfoProvider) {
     this.updateVersions().catch(handleErrorSentry(ErrorCategory.OTHER));
   }
 

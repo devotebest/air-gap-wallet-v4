@@ -1,9 +1,13 @@
 <ion-header no-border>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      {{ 'transaction-qr.title' | translate: { title: wallet.protocolIdentifier | uppercase } }}
+      {{ 'transaction-qr.title' | translate: { title: wallet.protocolIdentifier
+      | uppercase } }}
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding margin-bottom>
@@ -12,14 +16,35 @@
   </ion-row>
 
   <ion-row justify-content-center padding-vertical>
-    <qr-clipboard *ngIf="!qrDataTooBig" [qrdata]="preparedDataQR" level="L" size="400"></qr-clipboard>
-    <h1 ion-text *ngIf="qrDataTooBig">{{ 'transaction-qr.qr-data-too-big_warning' | translate }}</h1>
+    <qr-clipboard
+      *ngIf="!qrDataTooBig"
+      [qrdata]="preparedDataQR"
+      level="L"
+      size="400"
+    ></qr-clipboard>
+    <h1 ion-text *ngIf="qrDataTooBig">
+      {{ 'transaction-qr.qr-data-too-big_warning' | translate }}
+    </h1>
   </ion-row>
 
-  <from-to *ngIf="airGapTx" padding-horizontal [transaction]="airGapTx"></from-to>
-  <signed-transaction *ngIf="!airGapTx" [syncProtocolString]="preparedDataQR"></signed-transaction>
+  <from-to
+    *ngIf="airGapTx"
+    padding-horizontal
+    [transaction]="airGapTx"
+  ></from-to>
+  <signed-transaction
+    *ngIf="!airGapTx"
+    [syncProtocolString]="preparedDataQR"
+  ></signed-transaction>
 
   <ion-fab bottom right>
-    <button default ion-button color="primary" (click)="done()" round item-right>{{ 'transaction-qr.done_label' | translate }}</button>
+    <ion-button
+      default
+      color="primary"
+      (click)="done()"
+      shape="round"
+      item-right
+      >{{ 'transaction-qr.done_label' | translate }}</ion-button
+    >
   </ion-fab>
 </ion-content>

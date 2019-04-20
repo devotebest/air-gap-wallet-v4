@@ -11,14 +11,22 @@
     <br />
     <li>{{ 'web-extension-disclaimer.list.item-2_text' | translate }}</li>
   </ul>
-  <h6 padding-vertical>{{ 'web-extension-disclaimer.description' | translate }}</h6>
+  <h6 padding-vertical>
+    {{ 'web-extension-disclaimer.description' | translate }}
+  </h6>
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar padding transparent>
     <ion-row justify-content-end>
-      <button default ion-button color="primary" (click)="accept()" round item-right>
+      <ion-button
+        default
+        color="primary"
+        (click)="accept()"
+        shape="round"
+        item-right
+      >
         {{ 'web-extension-disclaimer.accept_label' | translate }}
-      </button>
+      </ion-button>
     </ion-row>
   </ion-toolbar>
 </ion-footer>

@@ -1,29 +1,55 @@
 <ion-header no-border no-shadow>
-  <ion-navbar color="whiteSecondaryContrast">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
       {{ 'interaction-selection.title' | translate }}
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h3 padding-bottom [innerHTML]="'interaction-selection.heading' | translate"></h3>
+  <h3
+    padding-bottom
+    [innerHTML]="'interaction-selection.heading' | translate"
+  ></h3>
 
-  <ion-row justify-content-center><img src="./assets/img/sign-one-device.svg" /></ion-row>
+  <ion-row justify-content-center
+    ><img src="./assets/img/sign-one-device.svg"
+  /></ion-row>
 
   <ion-row>
-    <button block default ion-button color="primary" (click)="sameDeviceSign()" round item-right icon-left>
+    <ion-button
+      block
+      default
+      color="primary"
+      (click)="sameDeviceSign()"
+      shape="round"
+      item-right
+      icon-left
+    >
       {{ 'interaction-selection.same-device_label' | translate }}
-    </button>
+    </ion-button>
     <p>{{ 'interaction-selection.same-device_info' | translate }}</p>
   </ion-row>
 
-  <ion-row justify-content-center padding-top><img src="./assets/img/sign-two-device.svg" /></ion-row>
+  <ion-row justify-content-center padding-top
+    ><img src="./assets/img/sign-two-device.svg"
+  /></ion-row>
 
   <ion-row>
-    <button block default ion-button color="primary" (click)="offlineDeviceSign()" round item-right icon-left>
+    <ion-button
+      block
+      default
+      color="primary"
+      (click)="offlineDeviceSign()"
+      shape="round"
+      item-right
+      icon-left
+    >
       {{ 'interaction-selection.offline-device_label' | translate }}
-    </button>
+    </ion-button>
     <p>{{ 'interaction-selection.offline-device_info' | translate }}</p>
   </ion-row>
 </ion-content>
