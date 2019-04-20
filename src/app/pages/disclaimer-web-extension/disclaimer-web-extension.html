@@ -19,11 +19,11 @@
   <ion-toolbar padding transparent>
     <ion-row justify-content-end>
       <ion-button
-        default
+        size="default"
         color="primary"
         (click)="accept()"
         shape="round"
-        item-right
+        slot="end"
       >
         {{ 'web-extension-disclaimer.accept_label' | translate }}
       </ion-button>

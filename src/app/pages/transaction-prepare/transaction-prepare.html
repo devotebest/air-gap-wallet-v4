@@ -25,11 +25,14 @@
               </p>
             </ion-row>
             <ion-row>
-              <p ion-text no-margin color="blackLight">
-                ${{ wallet.currentBalance | cryptoToFiat: { protocolIdentifier:
-                wallet.protocolIdentifier, currentMarketPrice:
-                wallet.currentMarketPrice } | number: '1.2-2' }}
-              </p>
+              <ion-text color="blackLight">
+                <p no-margin>
+                  ${{ wallet.currentBalance | cryptoToFiat: {
+                  protocolIdentifier: wallet.protocolIdentifier,
+                  currentMarketPrice: wallet.currentMarketPrice } | number:
+                  '1.2-2' }}
+                </p>
+              </ion-text>
             </ion-row>
           </ion-col>
         </ion-row>
@@ -201,43 +204,45 @@
           formControlName="fee"
           type="string"
         ></ion-input>
-        <span item-right class="input--placeholder">
+        <span slot="end" class="input--placeholder">
           {{ 'transaction-prepare.fee.label' | translate }} ({{
           wallet.coinProtocol.feeSymbol | uppercase }})
         </span>
       </ion-item>
     </ion-row>
     <ion-row padding-horizontal class="fee-amount__help">
-      <p ion-text no-margin color="blackLight">
-        <span id="fee-amount">
-          <ng-container
-            *ngIf="transactionForm.controls['fee'].invalid"
-            color="primary"
+      <ion-text color="blackLight">
+        <p no-margin>
+          <span id="fee-amount">
+            <ng-container
+              *ngIf="transactionForm.controls['fee'].invalid"
+              color="primary"
+            >
+              {{ 'transaction-prepare.amount_label' | translate }}
+            </ng-container>
+            <ng-container
+              *ngIf="transactionForm.controls['fee'].valid"
+              color="primary"
+            >
+              ${{ transactionForm.get('fee').value *
+              wallet.currentMarketPrice.toNumber() | number: '1.2-4' }}
+            </ng-container>
+          </span>
+          <span
+            id="fee-amount-advanced"
+            *ngIf="!transactionForm.get('isAdvancedMode').value"
           >
-            {{ 'transaction-prepare.amount_label' | translate }}
-          </ng-container>
-          <ng-container
-            *ngIf="transactionForm.controls['fee'].valid"
-            color="primary"
-          >
-            ${{ transactionForm.get('fee').value *
-            wallet.currentMarketPrice.toNumber() | number: '1.2-4' }}
-          </ng-container>
-        </span>
-        <span
-          id="fee-amount-advanced"
-          *ngIf="!transactionForm.get('isAdvancedMode').value"
-        >
-          ({{ transactionForm.get('fee').value | number: '1.2-6' }} {{
-          wallet.coinProtocol.feeSymbol | uppercase }})
-        </span>
-      </p>
+            ({{ transactionForm.get('fee').value | number: '1.2-6' }} {{
+            wallet.coinProtocol.feeSymbol | uppercase }})
+          </span>
+        </p>
+      </ion-text>
     </ion-row>
   </form>
 
   <ion-fab vertical="bottom" horizontal="end">
     <ion-button
-      default
+      size="default"
       color="primary"
       (click)="prepareTransaction()"
       [disabled]="transactionForm.invalid"

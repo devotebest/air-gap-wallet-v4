@@ -44,10 +44,12 @@
   <ng-container *ngIf="hasPendingTransactions">
     <ion-row padding-horizontal>
       <ion-col col-12 no-padding padding-top>
-        <span ion-text color="primary" class="font--weight__bold">
-          {{ 'account-transaction-list.pending-transactions.label' | translate
-          }}
-        </span>
+        <ion-text color="primary">
+          <span class="font--weight__bold">
+            {{ 'account-transaction-list.pending-transactions.label' | translate
+            }}
+          </span>
+        </ion-text>
       </ion-col>
       <ion-col col-12 no-padding>
         <p>
@@ -57,14 +59,14 @@
       <ion-col col-12 no-padding>
         <ion-button
           (click)="openBlockexplorer()"
-          outline
+          fill="outline"
           ion-button
           color="secondary"
           shape="round"
-          icon-start
-          small
+          slot="start"
+          size="small"
         >
-          <ion-icon md-name="open_in_new"></ion-icon>
+          <ion-icon slot="start" md-name="open_in_new"></ion-icon>
           {{
           'account-transaction-list.pending-transactions.open-blockexplorer_label'
           | translate }}
@@ -97,10 +99,12 @@
     *ngIf="!isRefreshing && showAeMigrationScreen()"
   >
     <img padding-vertical src="../../assets/img/ae-token-migration.svg" />
-    <h5 ion-text color="primary">
-      {{ aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier:
-      wallet.protocolIdentifier, maxDigits: '10' } }}
-    </h5>
+    <ion-text color="primary">
+      <h5>
+        {{ aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier:
+        wallet.protocolIdentifier, maxDigits: '10' } }}
+      </h5>
+    </ion-text>
     <p
       [innerHTML]="
         'account-transaction-list.aeternity.same-phase.text'
@@ -177,7 +181,7 @@
         translate }}
       </p>
       <ion-button
-        default
+        size="default"
         color="secondary"
         (click)="openBlockexplorer()"
         shape="round"
@@ -208,28 +212,35 @@
           wallet.protocolIdentifier } }}
         </span>
       </h2>
-      <h3 ion-text color="blackLight" class="typography--mono">
-        <ng-container *ngIf="t.isInbound"
-          >{{ t.from[0] | shortenString }}</ng-container
-        >
-        <ng-container *ngIf="!t.isInbound"
-          >{{ t.to[0] | shortenString }}</ng-container
-        >
-      </h3>
+      <ion-text color="blackLight">
+        <h3 class="typography--mono">
+          <ng-container *ngIf="t.isInbound"
+            >{{ t.from[0] | shortenString }}</ng-container
+          >
+          <ng-container *ngIf="!t.isInbound"
+            >{{ t.to[0] | shortenString }}</ng-container
+          >
+        </h3>
+      </ion-text>
       <ion-row class="items--right" item-end>
         <ion-col no-padding>
           <ion-row justify-content-end>
-            <p ion-text color="blackLight" *ngIf="t.timestamp">
-              {{ t.timestamp | amFromUnix | amCalendar: { sameDay: '[Today]',
-              lastDay: '[Yesterday]', lastWeek: '[Last] dddd', sameElse: 'HH:mm'
-              } }}
-            </p>
+            <ion-text color="blackLight">
+              <p *ngIf="t.timestamp">
+                {{ t.timestamp | amFromUnix | amCalendar: { sameDay: '[Today]',
+                lastDay: '[Yesterday]', lastWeek: '[Last] dddd', sameElse:
+                'HH:mm' } }}
+              </p>
+            </ion-text>
           </ion-row>
           <ion-row justify-content-end>
-            <p ion-text color="blackLight" *ngIf="t.timestamp">
-              {{ t.timestamp | amFromUnix | amCalendar: { sameDay: '[at] HH:mm',
-              lastDay: '[at] HH:mm', lastWeek: '[at] HH:mm', sameElse: 'L' } }}
-            </p>
+            <ion-text color="blackLight">
+              <p *ngIf="t.timestamp">
+                {{ t.timestamp | amFromUnix | amCalendar: { sameDay: '[at]
+                HH:mm', lastDay: '[at] HH:mm', lastWeek: '[at] HH:mm', sameElse:
+                'L' } }}
+              </p>
+            </ion-text>
           </ion-row>
         </ion-col>
       </ion-row>
@@ -253,8 +264,8 @@
     <ion-row>
       <ion-col>
         <ion-button
-          full
-          default
+          expand="full"
+          size="default"
           color="primary"
           (click)="openReceivePage()"
           shape="round"
@@ -265,15 +276,15 @@
       </ion-col>
       <ion-col>
         <ion-button
-          full
-          default
+          expand="full"
+          size="default"
           color="primary"
           (click)="openPreparePage()"
           [disabled]="protocolIdentifier === 'ae' && (!aeTxEnabled || wallet.currentBalance.toNumber() === 0)"
           shape="round"
-          icon-start
+          slot="start"
         >
-          <ion-icon name="send"></ion-icon>
+          <ion-icon slot="start" name="send"></ion-icon>
           {{ 'account-transaction-list.send_label' | translate }}
         </ion-button>
       </ion-col>

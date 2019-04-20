@@ -22,9 +22,11 @@
       level="L"
       size="400"
     ></qr-clipboard>
-    <h1 ion-text *ngIf="qrDataTooBig">
-      {{ 'transaction-qr.qr-data-too-big_warning' | translate }}
-    </h1>
+    <ion-text>
+      <h1 *ngIf="qrDataTooBig">
+        {{ 'transaction-qr.qr-data-too-big_warning' | translate }}
+      </h1>
+    </ion-text>
   </ion-row>
 
   <from-to
@@ -43,8 +45,9 @@
       color="primary"
       (click)="done()"
       shape="round"
-      item-right
-      >{{ 'transaction-qr.done_label' | translate }}</ion-button
+      slot="end"
+    >
+      {{ 'transaction-qr.done_label' | translate }}</ion-button
     >
   </ion-fab>
 </ion-content>

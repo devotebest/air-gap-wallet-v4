@@ -59,11 +59,13 @@
       <strong
         *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingBalance"
       >
-        <p ion-text color="black">
-          ${{ wallet.currentBalance | cryptoToFiat: { protocolIdentifier:
-          wallet.protocolIdentifier, currentMarketPrice:
-          wallet.currentMarketPrice } | number: '1.2-2' }}
-        </p>
+        <ion-text color="black">
+          <p>
+            ${{ wallet.currentBalance | cryptoToFiat: { protocolIdentifier:
+            wallet.protocolIdentifier, currentMarketPrice:
+            wallet.currentMarketPrice } | number: '1.2-2' }}
+          </p>
+        </ion-text>
       </strong>
       <ng-template #syncingBalance>
         <div class="skeleton--loading"><p></p></div>
@@ -71,13 +73,11 @@
     </ion-col>
     <ion-col col-12 no-padding text-right>
       <p *ngIf="wallet.currentBalance; else syncingPrice">
-        <span
-          *ngIf="wallet.currentBalance?.toNumber() > 0"
-          ion-text
-          color="blackLight"
-        >
-          ${{ wallet.currentMarketPrice?.toNumber() | number: '1.2-4' }}
-        </span>
+        <ion-text color="blackLight">
+          <span *ngIf="wallet.currentBalance?.toNumber() > 0">
+            ${{ wallet.currentMarketPrice?.toNumber() | number: '1.2-4' }}
+          </span>
+        </ion-text>
         <!-- <span ion-text [ngClass]="wallet.change24hour >= 0 ? 'green' : 'red'">{{ wallet.change24hour }}%</span> -->
       </p>
       <ng-template #syncingPrice>
