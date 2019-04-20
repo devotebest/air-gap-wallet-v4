@@ -126,17 +126,17 @@ export class DelegationBakerDetailPage {
           this.wallet,
           this.bakerConfig.address
         );
-        this.navCtrl
-          .push(pageOptions.page, pageOptions.params)
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        // this.navCtrl
+        //   .push(pageOptions.page, pageOptions.params)
+        //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       } else {
         const pageOptions = await this.operationsProvider.prepareDelegate(
           this.wallet,
           this.bakerConfig.address
         );
-        this.navCtrl
-          .push(pageOptions.page, pageOptions.params)
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        // this.navCtrl
+        //   .push(pageOptions.page, pageOptions.params)
+        //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       }
     } catch (error) {
       handleErrorSentry(ErrorCategory.OPERATIONS_PROVIDER)(error);
@@ -147,8 +147,9 @@ export class DelegationBakerDetailPage {
           duration: 3000,
           position: "bottom"
         })
-        .present()
-        .catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+        .then(toast => {
+          toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
+        });
     }
   }
 

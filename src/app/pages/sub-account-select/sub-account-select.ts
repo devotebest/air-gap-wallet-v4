@@ -33,10 +33,10 @@ export class SubAccountSelectPage {
   }
 
   async goToDelegateSelection(subWallet: AirGapMarketWallet) {
-    this.navCtrl
-      .push(DelegationBakerDetailPage, {
-        wallet: subWallet
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(DelegationBakerDetailPage, {
+    //     wallet: subWallet
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

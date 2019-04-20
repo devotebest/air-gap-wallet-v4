@@ -81,13 +81,13 @@ export class ExchangeConfirmPage {
         fee
       );
 
-      this.navCtrl
-        .push(InteractionSelectionPage, {
-          wallet: wallet,
-          airGapTx: airGapTx,
-          data: "airgap-vault://?d=" + serializedTx
-        })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      // this.navCtrl
+      //   .push(InteractionSelectionPage, {
+      //     wallet: wallet,
+      //     airGapTx: airGapTx,
+      //     data: "airgap-vault://?d=" + serializedTx
+      //   })
+      //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
     } catch (error) {
       //
     }

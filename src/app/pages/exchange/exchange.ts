@@ -260,13 +260,13 @@ export class ExchangePage {
         this.amount.toFixed()
       );
 
-      this.navCtrl
+      /*this.navCtrl
         .push(ExchangeConfirmPage, {
           fromWallet: this.fromWallet,
           toWallet: this.toWallet,
           exchangeResult: result
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     } catch (error) {
       console.error(error);
     }
@@ -280,6 +280,6 @@ export class ExchangePage {
   }
 
   goToAddCoinPage() {
-    this.navCtrl.push(AccountAddPage);
+    //this.navCtrl.push(AccountAddPage);
   }
 }

@@ -75,15 +75,15 @@ export class PortfolioPage {
   }
 
   openDetail(wallet: AirGapMarketWallet) {
-    this.navCtrl
-      .push(AccountTransactionListPage, { wallet: wallet })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(AccountTransactionListPage, { wallet: wallet })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   openAccountAddPage() {
-    this.navCtrl
-      .push(AccountAddPage)
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(AccountAddPage)
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   async doRefresh(refresher: any = null) {

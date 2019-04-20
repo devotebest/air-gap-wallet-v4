@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Platform } from "@ionic/angular";
 
-import "rxjs/add/operator/map";
-
 declare var QRScanner: any;
 
 @Injectable({

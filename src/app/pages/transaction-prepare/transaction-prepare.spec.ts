@@ -8,6 +8,7 @@ import {
   LoadingController,
   ToastController
 } from "@ionic/angular";
+import { AppComponent } from "../../app.component";
 import { TransactionPreparePage } from "./transaction-prepare";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -61,7 +62,6 @@ describe("TransactionPrepare Page", () => {
     TestBed.configureTestingModule({
       declarations: [TransactionPreparePage],
       imports: [
-        IonicModule.forRoot(TransactionPreparePage),
         ComponentsModule,
         PipesModule,
         HttpClientModule,

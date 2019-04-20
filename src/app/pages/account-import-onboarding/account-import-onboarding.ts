@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams, Platform, Slides } from "@ionic/angular";
+import { NavController, NavParams, Platform, IonSlides } from "@ionic/angular";
 import { getProtocolByIdentifier, ICoinProtocol } from "airgap-coin-lib";
 import { DeepLinkProvider } from "../../services/deep-link/deep-link";
 
@@ -10,9 +10,15 @@ const DEEPLINK_VAULT_ADD_ACCOUNT = `airgap-vault://add-account/`;
   templateUrl: "account-import-onboarding.html"
 })
 export class AccountImportOnboardingPage {
-  @ViewChild(Slides)
-  slides: Slides;
-
+  @ViewChild(IonSlides)
+  slides: IonSlides;
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400,
+    pagination: {
+      type: "progressbar"
+    }
+  };
   public protocol: ICoinProtocol;
 
   constructor(

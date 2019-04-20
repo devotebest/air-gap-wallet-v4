@@ -255,27 +255,27 @@ export class AccountTransactionListPage {
   }
 
   openPreparePage() {
-    this.navCtrl
+    /*this.navCtrl
       .push(TransactionPreparePage, {
         wallet: this.wallet
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   openReceivePage() {
-    this.navCtrl
-      .push(AccountAddressPage, {
-        wallet: this.wallet
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(AccountAddressPage, {
+    //     wallet: this.wallet
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   openTransactionDetailPage(transaction: IAirGapTransaction) {
-    this.navCtrl
-      .push(TransactionDetailPage, {
-        transaction: transaction
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(TransactionDetailPage, {
+    //     transaction: transaction
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   openBlockexplorer() {
@@ -471,32 +471,35 @@ export class AccountTransactionListPage {
   }
 
   private showToast(message: string) {
-    let toast = this.toastController.create({
-      duration: 3000,
-      message: message,
-      showCloseButton: true,
-      position: "bottom"
-    });
-    toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    let toast = this.toastController
+      .create({
+        duration: 3000,
+        message: message,
+        showCloseButton: true,
+        position: "bottom"
+      })
+      .then(toast => {
+        toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      });
   }
 
   openDelegateSelection(wallet?: AirGapMarketWallet) {
-    this.navCtrl
-      .push(DelegationBakerDetailPage, {
-        wallet: wallet || this.wallet
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(DelegationBakerDetailPage, {
+    //     wallet: wallet || this.wallet
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   openAccountAddPage(
     subProtocolType: SubProtocolType,
     wallet: AirGapMarketWallet
   ) {
-    this.navCtrl
-      .push(SubAccountAddPage, {
-        subProtocolType: subProtocolType,
-        wallet: wallet
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(SubAccountAddPage, {
+    //     subProtocolType: subProtocolType,
+    //     wallet: wallet
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

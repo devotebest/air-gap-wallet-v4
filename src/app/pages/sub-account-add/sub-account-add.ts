@@ -129,8 +129,8 @@ export class SubAccountAddPage {
       this.wallet
     );
 
-    this.navCtrl
-      .push(pageOptions.page, pageOptions.params)
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(pageOptions.page, pageOptions.params)
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

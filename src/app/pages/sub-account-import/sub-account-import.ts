@@ -82,6 +82,6 @@ export class SubAccountImportPage {
   }
 
   popToRoot() {
-    this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    //this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

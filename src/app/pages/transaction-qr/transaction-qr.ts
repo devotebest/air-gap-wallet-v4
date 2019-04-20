@@ -33,7 +33,7 @@ export class TransactionQrPage {
   }
 
   done() {
-    this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    //this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   sameDeviceSign() {

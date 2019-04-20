@@ -1,5 +1,5 @@
 import { SettingsKey, StorageProvider } from "../../services/storage/storage";
-import { ViewController } from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
 import { Component } from "@angular/core";
 
 @Component({
@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
 })
 export class DisclaimerWebExtensionPage {
   constructor(
-    private viewController: ViewController,
+    private viewController: ModalController,
     private storageProvider: StorageProvider
   ) {}
 

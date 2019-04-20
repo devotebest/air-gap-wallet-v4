@@ -30,23 +30,23 @@ export class InteractionSelectionPage {
   }
 
   offlineDeviceSign() {
-    this.navController
+    /*this.navController
       .push(TransactionQrPage, {
         wallet: this.wallet,
         airGapTx: this.airGapTx,
         data: this.preparedDataQR
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   sameDeviceSign() {
-    this.deepLinkProvider
+    /*this.deepLinkProvider
       .sameDeviceDeeplink(this.preparedDataQR)
       .then(() => {
         this.navController
           .popToRoot()
           .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       })
-      .catch(handleErrorSentry(ErrorCategory.DEEPLINK_PROVIDER));
+      .catch(handleErrorSentry(ErrorCategory.DEEPLINK_PROVIDER));*/
   }
 }

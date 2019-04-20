@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Platform, NavController, ViewController } from "@ionic/angular";
+import { Platform, NavController, ModalController } from "@ionic/angular";
 import {
   handleErrorSentry,
   ErrorCategory
@@ -13,7 +13,7 @@ export class IntroductionDownloadPage {
   constructor(
     public navCtrl: NavController,
     private platform: Platform,
-    public viewController: ViewController
+    public viewController: ModalController
   ) {}
 
   public dismiss(shouldCloseAllModals = false) {

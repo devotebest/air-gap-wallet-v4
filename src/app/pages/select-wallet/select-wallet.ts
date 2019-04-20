@@ -31,11 +31,11 @@ export class SelectWalletPage {
   }
 
   openPreparePage(wallet: AirGapMarketWallet) {
-    this.navCtrl
-      .push(TransactionPreparePage, {
-        wallet: wallet,
-        address: this.address
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // this.navCtrl
+    //   .push(TransactionPreparePage, {
+    //     wallet: wallet,
+    //     address: this.address
+    //   })
+    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 }

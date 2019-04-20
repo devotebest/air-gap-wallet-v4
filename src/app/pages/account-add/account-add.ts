@@ -67,11 +67,11 @@ export class AccountAddPage {
   }
 
   addAccount(protocolIdentifier: string) {
-    this.navCtrl
+    /*this.navCtrl
       .push(AccountImportOnboardingPage, {
         protocolIdentifier: protocolIdentifier
       })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   addSubAccount(subProtocolIdentifier: string) {
@@ -83,17 +83,17 @@ export class AccountAddPage {
           protocol => protocol.protocolIdentifier === mainProtocolIdentifier
         ).length > 0
     ) {
-      this.navCtrl
+      /*this.navCtrl
         .push(SubAccountImportPage, {
           subProtocolIdentifier: subProtocolIdentifier
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     } else {
-      this.navCtrl
+      /*this.navCtrl
         .push(AccountImportOnboardingPage, {
           protocolIdentifier: mainProtocolIdentifier
         })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     }
   }
 }

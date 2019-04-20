@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import {
   NavParams,
-  ViewController,
+  ModalController,
   LoadingController,
   Platform,
   NavController,
@@ -30,7 +30,7 @@ export class AccountImportPage {
   constructor(
     private platform: Platform,
     private loadingCtrl: LoadingController,
-    private viewCtrl: ViewController,
+    private viewCtrl: ModalController,
     private navParams: NavParams,
     private wallets: AccountProvider,
     public navCtrl: NavController,

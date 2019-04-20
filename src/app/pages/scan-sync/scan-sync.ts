@@ -13,7 +13,7 @@ export class ScanSyncPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   goToScanPage() {
-    this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-    this.navCtrl.parent.select(1);
+    //this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    //this.navCtrl.parent.select(1);
   }
 }

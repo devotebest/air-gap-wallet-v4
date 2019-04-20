@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ViewController } from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
 import {
   handleErrorSentry,
   ErrorCategory
@@ -10,7 +10,7 @@ import {
   templateUrl: "introduction-push.html"
 })
 export class IntroductionPushPage {
-  constructor(public viewCtrl: ViewController) {}
+  constructor(public viewCtrl: ModalController) {}
 
   dismiss(askForPermissions: boolean = false) {
     this.viewCtrl
