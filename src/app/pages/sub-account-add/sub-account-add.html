@@ -60,10 +60,9 @@
       shape="round"
       (click)="addSubAccounts()"
       color="secondary"
-      icon-left
       [disabled]="!subAccounts.length"
     >
-      <ion-icon md-name="add"></ion-icon>
+      <ion-icon slot="start" md-name="add"></ion-icon>
       {{ 'add-sub-account.add-accounts_label' | translate: { typeLabel:
       typeLabel | translate } }}
     </ion-button>

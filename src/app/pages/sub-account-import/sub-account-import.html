@@ -30,10 +30,9 @@
       shape="round"
       (click)="importWallets()"
       color="secondary"
-      icon-left
       [disabled]="subWallets.length === 0"
     >
-      <ion-icon md-name="add"></ion-icon>
+      <ion-icon slot="start" md-name="add"></ion-icon>
       {{ 'sub-account-import.import-all_label' | translate: { typeLabel:
       typeLabel | translate } }}
     </ion-button>

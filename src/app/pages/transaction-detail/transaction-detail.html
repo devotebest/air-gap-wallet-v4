@@ -18,13 +18,8 @@
   </ion-list>
 
   <ion-fab bottom right>
-    <ion-button
-      color="primary"
-      (click)="openBlockexplorer()"
-      shape="round"
-      icon-left
-    >
-      <ion-icon md-name="open_in_new"></ion-icon>
+    <ion-button color="primary" (click)="openBlockexplorer()" shape="round">
+      <ion-icon slot="start" md-name="open_in_new"></ion-icon>
       {{ 'transaction-detail.open-blockexplorer_label' | translate }}
     </ion-button>
   </ion-fab>

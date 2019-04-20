@@ -83,8 +83,8 @@
     </ion-row>
     <ion-row padding-horizontal padding-bottom class="address-to__buttons">
       <ion-button
-        outline
-        small
+        fill="outline"
+        size="small"
         color="secondary"
         shape="round"
         (click)="pasteClipboard()"
@@ -92,14 +92,13 @@
         {{ 'transaction-prepare.paste_label' | translate }}
       </ion-button>
       <ion-button
-        outline
-        small
+        fill="outline"
+        size="small"
         color="secondary"
         shape="round"
-        icon-left
         (click)="openScanner()"
       >
-        <ion-icon name="md-barcode"></ion-icon>
+        <ion-icon slot="start" name="md-barcode"></ion-icon>
         {{ 'transaction-prepare.to-address-scan_label' | translate }}
       </ion-button>
     </ion-row>
@@ -243,9 +242,8 @@
       (click)="prepareTransaction()"
       [disabled]="transactionForm.invalid"
       shape="round"
-      icon-left
     >
-      <ion-icon md-name="open_in_new"></ion-icon>
+      <ion-icon slot="start" md-name="open_in_new"></ion-icon>
       {{ 'transaction-prepare.create-transaction' | translate }}
     </ion-button>
   </ion-fab>

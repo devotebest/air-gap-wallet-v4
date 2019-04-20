@@ -22,10 +22,9 @@
     color="primary"
     (click)="downloadAndroid()"
     shape="round"
-    icon-left
     margin-top
   >
-    <ion-icon md-name="android"></ion-icon>
+    <ion-icon slot="start" md-name="android"></ion-icon>
     Android
   </ion-button>
 
@@ -38,9 +37,8 @@
     color="primary"
     (click)="downloadIos()"
     shape="round"
-    icon-left
   >
-    <ion-icon md-name="smartphone"></ion-icon>
+    <ion-icon slot="start" md-name="smartphone"></ion-icon>
     iOS
   </ion-button>
 
@@ -51,9 +49,8 @@
     color="primary"
     (click)="downloadDistribution()"
     shape="round"
-    icon-left
   >
-    <ion-icon md-name="computer"></ion-icon>
+    <ion-icon slot="start" md-name="computer"></ion-icon>
     {{ 'introduction-download.linux-distro_label' | translate }}
   </ion-button>
 

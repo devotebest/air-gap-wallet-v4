@@ -2,9 +2,9 @@
   <ion-toolbar>
     <ion-title>{{ 'introduction.title' | translate }}</ion-title>
     <ion-buttons slot="start">
-      <ion-button (click)="dismiss()" clear icon-only
-        ><ion-icon name="md-close"></ion-icon
-      ></ion-button>
+      <ion-button (click)="dismiss()" fill="clear">
+        <ion-icon slot="icon-only" name="md-close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

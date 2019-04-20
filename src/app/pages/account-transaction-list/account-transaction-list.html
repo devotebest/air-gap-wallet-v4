@@ -22,11 +22,10 @@
       color="secondary"
       (click)="action.action()"
       shape="round"
-      icon-left
-      small
-      outline
+      size="small"
+      fill="outline"
     >
-      <ion-icon icon-left [name]="action.icon"></ion-icon>
+      <ion-icon slot="start" [name]="action.icon"></ion-icon>
       {{ action.name | translate }}
     </ion-button>
   </ion-row>

@@ -15,26 +15,24 @@
       <ion-col>
         <ion-button
           default
-          full
+          expand="full"
           color="secondary"
           (click)="dismiss()"
           shape="round"
-          icon-left
         >
-          <ion-icon md-name="close"></ion-icon>
+          <ion-icon slot="start" md-name="close"></ion-icon>
           {{ 'transaction-confirm.decline_label' | translate }}
         </ion-button>
       </ion-col>
       <ion-col>
         <ion-button
           default
-          full
+          expand="full"
           color="primary"
           (click)="broadcastTransaction()"
           shape="round"
-          icon-left
         >
-          <ion-icon md-name="check"></ion-icon>
+          <ion-icon slot="start" md-name="check"></ion-icon>
           {{ 'transaction-confirm.confirm_label' | translate }}
         </ion-button>
       </ion-col>
