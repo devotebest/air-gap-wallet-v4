@@ -1,12 +1,15 @@
-import { PipeTransform, Pipe } from '@angular/core'
-import { BigNumber } from 'bignumber.js'
-import { getProtocolByIdentifier } from 'airgap-coin-lib'
+import { PipeTransform, Pipe } from "@angular/core";
+import { BigNumber } from "bignumber.js";
+import { getProtocolByIdentifier } from "airgap-coin-lib";
 
 @Pipe({
-  name: 'cryptoToFiat'
+  name: "cryptoToFiat"
 })
 export class CryptoToFiatPipe implements PipeTransform {
-  transform(value: BigNumber, args: { protocolIdentifier: string; currentMarketPrice: BigNumber }): any {
+  transform(
+    value: BigNumber,
+    args: { protocolIdentifier: string; currentMarketPrice: BigNumber }
+  ): any {
     if (
       !args ||
       !args.currentMarketPrice ||
@@ -23,18 +26,20 @@ export class CryptoToFiatPipe implements PipeTransform {
           `Protocol: ${args.protocolIdentifier}\n` +
           `Value: ${value}`
       ) */
-      return ''
+      return "";
     }
 
-    let protocol
+    let protocol;
 
     try {
-      protocol = getProtocolByIdentifier(args.protocolIdentifier)
+      protocol = getProtocolByIdentifier(args.protocolIdentifier);
     } catch (e) {
-      return ''
+      return "";
     }
 
-    let fiatValue = args.currentMarketPrice.multipliedBy(value.shiftedBy(-1 * protocol.decimals))
-    return fiatValue.toFixed()
+    let fiatValue = args.currentMarketPrice.multipliedBy(
+      value.shiftedBy(-1 * protocol.decimals)
+    );
+    return fiatValue.toFixed();
   }
 }

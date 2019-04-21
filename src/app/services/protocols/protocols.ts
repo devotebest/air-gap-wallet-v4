@@ -1,60 +1,65 @@
-import { Injectable } from '@angular/core'
-import { GenericERC20, addSubProtocol, TezosKtProtocol, GenericERC20Configuration } from 'airgap-coin-lib'
+import { Injectable } from "@angular/core";
+import {
+  GenericERC20,
+  addSubProtocol,
+  TezosKtProtocol,
+  GenericERC20Configuration
+} from "airgap-coin-lib";
 
-import { tokens } from './tokens'
+import { tokens } from "./tokens";
 
 interface SubProtocolInfo {
-  symbol: string
-  name: string
-  marketSymbol: string
+  symbol: string;
+  name: string;
+  marketSymbol: string;
 
-  identifier: string
-  data: [string]
+  identifier: string;
+  data: [string];
 }
 
 interface SubAccount {
-  protocol: string
-  subProtocols: GenericERC20Configuration[]
+  protocol: string;
+  subProtocols: GenericERC20Configuration[];
 }
 
 export enum ProtocolSymbols {
-  AE = 'ae',
-  BTC = 'btc',
-  ETH = 'eth',
-  XTZ = 'xtz',
-  XTZ_KT = 'xtz-kt'
+  AE = "ae",
+  BTC = "btc",
+  ETH = "eth",
+  XTZ = "xtz",
+  XTZ_KT = "xtz-kt"
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class ProtocolsProvider {
   public subProtocols: SubAccount[] = [
     {
-      protocol: 'eth',
+      protocol: "eth",
       subProtocols: [
         {
-          symbol: 'AE-ERC20',
-          name: 'æternity Ethereum Token',
-          marketSymbol: 'ae',
-          identifier: 'eth-erc20-ae',
-          contractAddress: '0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d',
+          symbol: "AE-ERC20",
+          name: "æternity Ethereum Token",
+          marketSymbol: "ae",
+          identifier: "eth-erc20-ae",
+          contractAddress: "0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d",
           decimals: 18
         }
       ]
     }
-  ]
+  ];
 
   constructor() {
     /* */
   }
 
   getEnabledSubProtocols() {
-    return ['eth-erc20-ae']
+    return ["eth-erc20-ae"];
   }
 
   addProtocols() {
-    addSubProtocol('xtz', new TezosKtProtocol())
+    addSubProtocol("xtz", new TezosKtProtocol());
 
     this.subProtocols.forEach(supportedSubAccount => {
       supportedSubAccount.subProtocols.forEach(subProtocol => {
@@ -68,12 +73,12 @@ export class ProtocolsProvider {
             contractAddress: subProtocol.contractAddress,
             decimals: subProtocol.decimals
           })
-        )
-      })
-    })
+        );
+      });
+    });
     tokens.forEach(token => {
       addSubProtocol(
-        'eth',
+        "eth",
         new GenericERC20({
           symbol: token.symbol,
           name: token.name,
@@ -82,7 +87,7 @@ export class ProtocolsProvider {
           contractAddress: token.contractAddress,
           decimals: token.decimals
         })
-      )
-    })
+      );
+    });
   }
 }

@@ -8,9 +8,16 @@
       <strong>Payout</strong>
     </ion-col>
   </ion-row>
-  <ion-row justify-content-center padding-vertical *ngFor="let reward of delegationRewards">
+  <ion-row
+    justify-content-center
+    padding-vertical
+    *ngFor="let reward of delegationRewards"
+  >
     <ion-col col-2>#{{ reward.cycle }}</ion-col>
-    <ion-col>~{{ reward.reward?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 8 } }}</ion-col>
+    <ion-col
+      >~{{ reward.reward?.toNumber() | amountConverter: { protocolIdentifier:
+      wallet.protocolIdentifier, maxDigits: 8 } }}</ion-col
+    >
     <ion-col>
       {{ reward.payout | date: 'HH:mm dd.LL.yy' }}
     </ion-col>

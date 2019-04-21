@@ -1,19 +1,19 @@
-import { Pipe, PipeTransform } from '@angular/core'
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'shortenString'
+  name: "shortenString"
 })
 export class ShortenStringPipe implements PipeTransform {
   transform(value: string) {
-    if (!value || !(typeof value === 'string')) {
+    if (!value || !(typeof value === "string")) {
       // console.warn(`ShortenStringPipe: invalid value: ${value}`)
-      return ''
+      return "";
     }
 
-    let result = value
+    let result = value;
     if (value.length >= 12) {
-      result = `${value.substr(0, 5)}...${value.substr(-5)}`
+      result = `${value.substr(0, 5)}...${value.substr(-5)}`;
     }
-    return result
+    return result;
   }
 }

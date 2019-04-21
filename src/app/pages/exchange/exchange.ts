@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { ExchangeProvider } from "../../services/exchange/exchange";
 import {
   AirGapMarketWallet,
@@ -14,7 +14,7 @@ import { ExchangeConfirmPage } from "../exchange-confirm/exchange-confirm";
 import { StorageProvider, SettingsKey } from "../../services/storage/storage";
 import { AccountProvider } from "../../services/account/account.provider";
 import { BigNumber } from "bignumber.js";
-import { AccountAddPage } from "../account-add/account-add";
+//import { AccountAddPage } from "../account-add/account-add";
 
 enum ExchangePageState {
   LOADING,
@@ -48,7 +48,6 @@ export class ExchangePage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     private exchangeProvider: ExchangeProvider,
     private storageProvider: StorageProvider,
     private accountProvider: AccountProvider

@@ -3,19 +3,19 @@ import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { PortfolioPage } from "./portfolio";
-import { ComponentsModule } from "../../components/components.module";
 import { TranslateModule } from "@ngx-translate/core";
+import { ComponentsModule } from "../../components/components.module";
+import { ExchangePage } from "./exchange";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ComponentsModule,
     TranslateModule,
-    RouterModule.forChild([{ path: "", component: PortfolioPage }])
+    ComponentsModule,
+    RouterModule.forChild([{ path: "", component: ExchangePage }])
   ],
-  declarations: [PortfolioPage]
+  declarations: [ExchangePage]
 })
-export class PortfolioPageModule {}
+export class ExchangePageModule {}

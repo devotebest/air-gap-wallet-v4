@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import {
   NavController,
   ModalController,
-  NavParams,
   AlertController
 } from "@ionic/angular";
 import { AccountProvider } from "../../services/account/account.provider";
@@ -79,7 +78,6 @@ export class SwapComponent {
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public navParams: NavParams,
     public modalController: ModalController,
     private walletsProvider: AccountProvider
   ) {}

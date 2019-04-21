@@ -70,6 +70,7 @@ import { CurrencyItemComponent } from "./currency-item/currency-item";
     TezosDelegationStats,
     TezosDelegationCard,
     CurrencyItemComponent
-  ]
+  ],
+  entryComponents: []
 })
 export class ComponentsModule {}

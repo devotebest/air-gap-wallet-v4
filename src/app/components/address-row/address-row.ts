@@ -1,19 +1,19 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'address-row',
-  templateUrl: 'address-row.html'
+  selector: "address-row",
+  templateUrl: "address-row.html"
 })
 export class AddressRowComponent {
   @Input()
-  public label: string
+  public label: string;
 
   @Input()
-  public address: string
+  public address: string;
 
   @Input()
-  public symbol: string
+  public symbol: string;
 
   @Input()
-  public hasSymbol: boolean = false
+  public hasSymbol: boolean = false;
 }

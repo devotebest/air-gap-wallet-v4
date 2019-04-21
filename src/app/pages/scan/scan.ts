@@ -13,7 +13,8 @@ import {
 
 @Component({
   selector: "page-scan",
-  templateUrl: "scan.html"
+  templateUrl: "scan.html",
+  styleUrls: ["./scan.scss"]
 })
 export class ScanPage extends ScanBasePage {
   @ViewChild("scanner")

@@ -1,4 +1,4 @@
-import { TransactionQrPage } from "../transaction-qr/transaction-qr";
+//import { TransactionQrPage } from "../transaction-qr/transaction-qr";
 import { AirGapMarketWallet, IAirGapTransaction } from "airgap-coin-lib";
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "@ionic/angular";

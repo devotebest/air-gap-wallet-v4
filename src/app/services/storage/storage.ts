@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core'
-import { Storage } from '@ionic/storage'
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
 
 export enum SettingsKey {
-  INTRODUCTION = 'introduction',
-  WALLET = 'wallets',
-  WALLET_INTRODUCTION = 'walletIntroduction',
-  WEB_EXTENSION_DISCLAIMER = 'webExtensionDisclaimer',
-  SELECTED_ACCOUNT = 'selectedAccount',
-  LAST_TX_BROADCAST = 'lastTxBroadcast',
-  USER_ID = 'user_id',
-  EXCHANGE_INTEGRATION = 'exchangeIntroduction',
-  PUSH_INTRODUCTION = 'pushIntroduction'
+  INTRODUCTION = "introduction",
+  WALLET = "wallets",
+  WALLET_INTRODUCTION = "walletIntroduction",
+  WEB_EXTENSION_DISCLAIMER = "webExtensionDisclaimer",
+  SELECTED_ACCOUNT = "selectedAccount",
+  LAST_TX_BROADCAST = "lastTxBroadcast",
+  USER_ID = "user_id",
+  EXCHANGE_INTEGRATION = "exchangeIntroduction",
+  PUSH_INTRODUCTION = "pushIntroduction"
 }
 
 /* TS 2.7 feature
@@ -29,7 +29,7 @@ type SettingsKeyReturnType = {
 */
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class StorageProvider {
   constructor(private storage: Storage) {}
@@ -45,18 +45,18 @@ export class StorageProvider {
   */
 
   public async get<K extends SettingsKey>(key: K): Promise<any> {
-    return this.storage.get(key)
+    return this.storage.get(key);
   }
 
   public async set<K extends SettingsKey>(key: K, value: any): Promise<any> {
-    return this.storage.set(key, value)
+    return this.storage.set(key, value);
   }
 
   public async getCache<T>(key: string): Promise<T> {
-    return this.storage.get(key)
+    return this.storage.get(key);
   }
 
   public async setCache<T>(key: string, value: T): Promise<T> {
-    return this.storage.set(key, value)
+    return this.storage.set(key, value);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { Observable, ReplaySubject } from "rxjs";
 import { AccountProvider } from "../../services/account/account.provider";
 import { AirGapMarketWallet, ICoinSubProtocol } from "airgap-coin-lib";
@@ -8,8 +8,8 @@ import {
   handleErrorSentry,
   ErrorCategory
 } from "../../services/sentry-error-handler/sentry-error-handler";
-import { AccountAddPage } from "../account-add/account-add";
-import { AccountTransactionListPage } from "../account-transaction-list/account-transaction-list";
+//import { AccountAddPage } from "../account-add/account-add";
+//import { AccountTransactionListPage } from "../account-transaction-list/account-transaction-list";
 import { OperationsProvider } from "../../services/operations/operations";
 
 interface WalletGroup {
@@ -20,7 +20,7 @@ interface WalletGroup {
 @Component({
   selector: "page-portfolio",
   templateUrl: "portfolio.html",
-  animations: []
+  styleUrls: ["./portfolio.scss"]
 })
 export class PortfolioPage {
   isVisible = "hidden";
@@ -33,7 +33,6 @@ export class PortfolioPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     private walletsProvider: AccountProvider,
     private operationsProvider: OperationsProvider
   ) {
@@ -86,7 +85,7 @@ export class PortfolioPage {
     //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
-  async doRefresh(refresher: any = null) {
+  async doRefresh(event: any = null) {
     // XTZ: Refresh delegation status
     this.operationsProvider.refreshAllDelegationStatuses();
 
@@ -96,7 +95,10 @@ export class PortfolioPage {
       })
     ]);
 
-    this.calculateTotal(this.walletsProvider.getWalletList(), refresher);
+    this.calculateTotal(
+      this.walletsProvider.getWalletList(),
+      event ? event.target : null
+    );
   }
 
   calculateTotal(wallets: AirGapMarketWallet[], refresher: any = null) {

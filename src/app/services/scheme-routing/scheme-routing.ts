@@ -1,4 +1,4 @@
-import { SelectWalletPage } from "../../pages/select-wallet/select-wallet";
+//import { SelectWalletPage } from "../../pages/select-wallet/select-wallet";
 import { AccountProvider } from "../account/account.provider";
 import { Injectable } from "@angular/core";
 import { AlertController, NavController } from "@ionic/angular";
@@ -9,8 +9,8 @@ import {
   SyncWalletRequest,
   AirGapMarketWallet
 } from "airgap-coin-lib";
-import { AccountImportPage } from "../../pages/account-import/account-import";
-import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
+//import { AccountImportPage } from "../../pages/account-import/account-import";
+//import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
 import {
   handleErrorSentry,
   ErrorCategory
@@ -153,7 +153,7 @@ export class SchemeRoutingProvider {
   ) {
     if (this.navController) {
       /*this.navController
-        .push(TransactionConfirmPage, {
+//        .push(TransactionConfirmPage, {
           signedTransactionSync: deserializedSync
         })
         .then(v => {
