@@ -5,6 +5,7 @@ import {
   Platform,
   AlertController
 } from "@ionic/angular";
+import { Router } from "@angular/router";
 
 import { AboutPage } from "../about/about";
 import { IntroductionPage } from "../introduction/introduction";
@@ -26,6 +27,7 @@ declare var cordova: any;
 export class SettingsPage {
   constructor(
     public navCtrl: NavController,
+    private router: Router,
     private modalController: ModalController,
     private translateService: TranslateService,
     public platform: Platform,
@@ -35,9 +37,9 @@ export class SettingsPage {
   ) {}
 
   public about() {
-    /*this.navCtrl
-      .push(AboutPage)
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+    this.router
+      .navigateByUrl("/about")
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   public share() {
@@ -67,6 +69,10 @@ export class SettingsPage {
     this.modalController
       .create({
         component: IntroductionPage
+      })
+      .then(modal => {
+        modal.dismiss(async () => {});
+        modal.present().catch(console.error);
       })
       .catch(handleErrorSentry(ErrorCategory.IONIC_MODAL));
   }
