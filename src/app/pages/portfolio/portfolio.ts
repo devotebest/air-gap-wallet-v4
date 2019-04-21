@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { Observable, ReplaySubject } from "rxjs";
+import { Router } from "@angular/router";
+
 import { AccountProvider } from "../../services/account/account.provider";
 import { AirGapMarketWallet, ICoinSubProtocol } from "airgap-coin-lib";
 import { CryptoToFiatPipe } from "../../pipes/crypto-to-fiat/crypto-to-fiat.pipe";
@@ -32,6 +34,7 @@ export class PortfolioPage {
   walletGroups: ReplaySubject<WalletGroup[]> = new ReplaySubject(1);
 
   constructor(
+    private router: Router,
     public navCtrl: NavController,
     private walletsProvider: AccountProvider,
     private operationsProvider: OperationsProvider
@@ -80,9 +83,9 @@ export class PortfolioPage {
   }
 
   openAccountAddPage() {
-    // this.navCtrl
-    //   .push(AccountAddPage)
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.router
+      .navigateByUrl("/account-add")
+      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
   }
 
   async doRefresh(event: any = null) {

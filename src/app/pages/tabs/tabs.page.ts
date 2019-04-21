@@ -61,7 +61,7 @@ export class TabsPage {
             component: page
           })
           .then(modal => {
-            modal.dismiss(async () => {
+            modal.onDidDismiss().then(async () => {
               await this.storageProvider.set(settingsKey, true);
               resolve();
             });
