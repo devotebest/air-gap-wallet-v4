@@ -1,5 +1,6 @@
-import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams, Platform, IonSlides } from "@ionic/angular";
+import { Component, ViewChild, OnInit } from "@angular/core";
+import { NavController, Platform, IonSlides } from "@ionic/angular";
+import { ActivatedRoute } from "@angular/router";
 import { getProtocolByIdentifier, ICoinProtocol } from "airgap-coin-lib";
 import { DeepLinkProvider } from "../../services/deep-link/deep-link";
 
@@ -7,29 +8,59 @@ const DEEPLINK_VAULT_ADD_ACCOUNT = `airgap-vault://add-account/`;
 
 @Component({
   selector: "page-account-import-onboarding",
-  templateUrl: "account-import-onboarding.html"
+  templateUrl: "account-import-onboarding.html",
+  styleUrls: ["./account-import-onboarding.scss"]
 })
-export class AccountImportOnboardingPage {
+export class AccountImportOnboardingPage implements OnInit {
   @ViewChild(IonSlides)
   slides: IonSlides;
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400,
     pagination: {
       type: "progressbar"
     }
   };
   public protocol: ICoinProtocol;
+  isBegin: boolean = true;
+  isEnd: boolean = false;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
+    private route: ActivatedRoute,
     public platform: Platform,
     private deeplinkProvider: DeepLinkProvider
   ) {
-    this.protocol = getProtocolByIdentifier(
-      this.navParams.get("protocolIdentifier")
-    );
+    /*this.route.queryParams.subscribe(params => {
+        console.log(params["protocolIdentifier"]);
+        this.protocol = getProtocolByIdentifier(
+          params["protocolIdentifier"]
+        );
+    });*/
+  }
+
+  ngOnInit() {
+    if (this.route.snapshot.data["special"]) {
+      this.protocol = getProtocolByIdentifier(
+        this.route.snapshot.data["special"]
+      );
+      console.log(this.protocol);
+    }
+  }
+
+  ionSlideDidChange() {
+    this.slides.getActiveIndex().then(val => {
+      if (val == 0) {
+        this.isBegin = true;
+      } else {
+        this.isBegin = false;
+      }
+      if (val == 3) {
+        this.isEnd = true;
+      } else {
+        this.isEnd = false;
+      }
+    });
   }
 
   openVault() {

@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { DataResolverService } from "./services/resolver/data-resolver.service";
 
 const routes: Routes = [
   { path: "", loadChildren: "./pages/tabs/tabs.module#TabsPageModule" },
@@ -7,6 +8,14 @@ const routes: Routes = [
   {
     path: "account-add",
     loadChildren: "./pages/account-add/account-add.module#AccountAddPageModule"
+  },
+  {
+    path: "account-import-onboarding/:id",
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren:
+      "./pages/account-import-onboarding/account-import-onboarding.module#AccountImportOnboardingPageModule"
   }
 ];
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { NavigationExtras } from "@angular/router";
 import { supportedProtocols, ICoinProtocol } from "airgap-coin-lib";
 import { AccountImportOnboardingPage } from "../account-import-onboarding/account-import-onboarding";
 import { SubAccountImportPage } from "../sub-account-import/sub-account-import";
@@ -10,10 +11,12 @@ import {
 } from "../../services/sentry-error-handler/sentry-error-handler";
 import { AccountProvider } from "../../services/account/account.provider";
 import { ProtocolsProvider } from "../../services/protocols/protocols";
-
+import { Router } from "@angular/router";
+import { DataService } from "../../services/data/data.service";
 @Component({
   selector: "page-account-add",
-  templateUrl: "account-add.html"
+  templateUrl: "account-add.html",
+  styleUrls: ["./account-add.scss"]
 })
 export class AccountAddPage {
   searchTerm: string = "";
@@ -25,7 +28,9 @@ export class AccountAddPage {
   constructor(
     public navCtrl: NavController,
     private accountProvider: AccountProvider,
-    private protocolsProvider: ProtocolsProvider
+    private protocolsProvider: ProtocolsProvider,
+    private router: Router,
+    private dataService: DataService
   ) {
     this.supportedAccountProtocols = supportedProtocols().map(coin => coin);
     this.supportedSubAccountProtocols = supportedProtocols().reduce(
@@ -66,6 +71,14 @@ export class AccountAddPage {
   }
 
   addAccount(protocolIdentifier: string) {
+    this.dataService.setData(42, protocolIdentifier);
+    this.router.navigateByUrl("/account-import-onboarding/42");
+    // let navigationExtras: NavigationExtras = {
+    //     queryParams: {
+    //       protocolIdentifier: protocolIdentifier
+    //     }
+    // };
+    // this.navCtrl.navigateForward(['account-import-onboarding'], navigationExtras);
     /*this.navCtrl
       .push(AccountImportOnboardingPage, {
         protocolIdentifier: protocolIdentifier
