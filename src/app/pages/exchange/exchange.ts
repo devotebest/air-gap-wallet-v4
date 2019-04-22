@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
 import { ExchangeProvider } from "../../services/exchange/exchange";
 import {
   AirGapMarketWallet,
@@ -47,6 +48,7 @@ export class ExchangePage {
   public exchangePageState: ExchangePageState = ExchangePageState.LOADING;
 
   constructor(
+    private router: Router,
     public navCtrl: NavController,
     private exchangeProvider: ExchangeProvider,
     private storageProvider: StorageProvider,
@@ -279,6 +281,6 @@ export class ExchangePage {
   }
 
   goToAddCoinPage() {
-    //this.navCtrl.push(AccountAddPage);
+    this.router.navigateByUrl("/account-add");
   }
 }

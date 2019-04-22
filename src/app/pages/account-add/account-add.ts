@@ -95,12 +95,16 @@ export class AccountAddPage {
           protocol => protocol.protocolIdentifier === mainProtocolIdentifier
         ).length > 0
     ) {
+      console.log(subProtocolIdentifier);
       /*this.navCtrl
         .push(SubAccountImportPage, {
           subProtocolIdentifier: subProtocolIdentifier
         })
         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     } else {
+      console.log(mainProtocolIdentifier);
+      this.dataService.setData(42, mainProtocolIdentifier);
+      this.router.navigateByUrl("/account-import-onboarding/42");
       /*this.navCtrl
         .push(AccountImportOnboardingPage, {
           protocolIdentifier: mainProtocolIdentifier
