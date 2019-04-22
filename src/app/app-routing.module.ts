@@ -16,6 +16,19 @@ const routes: Routes = [
     },
     loadChildren:
       "./pages/account-import-onboarding/account-import-onboarding.module#AccountImportOnboardingPageModule"
+  },
+  {
+    path: "select-wallet",
+    loadChildren:
+      "./pages/select-wallet/select-wallet.module#SelectWalletPageModule"
+  },
+  {
+    path: "account-import/:id",
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren:
+      "./pages/account-import/account-import.module#AccountImportPageModule"
   }
 ];
 @NgModule({

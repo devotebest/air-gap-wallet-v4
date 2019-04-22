@@ -11,7 +11,7 @@
   >
     <ng-container *ngIf="walletGroupsArray.length; else noItems">
       <ion-list
-        no-lines
+        lines="none"
         margin-top
         *ngFor="let walletGroup of walletGroupsArray"
       >
@@ -40,7 +40,7 @@
     </ng-template>
   </ng-container>
   <ng-template #loading>
-    <ion-list no-lines margin-top>
+    <ion-list lines="none" margin-top>
       <ion-card>
         <portfolio-item></portfolio-item>
       </ion-card>
@@ -58,14 +58,13 @@
 
   <ion-fab vertical="bottom" horizontal="end">
     <ng-container *ngIf="(wallets | async) as walletsArray">
-      <ion-button
+      <ion-fab-button
         *ngIf="walletsArray.length > 0"
-        ion-fab
         color="secondary"
         (click)="openAccountAddPage()"
       >
         <ion-icon name="add"></ion-icon>
-      </ion-button>
+      </ion-fab-button>
       <ion-button
         *ngIf="walletsArray.length === 0"
         color="secondary"

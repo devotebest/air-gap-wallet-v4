@@ -30,14 +30,7 @@ export class AccountImportOnboardingPage implements OnInit {
     private route: ActivatedRoute,
     public platform: Platform,
     private deeplinkProvider: DeepLinkProvider
-  ) {
-    /*this.route.queryParams.subscribe(params => {
-        console.log(params["protocolIdentifier"]);
-        this.protocol = getProtocolByIdentifier(
-          params["protocolIdentifier"]
-        );
-    });*/
-  }
+  ) {}
 
   ngOnInit() {
     if (this.route.snapshot.data["special"]) {

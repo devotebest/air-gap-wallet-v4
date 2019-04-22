@@ -3,7 +3,8 @@ import { ICoinProtocol } from "airgap-coin-lib";
 
 @Component({
   selector: "currency-item",
-  templateUrl: "currency-item.html"
+  templateUrl: "currency-item.html",
+  styleUrls: ["./currency-item.scss"]
 })
 export class CurrencyItemComponent {
   @Input()

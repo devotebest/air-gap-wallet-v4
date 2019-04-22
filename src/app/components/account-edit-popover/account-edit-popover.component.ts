@@ -17,7 +17,7 @@ import { ProtocolSymbols } from "../../services/protocols/protocols";
 
 @Component({
   template: `
-    <ion-list no-lines no-detail>
+    <ion-list lines="none" no-detail>
       <ion-list-header
         ><ion-label>{{
           "wallet-edit-popover-component.settings_label" | translate

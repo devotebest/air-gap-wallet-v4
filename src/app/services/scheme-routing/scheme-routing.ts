@@ -2,6 +2,8 @@
 import { AccountProvider } from "../account/account.provider";
 import { Injectable } from "@angular/core";
 import { AlertController, NavController } from "@ionic/angular";
+import { Router, NavigationExtras } from "@angular/router";
+import { DataService } from "../../services/data/data.service";
 import {
   DeserializedSyncProtocol,
   SyncProtocolUtils,
@@ -9,7 +11,7 @@ import {
   SyncWalletRequest,
   AirGapMarketWallet
 } from "airgap-coin-lib";
-//import { AccountImportPage } from "../../pages/account-import/account-import";
+import { AccountImportPage } from "../../pages/account-import/account-import";
 //import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
 import {
   handleErrorSentry,
@@ -21,6 +23,7 @@ import {
 })
 export class SchemeRoutingProvider {
   private navController: NavController;
+  private router: Router;
   /* TS 2.7 feature
   private syncSchemeHandlers: {
     [key in EncodedType]: (deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) => Promise<boolean>
@@ -33,7 +36,8 @@ export class SchemeRoutingProvider {
 
   constructor(
     private alertController: AlertController,
-    private accountProvider: AccountProvider
+    private accountProvider: AccountProvider,
+    private dataService: DataService
   ) {
     /* TS 2.7 feature
     this.syncSchemeHandlers = {
@@ -55,12 +59,14 @@ export class SchemeRoutingProvider {
 
   async handleNewSyncRequest(
     navCtrl: NavController,
+    router: Router,
     rawString: string,
     scanAgainCallback: Function = () => {
       /* */
     }
   ) {
     this.navController = navCtrl;
+    this.router = router;
     const syncProtocol = new SyncProtocolUtils();
 
     try {
@@ -96,6 +102,22 @@ export class SchemeRoutingProvider {
         rawString
       );
       if (compatibleWallets.length > 0) {
+        /*let navigationExtras: NavigationExtras = {
+            queryParams: {
+              address: rawString,
+              compatibleWallets,
+              incompatibleWallets
+            }
+        };
+        this.navController.navigateForward(['account-import-onboarding'], navigationExtras);*/
+        let navigationExtras: NavigationExtras = {
+          state: {
+            address: rawString,
+            compatibleWallets,
+            incompatibleWallets
+          }
+        };
+        this.router.navigate(["select-wallet"], navigationExtras);
         /*this.navController
           .push(SelectWalletPage, {
             address: rawString,
@@ -119,32 +141,31 @@ export class SchemeRoutingProvider {
       walletSync.isExtendedPublicKey,
       walletSync.derivationPath
     );
-    if (this.navController) {
-      /*this.navController
-        .push(AccountImportPage, {
-          wallet: wallet
-        })
-        .then(v => {
-          console.log("WalletImportPage openend", v);
-          // this.navController.push(PortfolioPage)
-        })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-*/
-      /*
-        const cancelButton = {
-        text: 'Okay!',
-        role: 'cancel',
-        handler: () => {
-          scanAgainCallback()
-        }
-      }
-      this.showAlert(
-        'No secret found',
-        'You do not have any compatible wallet for this public key in AirGap. Please import your secret and create the corresponding wallet to sign this transaction',
-        [cancelButton]
-      )
-        */
+    if (this.router) {
+      this.dataService.setData(1, wallet);
+      this.router.navigateByUrl("/account-import/1").then(v => {
+        //this.router.navigateByUrl("/tabs/portfolio");
+      });
     }
+    //     if (this.router) {
+    //       let navigationExtras: NavigationExtras = {
+    //         state: {
+    //           wallet: wallet
+    //         }
+    //       };
+    //       this.router.navigateByUrl("/account-import", navigationExtras);
+    //       /*this.navController
+    //         .push(AccountImportPage, {
+    //           wallet: wallet
+    //         })
+    //         .then(v => {
+    //           console.log("WalletImportPage openend", v);
+    //           // this.navController.push(PortfolioPage)
+    //         })
+    //         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    // */
+
+    //     }
   }
 
   async handleSignedTransaction(

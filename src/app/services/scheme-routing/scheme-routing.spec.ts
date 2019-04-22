@@ -1,11 +1,11 @@
 import { async, TestBed } from "@angular/core/testing";
 import {
   NavController,
-  NavParams,
   Platform,
   AlertController,
   LoadingController
 } from "@ionic/angular";
+import { Router, NavigationExtras } from "@angular/router";
 import { StatusBar } from "@ionic-native/status-bar";
 import "jasmine";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -14,7 +14,6 @@ import {
   PlatformMock,
   StatusBarMock,
   SplashScreenMock,
-  NavParamsMock,
   AlertControllerMock
 } from "../../../../test-config/mocks-ionic";
 import { NavControllerMock, AppMock, LoadingControllerMock } from "ionic-mocks";
@@ -27,6 +26,7 @@ describe("SchemeRoutingProvider Provider", () => {
   let schemeRoutingProvider: SchemeRoutingProvider;
   let storageProvider: Storage;
   let navController: NavController;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,7 +43,6 @@ describe("SchemeRoutingProvider Provider", () => {
         },
         { provide: Storage, useClass: StorageMock },
         { provide: NavController, useClass: NavControllerMock },
-        { provide: NavParams, useClass: NavParamsMock },
         { provide: StatusBar, useClass: StatusBarMock },
         { provide: SplashScreen, useClass: SplashScreenMock },
         { provide: Platform, useClass: PlatformMock }
@@ -71,6 +70,7 @@ describe("SchemeRoutingProvider Provider", () => {
     const callback = () => undefined;
     await schemeRoutingProvider.handleNewSyncRequest(
       navController,
+      router,
       text,
       callback
     );

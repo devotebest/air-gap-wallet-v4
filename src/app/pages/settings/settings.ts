@@ -165,15 +165,21 @@ export class SettingsPage {
   }
 
   public pasteClipboard() {
-    this.clipboardProvider.paste().then(
-      (text: string) => {
-        this.schemeRoutingProvider
-          .handleNewSyncRequest(this.navCtrl, text)
-          .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING));
-      },
-      (err: string) => {
-        console.error("Error: " + err);
-      }
-    );
+    let text =
+      "airgap-wallet://?d=AerPyFYLtBvLFRMdCRAHG3ifKiz2DiFdabzoVhkaK94KAYkf3umTW5ZXc6WR8oMBbrhkY5WrCeUocSge5q8maicFi6snG2XYoosWzrsbUyQMXQwyNmafgo5m1GRzx1LQCmCPN9Lf9";
+    this.schemeRoutingProvider
+      .handleNewSyncRequest(this.navCtrl, this.router, text)
+      .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING));
+
+    // this.clipboardProvider.paste().then(
+    //   (text: string) => {
+    //     this.schemeRoutingProvider
+    //       .handleNewSyncRequest(this.navCtrl, this.router, text)
+    //       .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING));
+    //   },
+    //   (err: string) => {
+    //     console.error("Error: " + err);
+    //   }
+    // );
   }
 }

@@ -1,4 +1,4 @@
-<ion-item *ngIf="wallet; else skeletonWallet" no-lines>
+<ion-item *ngIf="wallet; else skeletonWallet" lines="none">
   <ion-avatar slot="start">
     <identicon
       *ngIf="!isToken"
@@ -34,7 +34,7 @@
         color="blackLight"
         class="typography--mono"
       >
-        <ion-badge item-end color="secondary" *ngIf="isActive"
+        <ion-badge slot="end" color="secondary" *ngIf="isActive"
           >active</ion-badge
         >
         {{ wallet.receivingPublicAddress | shortenString }}
@@ -52,10 +52,10 @@
 
   <ion-row
     class="items--right"
-    item-end
+    slot="end"
     *ngIf="!isExpendable && !hideFiatAmounts"
   >
-    <ion-col col-12 no-padding text-right>
+    <ion-col size="12" no-padding text-right>
       <strong
         *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingBalance"
       >
@@ -71,7 +71,7 @@
         <div class="skeleton--loading"><p></p></div>
       </ng-template>
     </ion-col>
-    <ion-col col-12 no-padding text-right>
+    <ion-col size="12" no-padding text-right>
       <p *ngIf="wallet.currentBalance; else syncingPrice">
         <ion-text color="blackLight">
           <span *ngIf="wallet.currentBalance?.toNumber() > 0">
@@ -87,7 +87,7 @@
   </ion-row>
   <ion-row
     class="items--right"
-    item-end
+    slot="end"
     *ngIf="isExpendable"
     class="expendable__container"
   >
@@ -101,7 +101,7 @@
 
 <ng-template #skeletonWallet>
   <ion-list>
-    <ion-item class="skeleton--loading__container" no-lines>
+    <ion-item class="skeleton--loading__container" lines="none">
       <ion-avatar slot="start"></ion-avatar>
       <ion-label>
         <div class="symbol--icon"></div>
@@ -110,7 +110,7 @@
         <h3 *ngIf="!isToken"></h3>
       </ion-label>
 
-      <ion-row class="items--right" item-end>
+      <ion-row class="items--right" slot="end">
         <ion-col col-12 no-padding text-right><p></p></ion-col>
         <ion-col col-12 no-padding text-right><p></p></ion-col>
       </ion-row>

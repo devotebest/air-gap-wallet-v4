@@ -23,7 +23,7 @@ export class ProtocolSelectPage {
     this.viewCtrl.dismiss();
   }
 
-  public onModelChange() {
+  public onModelChange($event) {
     this.viewCtrl.dismiss(this.selectedProtocol);
   }
 

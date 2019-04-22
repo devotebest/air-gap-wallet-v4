@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list no-lines>
+  <ion-list lines="none">
     <currency-item
       (click)="addAccount(protocol.identifier)"
       *ngFor="let protocol of filteredAccountProtocols"

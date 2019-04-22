@@ -71,14 +71,8 @@ export class AccountAddPage {
   }
 
   addAccount(protocolIdentifier: string) {
-    this.dataService.setData(42, protocolIdentifier);
-    this.router.navigateByUrl("/account-import-onboarding/42");
-    // let navigationExtras: NavigationExtras = {
-    //     queryParams: {
-    //       protocolIdentifier: protocolIdentifier
-    //     }
-    // };
-    // this.navCtrl.navigateForward(['account-import-onboarding'], navigationExtras);
+    this.dataService.setData(1, protocolIdentifier);
+    this.router.navigateByUrl("/account-import-onboarding/1");
     /*this.navCtrl
       .push(AccountImportOnboardingPage, {
         protocolIdentifier: protocolIdentifier
@@ -103,8 +97,8 @@ export class AccountAddPage {
         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     } else {
       console.log(mainProtocolIdentifier);
-      this.dataService.setData(42, mainProtocolIdentifier);
-      this.router.navigateByUrl("/account-import-onboarding/42");
+      this.dataService.setData(1, mainProtocolIdentifier);
+      this.router.navigateByUrl("/account-import-onboarding/1");
       /*this.navCtrl
         .push(AccountImportOnboardingPage, {
           protocolIdentifier: mainProtocolIdentifier

@@ -5,7 +5,8 @@ import { BigNumber } from "bignumber.js";
 
 @Component({
   selector: "identicon",
-  templateUrl: "identicon.html"
+  templateUrl: "identicon.html",
+  styleUrls: ["./identicon.scss"]
 })
 export class IdenticonComponent {
   // used in template

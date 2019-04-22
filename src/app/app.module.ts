@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ErrorHandler } from "@angular/core";
 import { AppVersion } from "@ionic-native/app-version/ngx";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner/ngx";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { Clipboard } from "@ionic-native/clipboard/ngx";
@@ -87,6 +88,7 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    QRScanner,
     Keyboard,
     Deeplinks,
     Clipboard,

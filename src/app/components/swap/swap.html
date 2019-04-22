@@ -4,7 +4,7 @@
   class="amount__container border--vertical"
 >
   <ion-col padding col-8>
-    <ion-item no-padding no-lines>
+    <ion-item no-padding lines="none">
       <ion-label no-margin stacked>
         {{ (swapSell ? 'swap.sell_label' : 'swap.buy_label') | translate }}
         <span
@@ -78,7 +78,7 @@
     [maxDigits]="8"
   ></portfolio-item>
   <ng-container *ngIf="expandWalletSelection">
-    <ion-list no-lines margin-top [@expandWalletAnimation]>
+    <ion-list lines="none" margin-top [@expandWalletAnimation]>
       <ng-container *ngFor="let wallet of supportedWallets">
         <portfolio-item
           *ngIf="selectedWallet !== wallet"

@@ -12,7 +12,7 @@
     [innerHTML]="'sub-account-import.text' | translate: { subProtocolName: subProtocol.name }"
     padding-horizontal
   ></p>
-  <ion-list no-lines margin-top *ngFor="let wallet of subWallets">
+  <ion-list lines="none" margin-top *ngFor="let wallet of subWallets">
     <portfolio-item
       [wallet]="wallet"
       [maxDigits]="8"
@@ -33,8 +33,9 @@
       [disabled]="subWallets.length === 0"
     >
       <ion-icon slot="start" md-name="add"></ion-icon>
-      {{ 'sub-account-import.import-all_label' | translate: { typeLabel:
-      typeLabel | translate } }}
+      <!--{{ 'sub-account-import.import-all_label' | translate: { typeLabel:
+      typeLabel | translate } }}-->
+      {{ 'sub-account-import.import-all_label' | translate }}
     </ion-button>
   </ion-fab>
 </ion-content>

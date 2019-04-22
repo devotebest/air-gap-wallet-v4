@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="1" id="it.airgap.wallet" ios-CFBundleVersion="0.0.0" version="0.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>AirGap Wallet</name>
+    <name>AirGap Wallet V4</name>
     <description>The most secure way to transact crypto</description>
     <author email="contact@papers.ch" href="http://www.papers.ch/">Papers.ch</author>
     <content src="index.html" />
@@ -116,10 +116,7 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.4.7">
         <variable name="ANDROID_SUPPORT_VERSION" value="26.1.0" />
     </plugin>
-    <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="^5.0.0" />
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="8.0.1" />
     <plugin name="cordova-clipboard" spec="1.2.1" />
     <plugin name="ionic-plugin-deeplinks" spec="https://github.com/airgap-it/ionic-plugin-deeplinks#cordova-ios-v5.0.0-fix">
         <variable name="URL_SCHEME" value="airgap-wallet" />
@@ -150,4 +147,6 @@
     <plugin name="cordova-plugin-qrscanner" spec="2.6.0" />
     <plugin name="cordova-sqlite-storage" spec="2.6.0" />
     <plugin name="com.lampa.startapp" spec="^6.1.6" />
+    <engine name="ios" spec="^5.0.0" />
+    <engine name="android" spec="7.1.0" />
 </widget>

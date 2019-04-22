@@ -5,8 +5,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { ComponentsModule } from "../../components/components.module";
-import { ZXingScannerModule } from "@zxing/ngx-scanner";
-import { ScanPage } from "./scan";
+import { TransactionPreparePage } from "./transaction-prepare";
 
 @NgModule({
   imports: [
@@ -15,9 +14,8 @@ import { ScanPage } from "./scan";
     FormsModule,
     TranslateModule,
     ComponentsModule,
-    ZXingScannerModule,
-    RouterModule.forChild([{ path: "", component: ScanPage }])
+    RouterModule.forChild([{ path: "", component: TransactionPreparePage }])
   ],
-  declarations: [ScanPage]
+  declarations: [TransactionPreparePage]
 })
-export class ScanPageModule {}
+export class TransactionPreparePageModule {}

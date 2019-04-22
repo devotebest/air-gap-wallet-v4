@@ -8,7 +8,8 @@ import { ProtocolSymbols } from "../../services/protocols/protocols";
 
 @Component({
   selector: "portfolio-item",
-  templateUrl: "portfolio-item.html"
+  templateUrl: "portfolio-item.html",
+  styleUrls: ["./portfolio-item.scss"]
 })
 export class PortfolioItemComponent {
   public isActive: boolean = false;

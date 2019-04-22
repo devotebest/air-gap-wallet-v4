@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { TranslateModule } from "@ngx-translate/core";
 import { ComponentsModule } from "../../components/components.module";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
-import { ScanPage } from "./scan";
+import { SelectWalletPage } from "./select-wallet";
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { ScanPage } from "./scan";
     TranslateModule,
     ComponentsModule,
     ZXingScannerModule,
-    RouterModule.forChild([{ path: "", component: ScanPage }])
+    RouterModule.forChild([{ path: "", component: SelectWalletPage }])
   ],
-  declarations: [ScanPage]
+  declarations: [SelectWalletPage]
 })
-export class ScanPageModule {}
+export class SelectWalletPageModule {}

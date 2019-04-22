@@ -3,21 +3,21 @@ import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { TranslateModule } from "@ngx-translate/core";
+import { ScanAddressPage } from "./scan-address";
 import { ComponentsModule } from "../../components/components.module";
+import { TranslateModule } from "@ngx-translate/core";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
-import { ScanPage } from "./scan";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TranslateModule,
     ComponentsModule,
+    TranslateModule,
     ZXingScannerModule,
-    RouterModule.forChild([{ path: "", component: ScanPage }])
+    RouterModule.forChild([{ path: "", component: ScanAddressPage }])
   ],
-  declarations: [ScanPage]
+  declarations: [ScanAddressPage]
 })
-export class ScanPageModule {}
+export class ScanAddressPageModule {}
