@@ -12,6 +12,7 @@ import {
 } from "../../services/sentry-error-handler/sentry-error-handler";
 //import { AccountAddPage } from "../account-add/account-add";
 //import { AccountTransactionListPage } from "../account-transaction-list/account-transaction-list";
+import { DataService } from "../../services/data/data.service";
 import { OperationsProvider } from "../../services/operations/operations";
 import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner/ngx";
 
@@ -39,6 +40,7 @@ export class PortfolioPage {
     public navCtrl: NavController,
     private walletsProvider: AccountProvider,
     private operationsProvider: OperationsProvider,
+    private dataService: DataService,
     private qrScanner: QRScanner
   ) {
     this.wallets = this.walletsProvider.wallets.asObservable();
@@ -103,6 +105,8 @@ export class PortfolioPage {
   }
 
   openDetail(wallet: AirGapMarketWallet) {
+    this.dataService.setData(1, wallet);
+    this.router.navigateByUrl("/account-transaction-list/1");
     // this.navCtrl
     //   .push(AccountTransactionListPage, { wallet: wallet })
     //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));

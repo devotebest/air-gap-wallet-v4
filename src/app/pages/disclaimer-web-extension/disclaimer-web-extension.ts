@@ -4,7 +4,8 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "page-disclaimer-web-extension",
-  templateUrl: "disclaimer-web-extension.html"
+  templateUrl: "disclaimer-web-extension.html",
+  styleUrls: ["./disclaimer-web-extension.scss"]
 })
 export class DisclaimerWebExtensionPage {
   constructor(

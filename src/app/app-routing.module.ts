@@ -29,6 +29,14 @@ const routes: Routes = [
     },
     loadChildren:
       "./pages/account-import/account-import.module#AccountImportPageModule"
+  },
+  {
+    path: "account-transaction-list/:id",
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren:
+      "./pages/account-transaction-list/account-transaction-list.module#AccountTransactionListPageModule"
   }
 ];
 @NgModule({

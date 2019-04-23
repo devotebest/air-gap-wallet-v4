@@ -17,7 +17,8 @@ declare let cordova;
 
 @Component({
   selector: "page-exchange-confirm",
-  templateUrl: "exchange-confirm.html"
+  templateUrl: "exchange-confirm.html",
+  styleUrls: ["./exchange-confirm.scss"]
 })
 export class ExchangeConfirmPage {
   public fromWallet: AirGapMarketWallet;

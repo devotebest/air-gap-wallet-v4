@@ -8,13 +8,13 @@
       [symbol]="wallet.coinProtocol.symbol"
       *ngIf="isToken"
     ></currency-symbol>
-  </ion-avatar>
-  <ion-label>
     <currency-symbol
       [symbol]="wallet.coinProtocol.symbol"
       *ngIf="!isToken"
       class="symbol--icon"
     ></currency-symbol>
+  </ion-avatar>
+  <ion-label>
     <h2
       class="font--weight__bold"
       ion-text

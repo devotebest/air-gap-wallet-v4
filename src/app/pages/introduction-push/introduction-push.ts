@@ -7,7 +7,8 @@ import {
 
 @Component({
   selector: "page-introduction-push",
-  templateUrl: "introduction-push.html"
+  templateUrl: "introduction-push.html",
+  styleUrls: ["./introduction-push.scss"]
 })
 export class IntroductionPushPage {
   constructor(public viewCtrl: ModalController) {}

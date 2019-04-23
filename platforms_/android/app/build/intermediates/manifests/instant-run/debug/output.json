@@ -1,0 +1,12 @@
+[
+  {
+    "outputType": { "type": "INSTANT_RUN_MERGED_MANIFESTS" },
+    "apkInfo": { "type": "MAIN", "splits": [], "versionCode": 1 },
+    "path": "AndroidManifest.xml",
+    "properties": {
+      "packageId": "it.airgap.wallet",
+      "split": "",
+      "minSdkVersion": "19"
+    }
+  }
+]

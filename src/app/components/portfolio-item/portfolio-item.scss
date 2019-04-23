@@ -20,11 +20,11 @@ ion-label {
   margin: 0 !important;
 }
 .symbol--icon {
-  position: fixed;
+  position: absolute;
   height: 24px;
   width: 24px;
   left: 40px;
-  top: 55px;
+  top: 25px;
 }
 .symbol--icon__isToken {
   top: 18px;

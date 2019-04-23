@@ -12,7 +12,8 @@ import {
 
 @Component({
   selector: "page-scan-address",
-  templateUrl: "scan-address.html"
+  templateUrl: "scan-address.html",
+  styleUrls: ["./scan-address.scss"]
 })
 export class ScanAddressPage extends ScanBasePage {
   private callback: (address: string) => void;

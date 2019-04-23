@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Location } from "@angular/common";
 import {
   ModalController,
   LoadingController,
@@ -31,6 +32,7 @@ export class AccountImportPage {
 
   constructor(
     private platform: Platform,
+    private location: Location,
     private loadingCtrl: LoadingController,
     private viewCtrl: ModalController,
     private route: ActivatedRoute,
@@ -49,17 +51,14 @@ export class AccountImportPage {
   ionViewWillEnter() {
     this.platform
       .ready()
-      .then(() => {
-        this.loadingCtrl
-          .create({
-            message: "Syncing..."
-          })
-          .then(loading => {
-            this.loading = loading;
-            loading
-              .present()
-              .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-          });
+      .then(async () => {
+        this.loading = await this.loadingCtrl.create({
+          message: "Syncing..."
+        });
+
+        this.loading
+          .present()
+          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
 
         this.walletAlreadyExists = false;
         //this.wallet = this.navParams.get("wallet"); // TODO: Catch error if wallet cannot be imported
@@ -125,31 +124,11 @@ export class AccountImportPage {
   }
 
   dismiss() {
-    this.viewCtrl
-      .dismiss()
-      .then(v => {
-        console.log("WalletImportPage dismissed");
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.location.back();
   }
 
   async import() {
     await this.wallets.addWallet(this.wallet);
-    this.viewCtrl.dismiss().then(async v => {
-      this.router.navigateByUrl("/tabs/portfolio");
-    });
-    /*this.viewCtrl
-      .dismiss()
-      .then(async v => {
-        console.log("WalletImportPage dismissed");
-        await this.navCtrl
-          .popToRoot()
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-        const tabs = this.navCtrl.parent;
-        if (tabs) {
-          tabs.select(0);
-        }
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+    await this.router.navigateByUrl("/tabs/portfolio");
   }
 }

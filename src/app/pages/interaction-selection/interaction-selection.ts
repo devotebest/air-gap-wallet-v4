@@ -10,7 +10,8 @@ import { DeepLinkProvider } from "../../services/deep-link/deep-link";
 
 @Component({
   selector: "page-interaction-selection",
-  templateUrl: "interaction-selection.html"
+  templateUrl: "interaction-selection.html",
+  styleUrls: ["./interaction-selection.scss"]
 })
 export class InteractionSelectionPage {
   public preparedDataQR: string = "";

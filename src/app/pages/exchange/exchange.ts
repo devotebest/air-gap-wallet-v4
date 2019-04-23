@@ -29,7 +29,8 @@ const TO = "to";
 
 @Component({
   selector: "page-exchange",
-  templateUrl: "exchange.html"
+  templateUrl: "exchange.html",
+  styleUrls: ["./exchange.scss"]
 })
 export class ExchangePage {
   public selectedFromProtocol: ICoinProtocol;
