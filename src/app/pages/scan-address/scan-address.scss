@@ -3,7 +3,7 @@
 }
 
 p {
-  background: rgba(color($colors, primary), 0.5);
+  background: rgba(var(--ion-color-primary), 0.5);
 }
 
 .row--height__100 {

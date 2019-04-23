@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { ClipboardProvider } from '../../services/clipboard/clipboard'
 import { OperationsProvider } from '../../services/operations/operations'
+import { DataService } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-transaction-prepare',
@@ -35,7 +36,8 @@ export class TransactionPreparePage {
     private _ngZone: NgZone,
     private http: HttpClient,
     private clipboardProvider: ClipboardProvider,
-    private operationsProvider: OperationsProvider
+    private operationsProvider: OperationsProvider,
+    private dataService: DataService
   ) {
     let address = '',
       wallet
@@ -142,14 +144,13 @@ export class TransactionPreparePage {
 
     try {
       const { airGapTx, serializedTx } = await this.operationsProvider.prepareTransaction(this.wallet, formAddress, amount, fee)
-
-      /*this.navController
-        .push(InteractionSelectionPage, {
-          wallet: this.wallet,
-          airGapTx: airGapTx,
-          data: "airgap-vault://?d=" + serializedTx
-        })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+      const info = {
+        wallet: this.wallet,
+        airGapTx: airGapTx,
+        data: 'airgap-vault://?d=' + serializedTx
+      }
+      this.dataService.setData(1, info)
+      this.router.navigateByUrl('/interaction-selection/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     } catch (error) {
       //
     }
@@ -159,6 +160,11 @@ export class TransactionPreparePage {
     let callback = address => {
       this.transactionForm.controls.address.setValue(address)
     }
+    const info = {
+      callback: callback
+    }
+    this.dataService.setData(1, info)
+    this.router.navigateByUrl('/scan-address/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     /*this.navController
       .push(ScanAddressPage, {
         callback: callback

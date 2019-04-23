@@ -61,6 +61,27 @@ const routes: Routes = [
       special: DataResolverService
     },
     loadChildren: './pages/transaction-prepare/transaction-prepare.module#TransactionPreparePageModule'
+  },
+  {
+    path: 'interaction-selection/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/interaction-selection/interaction-selection.module#InteractionSelectionPageModule'
+  },
+  {
+    path: 'transaction-qr/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/transaction-qr/transaction-qr.module#TransactionQrPageModule'
+  },
+  {
+    path: 'scan-address/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/scan-address/scan-address.module#ScanAddressPageModule'
   }
 ]
 @NgModule({

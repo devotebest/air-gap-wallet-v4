@@ -58,7 +58,7 @@ identicon {
 
 // Styling of translated messages
 .color__primary {
-  color: color($colors, primary);
+  color: var(--ion-color-primary);
 }
 
 ion-app {
