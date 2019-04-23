@@ -45,6 +45,13 @@ $colors: (
   transparent: transparent
 );
 
+identicon {
+  width: inherit;
+  height: inherit;
+  min-width: 48px;
+  min-height: 48px;
+}
+
 .style__strong {
   font-weight: bold;
 }

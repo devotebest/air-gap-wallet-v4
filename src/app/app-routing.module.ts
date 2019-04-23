@@ -47,6 +47,20 @@ const routes: Routes = [
       special: DataResolverService
     },
     loadChildren: './pages/sub-account-add/sub-account-add.module#SubAccountAddPageModule'
+  },
+  {
+    path: 'account-address/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/account-address/account-address.module#AccountAddressPageModule'
+  },
+  {
+    path: 'transaction-prepare/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/transaction-prepare/transaction-prepare.module#TransactionPreparePageModule'
   }
 ]
 @NgModule({

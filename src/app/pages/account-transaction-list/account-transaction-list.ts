@@ -224,19 +224,17 @@ export class AccountTransactionListPage {
   }
 
   openPreparePage() {
-    /*this.navCtrl
-      .push(TransactionPreparePage, {
-        wallet: this.wallet
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+    const info = {
+      wallet: this.wallet,
+      address: ''
+    }
+    this.dataService.setData(1, info)
+    this.router.navigateByUrl('/transaction-prepare/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openReceivePage() {
-    // this.navCtrl
-    //   .push(AccountAddressPage, {
-    //     wallet: this.wallet
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.dataService.setData(1, this.wallet)
+    this.router.navigateByUrl('/account-address/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openTransactionDetailPage(transaction: IAirGapTransaction) {
@@ -427,7 +425,7 @@ export class AccountTransactionListPage {
       subProtocolType: subProtocolType,
       wallet: wallet
     }
-    this.dataService.setData(2, info)
-    this.router.navigateByUrl('/sub-account-add/2').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(1, info)
+    this.router.navigateByUrl('/sub-account-add/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

@@ -1,31 +1,33 @@
-import { Component } from "@angular/core";
-import { NavController, NavParams } from "@ionic/angular";
-import { AirGapMarketWallet } from "airgap-coin-lib";
-import { ClipboardProvider } from "../../services/clipboard/clipboard";
+import { Component } from '@angular/core'
+import { NavController } from '@ionic/angular'
+import { AirGapMarketWallet } from 'airgap-coin-lib'
+import { ClipboardProvider } from '../../services/clipboard/clipboard'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
-  selector: "page-account-address",
-  templateUrl: "account-address.html",
-  styleUrls: ["./account-address.scss"]
+  selector: 'page-account-address',
+  templateUrl: 'account-address.html',
+  styleUrls: ['./account-address.scss']
 })
 export class AccountAddressPage {
-  public wallet: AirGapMarketWallet;
+  public wallet: AirGapMarketWallet
 
   constructor(
     private navController: NavController,
-    private navParams: NavParams,
+    private router: Router,
+    private route: ActivatedRoute,
     private clipboardProvider: ClipboardProvider
   ) {
-    this.wallet = this.navParams.get("wallet");
+    if (this.route.snapshot.data['special']) {
+      this.wallet = this.route.snapshot.data['special']
+    }
   }
 
   async copyAddressToClipboard() {
-    await this.clipboardProvider.copyAndShowToast(
-      this.wallet.receivingPublicAddress
-    );
+    await this.clipboardProvider.copyAndShowToast(this.wallet.receivingPublicAddress)
   }
 
   async done() {
-    await this.navController.pop();
+    await this.navController.pop()
   }
 }

@@ -29,23 +29,31 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-item no-padding class="content--align-vert__center to-address__item">
-            <ion-label stacked>{{ 'Send To' | translate }}</ion-label>
-            <ion-textarea
-              [placeholder]="wallet.coinProtocol.addressPlaceholder"
-              formControlName="address"
-              id="address-input"
-            ></ion-textarea>
-          </ion-item>
+          <ion-col size="12">
+            <ion-item no-padding class="content--align-vert__center to-address__item">
+              <ion-label position="stacked">{{ 'Send To' | translate }}</ion-label>
+              <ion-textarea
+                [placeholder]="wallet.coinProtocol.addressPlaceholder"
+                formControlName="address"
+                id="address-input"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
         </ion-row>
       </ion-col>
       <ion-col size="2" no-padding>
-        <ion-row justify-content-center>
-          <ion-avatar slot="start"><identicon [address]="wallet.receivingPublicAddress"></identicon></ion-avatar>
-        </ion-row>
-        <ion-row justify-content-center align-items-center><div class="line--vertical"></div></ion-row>
         <ion-row justify-content-center align-items-center>
-          <ion-avatar slot="start"><identicon [address]="transactionForm.get('address').value"></identicon></ion-avatar>
+          <ion-avatar>
+            <identicon [address]="wallet.receivingPublicAddress"></identicon>
+          </ion-avatar>
+        </ion-row>
+        <ion-row justify-content-center align-items-center>
+          <div class="line--vertical"></div>
+        </ion-row>
+        <ion-row justify-content-center align-items-center>
+          <ion-avatar>
+            <identicon [address]="transactionForm.get('address').value"></identicon>
+          </ion-avatar>
         </ion-row>
       </ion-col>
     </ion-row>
@@ -54,7 +62,7 @@
       class="error--address"
       *ngIf="transactionForm.controls['address'].dirty && transactionForm.controls['address'].invalid"
     >
-      <ion-col>
+      <ion-col size="12">
         <p
           ion-text
           no-margin
@@ -78,23 +86,31 @@
     <ion-row padding-horizontal padding-top align-items-center class="amount__container">
       <ion-col size="9" class="amount--container__input">
         <ion-item no-padding lines="none">
-          <ion-label no-margin stacked>{{ 'transaction-prepare.amount_label' | translate }}</ion-label>
+          <ion-label no-margin position="stacked">{{ 'transaction-prepare.amount_label' | translate }}</ion-label>
           <ion-input formControlName="amount" type="number" id="amount-input" placeholder="0.0"></ion-input>
         </ion-item>
         <p ion-text no-margin color="blackLight">
           ${{ transactionForm.get('amount').value * wallet.currentMarketPrice | number: '1.2-2' }}
         </p>
       </ion-col>
-      <ion-col size="3" no-padding>
-        <ion-buttons slot="end">
-          <ion-button [fill]="sendMaxAmount ? outline : ''" size="small" color="secondary" shape="round" (click)="toggleMaxAmount()">
-            {{ 'transaction-prepare.fee.max_label' | translate }}
-          </ion-button>
-        </ion-buttons>
+      <ion-col size="3">
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button
+              shape="round"
+              [fill]="sendMaxAmount ? 'solid' : 'outline'"
+              size="small"
+              color="secondary"
+              (click)="toggleMaxAmount()"
+            >
+              {{ 'transaction-prepare.fee.max_label' | translate }}
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
       </ion-col>
     </ion-row>
     <ion-row padding-horizontal padding-bottom>
-      <ion-col *ngIf="!transactionForm.controls['amount'].valid">
+      <ion-col size="12" *ngIf="!transactionForm.controls['amount'].valid">
         <p no-margin color="danger" ion-text>
           {{ 'transaction-prepare.error.amount_label' | translate }}
         </p>
@@ -102,20 +118,24 @@
     </ion-row>
     <div class="divider--line"></div>
     <ion-row padding-horizontal class="fee--amount__label">
-      <ion-item lines="none" no-padding>
-        <ion-label ion-text no-margin color="blackLight">
-          {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
-        </ion-label>
-        <ion-toggle mode="md" formControlName="isAdvancedMode"></ion-toggle>
-      </ion-item>
+      <ion-col size="12">
+        <ion-item lines="none" no-padding>
+          <ion-label ion-text no-margin color="blackLight">
+            {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
+          </ion-label>
+          <ion-toggle mode="md" formControlName="isAdvancedMode"></ion-toggle>
+        </ion-item>
+      </ion-col>
     </ion-row>
-    <ion-row padding-horizontal>
-      <ion-item no-padding lines="none">
-        <ion-range no-padding min="0" max="2" step="1" snaps="true" formControlName="feeLevel" id="feeLevel-input" color="primary">
-          <ion-icon slot="start" color="black" md-name="hourglass_empty"></ion-icon>
-          <ion-icon slot="end" color="black" md-name="flight_takeoff"></ion-icon>
-        </ion-range>
-      </ion-item>
+    <ion-row nowrap>
+      <ion-col size="12">
+        <ion-item no-padding lines="none">
+          <ion-range no-padding min="0" max="2" step="1" snaps="true" formControlName="feeLevel" id="feeLevel-input" color="primary">
+            <ion-icon slot="start" color="black" name="hourglass"></ion-icon>
+            <ion-icon slot="end" color="black" name="jet"></ion-icon>
+          </ion-range>
+        </ion-item>
+      </ion-col>
     </ion-row>
     <ion-row padding-horizontal>
       <ion-col size="6" no-padding>
@@ -127,7 +147,7 @@
     </ion-row>
     <ion-row padding-horizontal *ngIf="transactionForm.get('isAdvancedMode').value">
       <ion-item no-padding lines="none">
-        <ion-label stacked></ion-label>
+        <ion-label position="stacked"></ion-label>
         <ion-input id="fee-input" formControlName="fee" type="string"></ion-input>
         <span slot="end" class="input--placeholder">
           {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
@@ -155,7 +175,7 @@
 
   <ion-fab vertical="bottom" horizontal="end">
     <ion-button size="default" color="primary" (click)="prepareTransaction()" [disabled]="transactionForm.invalid" shape="round">
-      <ion-icon slot="start" md-name="open_in_new"></ion-icon>
+      <ion-icon slot="start" name="open"></ion-icon>
       {{ 'transaction-prepare.create-transaction' | translate }}
     </ion-button>
   </ion-fab>
