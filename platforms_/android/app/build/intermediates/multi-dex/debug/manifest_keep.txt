@@ -1,2 +1,0 @@
-# Referenced at /Volumes/Work/air-gap-wallet-v4/platforms/android/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:79
--keep class android.support.multidex.MultiDexApplication { <init>(...); }
