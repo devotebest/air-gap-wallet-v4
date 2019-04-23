@@ -7,18 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content forceOverflow="false" [class.transparent]="hasCameraPermission">
+<ion-content forceOverscroll="false" [class.transparent]="hasCameraPermission">
   <ion-text color="light">
     <p padding no-margin text-center>
       {{ 'scan.text' | translate }}
     </p>
   </ion-text>
-  <ion-row
-    [hidden]="!hasCameraPermission"
-    justify-content-center
-    align-items-center
-    class="row--height__100"
-  >
+  <ion-row [hidden]="!hasCameraPermission" justify-content-center align-items-center class="row--height__100">
     <ion-col class="guides--container content--align__center-center">
       <img class="guides--container__img" src="assets/img/qr_code_guides.svg" />
     </ion-col>
@@ -31,22 +26,11 @@
     ></zxing-scanner>
   </ion-row>
 
-  <ion-row
-    [hidden]="hasCameraPermission"
-    (click)="requestPermission()"
-    justify-content-center
-    align-items-center
-    class="row--height__100"
-  >
+  <ion-row [hidden]="hasCameraPermission" (click)="requestPermission()" justify-content-center align-items-center class="row--height__100">
     <ion-col text-center>
       <img src="../assets/img/permission_onboarding_camera.svg" />
-      <h3
-        padding-horizontal
-        [innerHTML]="'scan.empty-state_heading' | translate"
-      ></h3>
-      <ion-button shape="round" color="primary"
-        >{{ 'scan.grant-permission_label' | translate }}</ion-button
-      >
+      <h3 padding-horizontal [innerHTML]="'scan.empty-state_heading' | translate"></h3>
+      <ion-button shape="round" color="primary">{{ 'scan.grant-permission_label' | translate }}</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

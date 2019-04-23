@@ -1,32 +1,28 @@
-import { Component, ViewChild } from "@angular/core";
-import { Deeplinks } from "@ionic-native/deeplinks/ngx";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, ViewChild } from '@angular/core'
+import { Deeplinks } from '@ionic-native/deeplinks/ngx'
+import { TranslateService } from '@ngx-translate/core'
+import { Router } from '@angular/router'
 
-import { AccountProvider } from "./services/account/account.provider";
-import { SchemeRoutingProvider } from "./services/scheme-routing/scheme-routing";
-import {
-  setSentryRelease,
-  handleErrorSentry,
-  ErrorCategory,
-  setSentryUser
-} from "./services/sentry-error-handler/sentry-error-handler";
-import { ProtocolsProvider } from "./services/protocols/protocols";
-import { WebExtensionProvider } from "./services/web-extension/web-extension";
-import { AppInfoProvider } from "./services/app-info/app-info";
+import { AccountProvider } from './services/account/account.provider'
+import { SchemeRoutingProvider } from './services/scheme-routing/scheme-routing'
+import { setSentryRelease, handleErrorSentry, ErrorCategory, setSentryUser } from './services/sentry-error-handler/sentry-error-handler'
+import { ProtocolsProvider } from './services/protocols/protocols'
+import { WebExtensionProvider } from './services/web-extension/web-extension'
+import { AppInfoProvider } from './services/app-info/app-info'
 //import { TransactionQrPage } from '../pages/transaction-qr/transaction-qr'
-import { StorageProvider, SettingsKey } from "./services/storage/storage";
-import { generateGUID } from "./utils/utils";
+import { StorageProvider, SettingsKey } from './services/storage/storage'
+import { generateGUID } from './utils/utils'
 
-import { Platform } from "@ionic/angular";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { Platform } from '@ionic/angular'
+import { SplashScreen } from '@ionic-native/splash-screen/ngx'
+import { StatusBar } from '@ionic-native/status-bar/ngx'
 
-import { DeepLinkProvider } from "./services/deep-link/deep-link";
-import { PushProvider } from "./services/push/push";
+import { DeepLinkProvider } from './services/deep-link/deep-link'
+import { PushProvider } from './services/push/push'
 
 @Component({
-  selector: "app-root",
-  templateUrl: "app.component.html"
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
   constructor(
@@ -42,107 +38,104 @@ export class AppComponent {
     private appInfoProvider: AppInfoProvider,
     private accountProvider: AccountProvider,
     private deepLinkProvider: DeepLinkProvider,
-    private pushProvider: PushProvider
+    private pushProvider: PushProvider,
+    private router: Router
   ) {
-    this.initializeApp();
+    this.initializeApp()
   }
 
   async initializeApp() {
-    const supportedLanguages = ["en", "de", "zh-cn"];
+    const supportedLanguages = ['en', 'de', 'zh-cn']
 
-    this.loadLanguages(supportedLanguages);
-    this.protocolsProvider.addProtocols();
+    this.loadLanguages(supportedLanguages)
+    this.protocolsProvider.addProtocols()
 
-    await this.platform.ready();
+    await this.platform.ready()
 
-    if (this.platform.is("cordova")) {
-      this.statusBar.styleDefault();
-      this.statusBar.backgroundColorByHexString("#FFFFFF");
-      this.splashScreen.hide();
+    if (this.platform.is('cordova')) {
+      this.statusBar.styleDefault()
+      this.statusBar.backgroundColorByHexString('#FFFFFF')
+      this.splashScreen.hide()
 
-      this.pushProvider.initPush();
+      this.pushProvider.initPush()
     }
 
     this.appInfoProvider
       .getVersionNumber()
       .then(version => {
-        if (this.platform.is("cordova")) {
-          setSentryRelease("app_" + version);
+        if (this.platform.is('cordova')) {
+          setSentryRelease('app_' + version)
         } else if (this.webExtensionProvider.isWebExtension()) {
-          setSentryRelease("ext_" + version);
+          setSentryRelease('ext_' + version)
         } else {
-          setSentryRelease("browser_" + version); // TODO: Set version in CI once we have browser version
+          setSentryRelease('browser_' + version) // TODO: Set version in CI once we have browser version
         }
       })
-      .catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN));
+      .catch(handleErrorSentry(ErrorCategory.CORDOVA_PLUGIN))
 
-    let userId = await this.storageProvider.get(SettingsKey.USER_ID);
+    let userId = await this.storageProvider.get(SettingsKey.USER_ID)
     if (!userId) {
-      userId = generateGUID();
-      this.storageProvider
-        .set(SettingsKey.USER_ID, userId)
-        .catch(handleErrorSentry(ErrorCategory.STORAGE));
+      userId = generateGUID()
+      this.storageProvider.set(SettingsKey.USER_ID, userId).catch(handleErrorSentry(ErrorCategory.STORAGE))
     }
-    setSentryUser(userId);
+    setSentryUser(userId)
 
-    let url = new URL(location.href);
+    let url = new URL(location.href)
 
-    if (url.searchParams.get("rawUnsignedTx")) {
+    if (url.searchParams.get('rawUnsignedTx')) {
       // Wait until wallets are initialized
       let sub = this.accountProvider.wallets.subscribe(wallets => {
-        this.walletDeeplink();
+        this.walletDeeplink()
         if (sub) {
-          sub.unsubscribe();
+          sub.unsubscribe()
         }
-      });
+      })
     }
   }
 
   loadLanguages(supportedLanguages: string[]) {
-    this.translate.setDefaultLang("en");
+    this.translate.setDefaultLang('en')
 
-    const language = this.translate.getBrowserLang();
+    const language = this.translate.getBrowserLang()
 
     if (language) {
-      const lowerCaseLanguage = language.toLowerCase();
+      const lowerCaseLanguage = language.toLowerCase()
       supportedLanguages.forEach(supportedLanguage => {
         if (supportedLanguage.startsWith(lowerCaseLanguage)) {
-          this.translate.use(supportedLanguage);
+          this.translate.use(supportedLanguage)
         }
-      });
+      })
     }
   }
 
   async ngAfterViewInit() {
-    await this.platform.ready();
-    if (this.platform.is("cordova")) {
+    await this.platform.ready()
+    if (this.platform.is('cordova')) {
       this.deeplinks
         .route({
-          "/": null
+          '/': null
         })
         .subscribe(
           match => {
             // match.$route - the route we matched, which is the matched entry from the arguments to route()
             // match.$args - the args passed in the link
             // match.$link - the full link data
-            console.log("Successfully matched route", JSON.stringify(match));
-            /*this.schemeRoutingProvider
-              .handleNewSyncRequest(this.nav, match.$link.url)
-              .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))*/
+            console.log('Successfully matched route', JSON.stringify(match))
+            this.schemeRoutingProvider
+              .handleNewSyncRequest(this.router, match.$link.url)
+              .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))
           },
           nomatch => {
             // nomatch.$link - the full link data
-            handleErrorSentry(ErrorCategory.DEEPLINK_PROVIDER)(
-              "route not matched: " + JSON.stringify(nomatch)
-            );
+            handleErrorSentry(ErrorCategory.DEEPLINK_PROVIDER)('route not matched: ' + JSON.stringify(nomatch))
           }
-        );
+        )
     }
   }
 
   // TODO: Move to provider
   async walletDeeplink() {
-    let deeplinkInfo = await this.deepLinkProvider.walletDeepLink();
+    let deeplinkInfo = await this.deepLinkProvider.walletDeepLink()
     /*this.nav.push(TransactionQrPage, {
       wallet: deeplinkInfo.wallet,
       airGapTx: deeplinkInfo.airGapTx,

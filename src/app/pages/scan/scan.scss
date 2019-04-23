@@ -1,4 +1,8 @@
-@import "../../../theme/variables.scss";
+@import '../../../theme/variables.scss';
+
+ion-content {
+  --background: none transparent;
+}
 
 .transparent {
   background: none !important;
