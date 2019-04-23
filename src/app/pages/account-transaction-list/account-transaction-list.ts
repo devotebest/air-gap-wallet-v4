@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { IAirGapTransaction, AirGapMarketWallet, TezosKtProtocol } from 'airgap-coin-lib'
 import { Platform, NavController, PopoverController, ToastController } from '@ionic/angular'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 import { TransactionDetailPage } from '../transaction-detail/transaction-detail'
 import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
@@ -9,6 +9,7 @@ import { AccountEditPopoverComponent } from '../../components/account-edit-popov
 import { AccountProvider } from '../../services/account/account.provider'
 import { HttpClient } from '@angular/common/http'
 import { BigNumber } from 'bignumber.js'
+
 import { StorageProvider, SettingsKey } from '../../services/storage/storage'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { AccountAddressPage } from '../account-address/account-address'
@@ -17,6 +18,7 @@ import { OperationsProvider, ActionType } from '../../services/operations/operat
 import { SubAccountAddPage } from '../sub-account-add/sub-account-add'
 import { SubProtocolType } from 'airgap-coin-lib/dist/protocols/ICoinSubProtocol'
 import { ProtocolSymbols } from '../../services/protocols/protocols'
+import { DataService } from '../../services/data/data.service'
 
 interface CoinAction {
   type: ActionType
@@ -64,6 +66,7 @@ export class AccountTransactionListPage {
 
   constructor(
     public navCtrl: NavController,
+    private router: Router,
     private route: ActivatedRoute,
     public popoverCtrl: PopoverController,
     public accountProvider: AccountProvider,
@@ -71,13 +74,13 @@ export class AccountTransactionListPage {
     private platform: Platform,
     private operationsProvider: OperationsProvider,
     private storageProvider: StorageProvider,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private dataService: DataService
   ) {
     if (this.route.snapshot.data['special']) {
       this.wallet = this.route.snapshot.data['special']
     }
 
-    //this.wallet = this.navParams.get("wallet");
     this.protocolIdentifier = this.wallet.coinProtocol.identifier
     if (this.protocolIdentifier === ProtocolSymbols.AE) {
       this.http
@@ -237,11 +240,8 @@ export class AccountTransactionListPage {
   }
 
   openTransactionDetailPage(transaction: IAirGapTransaction) {
-    // this.navCtrl
-    //   .push(TransactionDetailPage, {
-    //     transaction: transaction
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.dataService.setData(1, transaction)
+    this.router.navigateByUrl('/transaction-detail/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openBlockexplorer() {
@@ -365,14 +365,12 @@ export class AccountTransactionListPage {
       },
       event: event,
       translucent: true
-      /*tonDelete: () => {
-        this.navCtrl.pop().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-      },
+      /*
       onUndelegate: async () => {
         const pageOptions = await this.operationsProvider.prepareDelegate(
           this.wallet
         );
-        his.navCtrl
+        this.navCtrl
           .push(pageOptions.page, pageOptions.params)
           .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
     }*/
@@ -425,11 +423,11 @@ export class AccountTransactionListPage {
   }
 
   openAccountAddPage(subProtocolType: SubProtocolType, wallet: AirGapMarketWallet) {
-    // this.navCtrl
-    //   .push(SubAccountAddPage, {
-    //     subProtocolType: subProtocolType,
-    //     wallet: wallet
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    const info = {
+      subProtocolType: subProtocolType,
+      wallet: wallet
+    }
+    this.dataService.setData(2, info)
+    this.router.navigateByUrl('/sub-account-add/2').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

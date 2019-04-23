@@ -1,42 +1,19 @@
 <ion-item *ngIf="wallet; else skeletonWallet" lines="none">
   <ion-avatar slot="start">
-    <identicon
-      *ngIf="!isToken"
-      [address]="wallet.receivingPublicAddress"
-    ></identicon>
-    <currency-symbol
-      [symbol]="wallet.coinProtocol.symbol"
-      *ngIf="isToken"
-    ></currency-symbol>
-    <currency-symbol
-      [symbol]="wallet.coinProtocol.symbol"
-      *ngIf="!isToken"
-      class="symbol--icon"
-    ></currency-symbol>
+    <identicon *ngIf="!isToken" [address]="wallet.receivingPublicAddress"></identicon>
+    <currency-symbol [symbol]="wallet.coinProtocol.symbol" *ngIf="isToken"></currency-symbol>
+    <currency-symbol [symbol]="wallet.coinProtocol.symbol" *ngIf="!isToken" class="symbol--icon"></currency-symbol>
   </ion-avatar>
   <ion-label>
-    <h2
-      class="font--weight__bold"
-      ion-text
-      color="black"
-      *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingHeading"
-    >
-      {{ wallet.currentBalance?.toNumber() | amountConverter: {
-      protocolIdentifier: wallet.protocolIdentifier, maxDigits: maxDigits } }}
+    <h2 class="font--weight__bold" ion-text color="black" *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingHeading">
+      {{ wallet.currentBalance?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: maxDigits } }}
     </h2>
     <ng-template #syncingHeading>
       <div class="skeleton--loading"><h2></h2></div>
     </ng-template>
     <ng-container *ngIf="!isToken">
-      <h3
-        *ngIf="wallet.addresses.length > 0; else syncingHeadingLow"
-        ion-text
-        color="blackLight"
-        class="typography--mono"
-      >
-        <ion-badge slot="end" color="secondary" *ngIf="isActive"
-          >active</ion-badge
-        >
+      <h3 *ngIf="wallet.addresses.length > 0; else syncingHeadingLow" ion-text color="blackLight" class="typography--mono">
+        <ion-badge slot="end" color="secondary" *ngIf="isActive">active</ion-badge>
         {{ wallet.receivingPublicAddress | shortenString }}
       </h3>
     </ng-container>
@@ -50,19 +27,12 @@
     </ng-template>
   </ion-label>
 
-  <ion-row
-    class="items--right"
-    slot="end"
-    *ngIf="!isExpendable && !hideFiatAmounts"
-  >
+  <ion-row class="items--right" slot="end" *ngIf="!isExpendable && !hideFiatAmounts">
     <ion-col size="12" no-padding text-right>
-      <strong
-        *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingBalance"
-      >
+      <strong *ngIf="wallet.currentBalance && wallet.currentMarketPrice; else syncingBalance">
         <ion-text color="black">
           <p>
-            ${{ wallet.currentBalance | cryptoToFiat: { protocolIdentifier:
-            wallet.protocolIdentifier, currentMarketPrice:
+            ${{ wallet.currentBalance | cryptoToFiat: { protocolIdentifier: wallet.protocolIdentifier, currentMarketPrice:
             wallet.currentMarketPrice } | number: '1.2-2' }}
           </p>
         </ion-text>
@@ -85,12 +55,7 @@
       </ng-template>
     </ion-col>
   </ion-row>
-  <ion-row
-    class="items--right"
-    slot="end"
-    *ngIf="isExpendable"
-    class="expendable__container"
-  >
+  <ion-row class="items--right" slot="end" *ngIf="isExpendable" class="expendable__container">
     <ion-icon
       [ngClass]="{ 'icon--rotated': isExtended }"
       md-name="keyboard_arrow_down
@@ -111,8 +76,8 @@
       </ion-label>
 
       <ion-row class="items--right" slot="end">
-        <ion-col col-12 no-padding text-right><p></p></ion-col>
-        <ion-col col-12 no-padding text-right><p></p></ion-col>
+        <ion-col size="12" no-padding text-right><p></p></ion-col>
+        <ion-col size="12" no-padding text-right><p></p></ion-col>
       </ion-row>
     </ion-item>
   </ion-list>

@@ -25,34 +25,24 @@
     </ion-row>
 
     <ion-row padding-top align-items-center>
-      <ion-col col-5 *ngIf="isBrowser"
-        ><img src="assets/img/airgap_onboarding_wallet-notebook.svg"
-      /></ion-col>
-      <ion-col col-5 *ngIf="!isBrowser"
-        ><img src="assets/img/airgap_onboarding_wallet.svg"
-      /></ion-col>
-      <ion-col col-7>
+      <ion-col size="5" *ngIf="isBrowser"><img src="assets/img/airgap_onboarding_wallet-notebook.svg" /></ion-col>
+      <ion-col size="5" *ngIf="!isBrowser"><img src="assets/img/airgap_onboarding_wallet.svg" /></ion-col>
+      <ion-col size="7">
         <h5>{{ 'introduction.wallet.heading' | translate }}</h5>
         <p [innerHTML]="'introduction.wallet.text' | translate"></p>
       </ion-col>
     </ion-row>
 
     <ion-row padding-vertical align-items-center>
-      <ion-col col-5 text-center
-        ><img class="connector--img" src="assets/img/qrcode.svg"
-      /></ion-col>
-      <ion-col col-7>
-        <strong
-          >{{ 'introduction.communication.highest_text' | translate }}</strong
-        >
+      <ion-col size="5" text-center><img class="connector--img" src="assets/img/qrcode.svg" /></ion-col>
+      <ion-col size="7">
+        <strong>{{ 'introduction.communication.highest_text' | translate }}</strong>
       </ion-col>
     </ion-row>
 
     <ion-row align-items-center>
-      <ion-col col-5
-        ><img src="assets/img/airgap_onboarding_vault.svg"
-      /></ion-col>
-      <ion-col col-7>
+      <ion-col size="5"><img src="assets/img/airgap_onboarding_vault.svg" /></ion-col>
+      <ion-col size="7">
         <h5>{{ 'introduction.vault.heading' | translate }}</h5>
         <p [innerHTML]="'introduction.vault.text' | translate"></p>
       </ion-col>
@@ -65,31 +55,23 @@
     </ion-row>
 
     <ion-row padding-top align-items-center>
-      <ion-col col-5
-        ><img src="assets/img/airgap_onboarding_wallet.svg"
-      /></ion-col>
-      <ion-col col-7>
+      <ion-col size="5"><img src="assets/img/airgap_onboarding_wallet.svg" /></ion-col>
+      <ion-col size="7">
         <h5>{{ 'introduction.wallet.heading' | translate }}</h5>
         <p [innerHTML]="'introduction.wallet.text' | translate"></p>
       </ion-col>
     </ion-row>
 
     <ion-row padding-vertical align-items-center>
-      <ion-col col-5 text-center
-        ><img class="connector--img" src="assets/img/clone.svg"
-      /></ion-col>
-      <ion-col col-7>
-        <strong
-          >{{ 'introduction.communication.medium_text' | translate }}</strong
-        >
+      <ion-col size="5" text-center><img class="connector--img" src="assets/img/clone.svg" /></ion-col>
+      <ion-col size="7">
+        <strong>{{ 'introduction.communication.medium_text' | translate }}</strong>
       </ion-col>
     </ion-row>
 
     <ion-row align-items-center>
-      <ion-col col-5
-        ><img src="assets/img/airgap_onboarding_vault.svg"
-      /></ion-col>
-      <ion-col col-7>
+      <ion-col size="5"><img src="assets/img/airgap_onboarding_vault.svg" /></ion-col>
+      <ion-col size="7">
         <h5>{{ 'introduction.vault.heading' | translate }}</h5>
         <p [innerHTML]="'introduction.vault.text' | translate"></p>
       </ion-col>
@@ -97,15 +79,9 @@
   </ng-container>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-button
-      shape="round"
-      color="secondary"
-      (click)="openIntroductionDownloadPage()"
-    >
+    <ion-button shape="round" color="secondary" (click)="openIntroductionDownloadPage()">
       {{ 'introduction.vault-install_label' | translate }}
     </ion-button>
-    <ion-button shape="round" color="primary" (click)="dismiss()"
-      >{{ 'introduction.continue_label' | translate }}
-    </ion-button>
+    <ion-button shape="round" color="primary" (click)="dismiss()">{{ 'introduction.continue_label' | translate }}</ion-button>
   </ion-fab>
 </ion-content>
