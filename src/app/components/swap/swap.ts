@@ -1,79 +1,65 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import {
-  NavController,
-  ModalController,
-  AlertController
-} from "@ionic/angular";
-import { AccountProvider } from "../../services/account/account.provider";
-import {
-  AirGapMarketWallet,
-  ICoinProtocol,
-  getProtocolByIdentifier
-} from "airgap-coin-lib";
-import { Observable, ReplaySubject } from "rxjs";
-import { map, take } from "rxjs/operators";
-import { trigger, transition, style, animate } from "@angular/animations";
-import { BigNumber } from "bignumber.js";
-import { ProtocolSelectPage } from "../../pages/protocol-select/protocol-select";
-import {
-  handleErrorSentry,
-  ErrorCategory
-} from "../../services/sentry-error-handler/sentry-error-handler";
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { NavController, ModalController, AlertController } from '@ionic/angular'
+import { AccountProvider } from '../../services/account/account.provider'
+import { AirGapMarketWallet, ICoinProtocol, getProtocolByIdentifier } from 'airgap-coin-lib'
+import { Observable, ReplaySubject } from 'rxjs'
+import { map, take } from 'rxjs/operators'
+import { trigger, transition, style, animate } from '@angular/animations'
+import { BigNumber } from 'bignumber.js'
+import { ProtocolSelectPage } from '../../pages/protocol-select/protocol-select'
+import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 
 @Component({
-  selector: "swap",
-  templateUrl: "swap.html",
+  selector: 'swap',
+  templateUrl: 'swap.html',
+  styleUrls: ['./swap.scss'],
   animations: [
-    trigger("expandWalletAnimation", [
-      transition(":enter", [
-        style({ transform: "translateY(-20%)", opacity: 0 }),
-        animate("500ms", style({ transform: "translateY(0)", opacity: 1 }))
+    trigger('expandWalletAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(-20%)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
       ]),
-      transition(":leave", [
-        style({ transform: "translateY(0)", opacity: 1 }),
-        animate("500ms", style({ transform: "translateY(-20%)", opacity: 0 }))
+      transition(':leave', [
+        style({ transform: 'translateY(0)', opacity: 1 }),
+        animate('500ms', style({ transform: 'translateY(-20%)', opacity: 0 }))
       ])
     ])
   ]
 })
 export class SwapComponent {
-  public expandWalletSelection: boolean = false;
+  public expandWalletSelection: boolean = false
 
   @Input()
-  public readonly swapSell: boolean = true;
+  public readonly swapSell: boolean = true
 
   @Input()
-  public readonly selectedWallet: AirGapMarketWallet;
+  public readonly selectedWallet: AirGapMarketWallet
 
   @Input()
-  public readonly supportedWallets: AirGapMarketWallet[];
+  public readonly supportedWallets: AirGapMarketWallet[]
 
   @Input()
-  public readonly selectedProtocol: ICoinProtocol;
+  public readonly selectedProtocol: ICoinProtocol
 
   @Input()
-  public readonly supportedProtocols: string[] = [];
+  public readonly supportedProtocols: string[] = []
 
   @Input()
-  public readonly minExchangeAmount: BigNumber;
+  public readonly minExchangeAmount: BigNumber
 
   @Input()
-  public exchangeAmount: BigNumber;
+  public exchangeAmount: BigNumber
 
-  protected _amount: string;
+  protected _amount: string
 
   @Output()
-  private readonly protocolSetEmitter: EventEmitter<
-    ICoinProtocol
-  > = new EventEmitter();
+  private readonly protocolSetEmitter: EventEmitter<ICoinProtocol> = new EventEmitter()
 
   @Output()
-  private readonly walletSetEmitter: EventEmitter<
-    AirGapMarketWallet
-  > = new EventEmitter();
+  private readonly walletSetEmitter: EventEmitter<AirGapMarketWallet> = new EventEmitter()
 
   @Output()
-  private readonly amountSetEmitter: EventEmitter<string> = new EventEmitter();
+  private readonly amountSetEmitter: EventEmitter<string> = new EventEmitter()
 
   constructor(
     public navCtrl: NavController,
@@ -83,24 +69,24 @@ export class SwapComponent {
   ) {}
 
   amountSet(amount: string) {
-    this._amount = amount;
-    this.amountSetEmitter.emit(amount);
+    this._amount = amount
+    this.amountSetEmitter.emit(amount)
   }
 
   walletSet(wallet: AirGapMarketWallet) {
-    this.walletSetEmitter.emit(wallet);
-    this.expandWalletSelection = false;
+    this.walletSetEmitter.emit(wallet)
+    this.expandWalletSelection = false
   }
 
   async doRadio() {
-    const protocols = [];
+    const protocols = []
     this.supportedProtocols.forEach(supportedProtocol => {
       try {
-        protocols.push(getProtocolByIdentifier(supportedProtocol));
+        protocols.push(getProtocolByIdentifier(supportedProtocol))
       } catch (error) {
         /* */
       }
-    });
+    })
 
     const modal = await this.modalController.create({
       component: ProtocolSelectPage,
@@ -108,16 +94,14 @@ export class SwapComponent {
         selectedProtocol: this.selectedProtocol.identifier,
         protocols: protocols
       }
-    });
+    })
 
-    modal.dismiss((protocolIdentifier: string) => {
-      if (protocolIdentifier) {
-        this.protocolSetEmitter.emit(
-          getProtocolByIdentifier(protocolIdentifier)
-        );
+    modal.onDidDismiss().then((protocolIdentifier: any) => {
+      if (protocolIdentifier && protocolIdentifier.data) {
+        this.protocolSetEmitter.emit(getProtocolByIdentifier(protocolIdentifier.data))
       }
-    });
+    })
 
-    modal.present().catch(handleErrorSentry(ErrorCategory.IONIC_MODAL));
+    modal.present().catch(handleErrorSentry(ErrorCategory.IONIC_MODAL))
   }
 }

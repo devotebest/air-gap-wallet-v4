@@ -1,18 +1,6 @@
-card-actionable {
-  .background--color__gradient--reverse {
-    background: linear-gradient(
-      90deg,
-      color($colors, primary, base),
-      55%,
-      color($colors, secondaryLight, base)
-    );
-  }
-  .background--color__gradient {
-    background: linear-gradient(
-      90deg,
-      color($colors, secondaryLight, base),
-      45%,
-      color($colors, primary, base)
-    );
-  }
+.background--color__gradient--reverse {
+  background: linear-gradient(90deg, var(--ion-color-primary), 55%, var(--ion-color-secondary));
+}
+.background--color__gradient {
+  background: linear-gradient(90deg, var(--ion-color-secondary), 45%, var(--ion-color-primary));
 }

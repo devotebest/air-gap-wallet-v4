@@ -24,6 +24,7 @@ import { SignedTransactionComponent } from './signed-transaction/signed-transact
 import { TezosDelegationStats } from './tezos-delegation-stats/tezos-delegation-stats'
 import { TezosDelegationCard } from './tezos-delegation-card/tezos-delegation-card'
 import { CurrencyItemComponent } from './currency-item/currency-item'
+//import { ProtocolSelectPageModule } from '../pages/protocol-select/protocol-select.module'
 
 @NgModule({
   declarations: [

@@ -9,6 +9,7 @@
         ></span>
       </ion-label>
       <ion-input
+        ngDefaultControl
         [disabled]="!swapSell"
         type="number"
         id="buy-input"
@@ -50,7 +51,7 @@
     <ion-row>
       <h5>
         {{ selectedProtocol?.identifier | uppercase }}
-        <ion-icon md-name="keyboard_arrow_down"></ion-icon>
+        <ion-icon name="arrow-dropdown"></ion-icon>
       </h5>
     </ion-row>
   </ion-col>

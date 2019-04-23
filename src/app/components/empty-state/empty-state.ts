@@ -1,16 +1,17 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core'
 
 @Component({
-  selector: "empty-state",
-  templateUrl: "empty-state.html"
+  selector: 'empty-state',
+  templateUrl: 'empty-state.html',
+  styleUrls: ['./empty-state.scss']
 })
 export class EmptyStateComponent {
   @Input()
-  imageName: string;
+  imageName: string
 
   @Input()
-  text: string;
+  text: string
 
   @Input()
-  fullHeight: boolean = true;
+  fullHeight: boolean = true
 }

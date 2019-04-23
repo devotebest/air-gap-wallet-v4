@@ -10,26 +10,13 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar
-    mode="md"
-    [(ngModel)]="searchTerm"
-    (ionChange)="searchTermChanged()"
-  ></ion-searchbar>
+  <ion-searchbar mode="md" [(ngModel)]="searchTerm" (ionChange)="searchTermChanged()"></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list
-    [(ngModel)]="selectedProtocol"
-    (ngModelChange)="onModelChange($event)"
-    lines="none"
-  >
-    <ion-radio-group>
-      <currency-item
-        *ngFor="let protocol of filteredProtocols"
-        [protocol]="protocol"
-        [radioList]="true"
-      >
-      </currency-item>
+  <ion-list>
+    <ion-radio-group ngDefaultControl [(ngModel)]="selectedProtocol" (ngModelChange)="onModelChange($event)" lines="none">
+      <currency-item *ngFor="let protocol of filteredProtocols" [protocol]="protocol" [radioList]="true"></currency-item>
     </ion-radio-group>
   </ion-list>
 </ion-content>

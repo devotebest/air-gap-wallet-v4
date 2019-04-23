@@ -1,19 +1,20 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core'
 
 @Component({
-  selector: "card-actionable",
-  templateUrl: "card-actionable.html"
+  selector: 'card-actionable',
+  templateUrl: 'card-actionable.html',
+  styleUrls: ['./card-actionable.scss']
 })
 export class CardActionableComponent {
   @Input()
-  imageLeft: boolean = true;
+  imageLeft: boolean = true
 
   @Input()
-  imageName: string;
+  imageName: string
 
   @Input()
-  heading: string;
+  heading: string
 
   @Input()
-  text: string;
+  text: string
 }
