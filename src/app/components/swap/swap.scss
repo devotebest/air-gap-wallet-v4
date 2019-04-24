@@ -4,13 +4,14 @@
     box-shadow: none !important;
   }
 
-  input {
+  ion-input {
     font-size: 1.5em;
     font-weight: bold;
     margin: 0;
   }
+
   .coin__selection {
-    background-color: rgba(var(--ion-color-primary), 0.24);
+    background-color: rgba(0, 232, 204, 0.24);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +32,7 @@
   }
 }
 .border--vertical {
-  border-top: 1px solid rgba(var(--ion-color-primary), 0.24);
+  border-top: 1px solid rgba(0, 232, 204, 0.24);
 }
 .expendable__container {
   ion-icon {

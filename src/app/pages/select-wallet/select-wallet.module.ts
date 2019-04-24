@@ -1,12 +1,12 @@
-import { IonicModule } from "@ionic/angular";
-import { RouterModule } from "@angular/router";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { TranslateModule } from "@ngx-translate/core";
-import { ComponentsModule } from "../../components/components.module";
-import { ZXingScannerModule } from "@zxing/ngx-scanner";
-import { SelectWalletPage } from "./select-wallet";
+import { IonicModule } from '@ionic/angular'
+import { RouterModule } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { ComponentsModule } from '../../components/components.module'
+import { ZXingScannerModule } from '@zxing/ngx-scanner'
+import { SelectWalletPage } from './select-wallet'
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { SelectWalletPage } from "./select-wallet";
     TranslateModule,
     ComponentsModule,
     ZXingScannerModule,
-    RouterModule.forChild([{ path: "", component: SelectWalletPage }])
+    RouterModule.forChild([{ path: '', component: SelectWalletPage }])
   ],
   declarations: [SelectWalletPage]
 })

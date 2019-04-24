@@ -67,14 +67,13 @@ export class SchemeRoutingProvider {
 
       const { compatibleWallets, incompatibleWallets } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(rawString)
       if (compatibleWallets.length > 0) {
-        let navigationExtras: NavigationExtras = {
-          state: {
-            address: rawString,
-            compatibleWallets,
-            incompatibleWallets
-          }
+        const info = {
+          address: rawString,
+          compatibleWallets,
+          incompatibleWallets
         }
-        this.router.navigate(['select-wallet'], navigationExtras)
+        this.dataService.setData(1, info)
+        this.router.navigateByUrl('/select-wallet/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
         /*this.navController
           .push(SelectWalletPage, {
             address: rawString,
@@ -123,7 +122,12 @@ export class SchemeRoutingProvider {
   }
 
   async handleSignedTransaction(deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) {
-    if (this.navController) {
+    if (this.router) {
+      const info = {
+        signedTransactionSync: deserializedSync
+      }
+      this.dataService.setData(1, info)
+      this.router.navigateByUrl('/transation-confirm/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
       /*this.navController
 //        .push(TransactionConfirmPage, {
           signedTransactionSync: deserializedSync

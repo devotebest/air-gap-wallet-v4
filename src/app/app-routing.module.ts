@@ -17,7 +17,10 @@ const routes: Routes = [
     loadChildren: './pages/account-import-onboarding/account-import-onboarding.module#AccountImportOnboardingPageModule'
   },
   {
-    path: 'select-wallet',
+    path: 'select-wallet/:id',
+    resolve: {
+      special: DataResolverService
+    },
     loadChildren: './pages/select-wallet/select-wallet.module#SelectWalletPageModule'
   },
   {
@@ -47,6 +50,20 @@ const routes: Routes = [
       special: DataResolverService
     },
     loadChildren: './pages/sub-account-add/sub-account-add.module#SubAccountAddPageModule'
+  },
+  {
+    path: 'sub-account-select/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/sub-account-select/sub-account-select.module#SubAccountSelectPageModule'
+  },
+  {
+    path: 'sub-account-import/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/sub-account-import/sub-account-import.module#SubAccountImportPageModule'
   },
   {
     path: 'account-address/:id',
@@ -82,6 +99,27 @@ const routes: Routes = [
       special: DataResolverService
     },
     loadChildren: './pages/scan-address/scan-address.module#ScanAddressPageModule'
+  },
+  {
+    path: 'exchange-confirm/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/exchange-confirm/exchange-confirm.module#ExchangeConfirmPageModule'
+  },
+  {
+    path: 'transaction-confirm/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/transaction-confirm/transaction-confirm.module#TransactionConfirmPageModule'
+  },
+  {
+    path: 'delegation-baker-detail/:id',
+    resolve: {
+      special: DataResolverService
+    },
+    loadChildren: './pages/delegation-baker-detail/delegation-baker-detail.module#DelegationBakerDetailPageModule'
   }
 ]
 @NgModule({

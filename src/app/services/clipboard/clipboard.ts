@@ -1,13 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Platform, ToastController } from "@ionic/angular";
-import {
-  handleErrorSentry,
-  ErrorCategory
-} from "../sentry-error-handler/sentry-error-handler";
-import { Clipboard } from "@ionic-native/clipboard/ngx";
+import { Injectable } from '@angular/core'
+import { Platform, ToastController } from '@ionic/angular'
+import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
+import { Clipboard } from '@ionic-native/clipboard/ngx'
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ClipboardProvider {
   constructor(
@@ -17,34 +14,31 @@ export class ClipboardProvider {
   ) {}
 
   async copy(text: string): Promise<void> {
-    if (this.platform.is("cordova")) {
-      return this.clipboard.copy(text);
+    if (this.platform.is('cordova')) {
+      return this.clipboard.copy(text)
     } else {
-      return (navigator as any).clipboard.writeText(text);
+      return (navigator as any).clipboard.writeText(text)
     }
   }
 
-  async copyAndShowToast(
-    text: string,
-    toastMessage: string = "Successfully copied to your clipboard!"
-  ) {
+  async copyAndShowToast(text: string, toastMessage: string = 'Successfully copied to your clipboard!') {
     try {
-      await this.copy(text);
-      await this.showToast(toastMessage);
+      await this.copy(text)
+      await this.showToast(toastMessage)
     } catch (err) {
-      console.error("Failed to copy: ", err);
+      console.error('Failed to copy: ', err)
     }
   }
 
   async paste(): Promise<string> {
     try {
-      if (this.platform.is("cordova")) {
-        return this.clipboard.paste();
+      if (this.platform.is('cordova')) {
+        return this.clipboard.paste()
       } else {
-        return (navigator as any).clipboard.readText();
+        return (navigator as any).clipboard.readText()
       }
     } catch (err) {
-      console.error("Failed to copy: ", err);
+      console.error('Failed to copy: ', err)
     }
   }
 
@@ -53,12 +47,12 @@ export class ClipboardProvider {
       .create({
         message: message,
         duration: 1000,
-        position: "top",
+        position: 'top',
         showCloseButton: true,
-        closeButtonText: "Ok"
+        closeButtonText: 'Ok'
       })
       .then(toast => {
-        toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
-      });
+        toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST))
+      })
   }
 }

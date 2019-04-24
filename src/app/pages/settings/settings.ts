@@ -152,19 +152,17 @@ export class SettingsPage {
   }
 
   public pasteClipboard() {
-    let text =
+    /*let text =
       'airgap-wallet://?d=AerPyFYLtBvLFRMdCRAHG3ifKiz2DiFdabzoVhkaK94KAYkf3umTW5ZXc6WR8oMBbrhkY5WrCeUocSge5q8maicFi6snG2XYoosWzrsbUyQMXQwyNmafgo5m1GRzx1LQCmCPN9Lf9'
-    this.schemeRoutingProvider.handleNewSyncRequest(this.router, text).catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))
+    this.schemeRoutingProvider.handleNewSyncRequest(this.router, text).catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))*/
 
-    // this.clipboardProvider.paste().then(
-    //   (text: string) => {
-    //     this.schemeRoutingProvider
-    //       .handleNewSyncRequest(this.router, text)
-    //       .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING));
-    //   },
-    //   (err: string) => {
-    //     console.error("Error: " + err);
-    //   }
-    // );
+    this.clipboardProvider.paste().then(
+      (text: string) => {
+        this.schemeRoutingProvider.handleNewSyncRequest(this.router, text).catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))
+      },
+      (err: string) => {
+        console.error('Error: ' + err)
+      }
+    )
   }
 }

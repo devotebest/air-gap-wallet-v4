@@ -1,12 +1,12 @@
-import { IonicModule } from "@ionic/angular";
-import { RouterModule } from "@angular/router";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { IntroductionPage } from "./introduction";
-import { ComponentsModule } from "../../components/components.module";
-import { TranslateModule } from "@ngx-translate/core";
-import { IntroductionDownloadPageModule } from "../introduction-download/introduction-download.module";
+import { IonicModule } from '@ionic/angular'
+import { RouterModule } from '@angular/router'
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
+import { IntroductionPage } from './introduction'
+import { ComponentsModule } from '../../components/components.module'
+import { TranslateModule } from '@ngx-translate/core'
+import { IntroductionDownloadPageModule } from '../introduction-download/introduction-download.module'
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { IntroductionDownloadPageModule } from "../introduction-download/introdu
     ComponentsModule,
     TranslateModule,
     IntroductionDownloadPageModule,
-    RouterModule.forChild([{ path: "", component: IntroductionPage }])
+    RouterModule.forChild([{ path: '', component: IntroductionPage }])
   ],
   declarations: [IntroductionPage]
 })

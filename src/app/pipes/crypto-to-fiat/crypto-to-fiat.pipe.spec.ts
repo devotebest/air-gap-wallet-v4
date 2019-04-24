@@ -1,84 +1,84 @@
-import { CryptoToFiatPipe } from "./crypto-to-fiat.pipe";
-import { BigNumber } from "bignumber.js";
+import { CryptoToFiatPipe } from './crypto-to-fiat.pipe'
+import { BigNumber } from 'bignumber.js'
 
-describe("CryptoToFiatPipe", () => {
-  let cryptoToFiatPipe: CryptoToFiatPipe;
+describe('CryptoToFiatPipe', () => {
+  let cryptoToFiatPipe: CryptoToFiatPipe
 
   beforeEach(() => {
-    cryptoToFiatPipe = new CryptoToFiatPipe();
-  });
+    cryptoToFiatPipe = new CryptoToFiatPipe()
+  })
 
-  it("should return the right price", () => {
+  it('should return the right price', () => {
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
-        protocolIdentifier: "eth",
+        protocolIdentifier: 'eth',
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("0.0000000000000002");
-  });
+    ).toEqual('0.0000000000000002')
+  })
 
-  it("should return an empty string when protocolIdentifier is not set", () => {
+  it('should return an empty string when protocolIdentifier is not set', () => {
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
         protocolIdentifier: undefined,
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when protocolIdentifier is invalid", () => {
+  it('should return an empty string when protocolIdentifier is invalid', () => {
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
-        protocolIdentifier: "bananarama",
+        protocolIdentifier: 'bananarama',
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when value is not a BigNumber", () => {
-    let value: any = "test";
+  it('should return an empty string when value is not a BigNumber', () => {
+    let value: any = 'test'
     expect(
       cryptoToFiatPipe.transform(value, {
-        protocolIdentifier: "eth",
+        protocolIdentifier: 'eth',
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when price is not a BigNumber", () => {
-    let value: any = "test";
+  it('should return an empty string when price is not a BigNumber', () => {
+    let value: any = 'test'
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
-        protocolIdentifier: "eth",
+        protocolIdentifier: 'eth',
         currentMarketPrice: value
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when value is undefined", () => {
+  it('should return an empty string when value is undefined', () => {
     expect(
       cryptoToFiatPipe.transform(undefined, {
-        protocolIdentifier: "eth",
+        protocolIdentifier: 'eth',
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when protocolIdentifier is undefined", () => {
+  it('should return an empty string when protocolIdentifier is undefined', () => {
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
         protocolIdentifier: undefined,
         currentMarketPrice: new BigNumber(200)
       })
-    ).toEqual("");
-  });
+    ).toEqual('')
+  })
 
-  it("should return an empty string when currentMarketPrice is undefined", () => {
+  it('should return an empty string when currentMarketPrice is undefined', () => {
     expect(
       cryptoToFiatPipe.transform(new BigNumber(1), {
-        protocolIdentifier: "eth",
+        protocolIdentifier: 'eth',
         currentMarketPrice: undefined
       })
-    ).toEqual("");
-  });
-});
+    ).toEqual('')
+  })
+})

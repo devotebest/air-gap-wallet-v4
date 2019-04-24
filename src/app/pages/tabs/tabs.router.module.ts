@@ -1,61 +1,61 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { TabsPage } from "./tabs.page";
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { TabsPage } from './tabs.page'
 
 const routes: Routes = [
   {
-    path: "tabs",
+    path: 'tabs',
     component: TabsPage,
     children: [
       {
-        path: "portfolio",
+        path: 'portfolio',
         children: [
           {
-            path: "",
-            loadChildren: "../portfolio/portfolio.module#PortfolioPageModule"
+            path: '',
+            loadChildren: '../portfolio/portfolio.module#PortfolioPageModule'
           }
         ]
       },
       {
-        path: "scan",
+        path: 'scan',
         children: [
           {
-            path: "",
-            loadChildren: "../scan/scan.module#ScanPageModule"
+            path: '',
+            loadChildren: '../scan/scan.module#ScanPageModule'
           }
         ]
       },
       {
-        path: "exchange",
+        path: 'exchange',
         children: [
           {
-            path: "",
-            loadChildren: "../exchange/exchange.module#ExchangePageModule"
+            path: '',
+            loadChildren: '../exchange/exchange.module#ExchangePageModule'
           }
         ]
       },
       {
-        path: "settings",
+        path: 'settings',
         children: [
           {
-            path: "",
-            loadChildren: "../settings/settings.module#SettingsPageModule"
+            path: '',
+            loadChildren: '../settings/settings.module#SettingsPageModule'
           }
         ]
       },
       {
-        path: "",
-        redirectTo: "/tabs/portfolio",
-        pathMatch: "full"
+        path: '',
+        redirectTo: '/tabs/portfolio',
+        pathMatch: 'full'
       }
     ]
   },
   {
-    path: "",
-    redirectTo: "/tabs/portfolio",
-    pathMatch: "full"
+    path: '',
+    redirectTo: '/tabs/portfolio',
+    pathMatch: 'full'
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

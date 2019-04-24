@@ -1,7 +1,7 @@
 <ion-row no-padding align-items-stretch class="amount__container border--vertical">
   <ion-col padding size="8">
     <ion-item no-padding lines="none">
-      <ion-label no-margin stacked>
+      <ion-label no-margin position="stacked">
         {{ (swapSell ? 'swap.sell_label' : 'swap.buy_label') | translate }}
         <span
           *ngIf="minExchangeAmount"
@@ -9,7 +9,6 @@
         ></span>
       </ion-label>
       <ion-input
-        ngDefaultControl
         [disabled]="!swapSell"
         type="number"
         id="buy-input"

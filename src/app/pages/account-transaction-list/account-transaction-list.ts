@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { IAirGapTransaction, AirGapMarketWallet, TezosKtProtocol } from 'airgap-coin-lib'
 import { Platform, NavController, PopoverController, ToastController } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
+//import 'core-js/es7/object'
 
 import { TransactionDetailPage } from '../transaction-detail/transaction-detail'
 import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
@@ -146,9 +147,15 @@ export class AccountTransactionListPage {
         if (ktAddresses.length === 0) {
           this.showToast('No accounts to import.')
         } else {
-          for (let [index, _ktAddress] of ktAddresses.entries()) {
+          debugger
+          let entries = ktAddresses.entries()
+          for (const [index, element] of ktAddresses.entries()) {
+            console.log(index, element)
             await this.operationsProvider.addKtAddress(this.wallet, index, ktAddresses)
           }
+          /*for (let [index, _ktAddress] of entries) {
+            await this.operationsProvider.addKtAddress(this.wallet, index, ktAddresses)
+          }*/
 
           await this.navCtrl.pop()
           this.showToast('Accounts imported')
@@ -413,6 +420,11 @@ export class AccountTransactionListPage {
   }
 
   openDelegateSelection(wallet?: AirGapMarketWallet) {
+    const info = {
+      wallet: wallet || this.wallet
+    }
+    this.dataService.setData(1, info)
+    this.router.navigateByUrl('/delegation-baker-detail/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     // this.navCtrl
     //   .push(DelegationBakerDetailPage, {
     //     wallet: wallet || this.wallet

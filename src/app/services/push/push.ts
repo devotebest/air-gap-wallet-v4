@@ -1,40 +1,31 @@
-import { PushBackendProvider } from "./../push-backend/push-backend";
-import { Injectable } from "@angular/core";
-import {
-  NotificationEventResponse,
-  Push,
-  PushObject,
-  PushOptions,
-  RegistrationEventResponse
-} from "@ionic-native/push/ngx";
-import { TranslateService } from "@ngx-translate/core";
-import {
-  handleErrorSentry,
-  ErrorCategory
-} from "../sentry-error-handler/sentry-error-handler";
-import { Platform, ModalController, ToastController } from "@ionic/angular";
-import { AirGapMarketWallet } from "airgap-coin-lib";
-import { ReplaySubject } from "rxjs";
-import { take, filter } from "rxjs/operators";
-import { StorageProvider, SettingsKey } from "../storage/storage";
-import { IntroductionPushPage } from "../../pages/introduction-push/introduction-push";
+import { PushBackendProvider } from './../push-backend/push-backend'
+import { Injectable } from '@angular/core'
+import { NotificationEventResponse, Push, PushObject, PushOptions, RegistrationEventResponse } from '@ionic-native/push/ngx'
+import { TranslateService } from '@ngx-translate/core'
+import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
+import { Platform, ModalController, ToastController } from '@ionic/angular'
+import { AirGapMarketWallet } from 'airgap-coin-lib'
+import { ReplaySubject } from 'rxjs'
+import { take, filter } from 'rxjs/operators'
+import { StorageProvider, SettingsKey } from '../storage/storage'
+import { IntroductionPushPage } from '../../pages/introduction-push/introduction-push'
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PushProvider {
-  private registrationId: ReplaySubject<string> = new ReplaySubject(1);
-  private registerCalled: boolean = false;
+  private registrationId: ReplaySubject<string> = new ReplaySubject(1)
+  private registerCalled: boolean = false
 
   private readonly options: PushOptions = {
     android: {},
     ios: {
-      alert: "true",
+      alert: 'true',
       badge: true,
-      sound: "false"
+      sound: 'false'
     },
     windows: {}
-  };
+  }
 
   constructor(
     private readonly platform: Platform,
@@ -45,136 +36,119 @@ export class PushProvider {
     private readonly modalController: ModalController,
     private readonly toastController: ToastController
   ) {
-    this.initPush();
+    this.initPush()
   }
 
   public async initPush(): Promise<void> {
-    await this.platform.ready();
+    await this.platform.ready()
 
-    if (!this.platform.is("cordova")) {
-      return;
+    if (!this.platform.is('cordova')) {
+      return
     }
 
-    const {
-      isEnabled
-    }: { isEnabled: boolean } = await this.push.hasPermission();
+    const { isEnabled }: { isEnabled: boolean } = await this.push.hasPermission()
 
     if (isEnabled) {
-      await this.register();
+      await this.register()
     }
   }
 
   public async setupPush() {
-    if (this.platform.is("android")) {
-      this.register();
-    } else if (this.platform.is("ios")) {
+    if (this.platform.is('android')) {
+      this.register()
+    } else if (this.platform.is('ios')) {
       // On iOS, show a modal why we need permissions
-      const hasShownPushModal = await this.storageProvider.get(
-        SettingsKey.PUSH_INTRODUCTION
-      );
+      const hasShownPushModal = await this.storageProvider.get(SettingsKey.PUSH_INTRODUCTION)
       if (!hasShownPushModal) {
-        await this.storageProvider.set(SettingsKey.PUSH_INTRODUCTION, true);
+        await this.storageProvider.set(SettingsKey.PUSH_INTRODUCTION, true)
         const modal = await this.modalController.create({
           component: IntroductionPushPage
-        });
+        })
 
         modal.dismiss(askForPermissions => {
           if (askForPermissions) {
-            this.register();
+            this.register()
           }
-        });
+        })
 
-        modal.present().catch(handleErrorSentry(ErrorCategory.IONIC_MODAL));
+        modal.present().catch(handleErrorSentry(ErrorCategory.IONIC_MODAL))
       }
     }
   }
 
   async registerWallets(wallets: AirGapMarketWallet[]) {
-    console.log("register wallets");
+    console.log('register wallets')
 
     this.registrationId.pipe(take(1)).subscribe(registrationId => {
-      const languageCode: string = this.translate.getBrowserCultureLang();
+      const languageCode: string = this.translate.getBrowserCultureLang()
 
       const pushRegisterRequests = wallets.map(wallet => ({
         address: wallet.receivingPublicAddress,
         identifier: wallet.protocolIdentifier,
         pushToken: registrationId,
         languageCode: languageCode
-      }));
+      }))
 
-      this.pushBackendProvider
-        .registerPushMany(pushRegisterRequests)
-        .catch(handleErrorSentry(ErrorCategory.PUSH));
+      this.pushBackendProvider.registerPushMany(pushRegisterRequests).catch(handleErrorSentry(ErrorCategory.PUSH))
       if (!this.registrationId) {
-        console.error("No registration token found");
-        return;
+        console.error('No registration token found')
+        return
       }
-    });
+    })
   }
 
   async unregisterWallets(wallets: AirGapMarketWallet[]) {
-    console.log("unregister wallets");
+    console.log('unregister wallets')
 
     this.registrationId.pipe(take(1)).subscribe(registrationId => {
       wallets.forEach(wallet => {
-        this.unregisterWallet(wallet, registrationId);
-      });
-    });
+        this.unregisterWallet(wallet, registrationId)
+      })
+    })
   }
 
-  private async unregisterWallet(
-    wallet: AirGapMarketWallet,
-    registrationId: string
-  ) {
+  private async unregisterWallet(wallet: AirGapMarketWallet, registrationId: string) {
     if (!this.registrationId) {
-      console.error("No registration token found");
-      return;
+      console.error('No registration token found')
+      return
     }
 
     this.pushBackendProvider
-      .unregisterPush(
-        wallet.protocolIdentifier,
-        wallet.receivingPublicAddress,
-        registrationId
-      )
-      .catch(handleErrorSentry(ErrorCategory.PUSH));
+      .unregisterPush(wallet.protocolIdentifier, wallet.receivingPublicAddress, registrationId)
+      .catch(handleErrorSentry(ErrorCategory.PUSH))
   }
 
   private async register(): Promise<void> {
     if (this.registerCalled) {
-      return;
+      return
     }
 
-    this.registerCalled = true;
+    this.registerCalled = true
 
-    const pushObject: PushObject = this.push.init(this.options);
+    const pushObject: PushObject = this.push.init(this.options)
 
-    pushObject
-      .on("notification")
-      .subscribe(async (notification: NotificationEventResponse) => {
-        console.debug("Received a notification", notification);
-        this.toastController
-          .create({
-            message: `${notification.title}: ${notification.message}`,
-            showCloseButton: true,
-            duration: 3000,
-            position: "top"
-          })
-          .then(toast => {
-            toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST));
-          });
-      });
+    pushObject.on('notification').subscribe(async (notification: NotificationEventResponse) => {
+      console.debug('Received a notification', notification)
+      this.toastController
+        .create({
+          message: `${notification.title}: ${notification.message}`,
+          showCloseButton: true,
+          duration: 3000,
+          position: 'top'
+        })
+        .then(toast => {
+          toast.present().catch(handleErrorSentry(ErrorCategory.IONIC_TOAST))
+        })
+    })
 
-    pushObject
-      .on("registration")
-      .subscribe(async (registration: RegistrationEventResponse) => {
-        console.debug("device registered", registration);
-        this.registrationId.next(registration.registrationId);
-      });
+    pushObject.on('registration').subscribe(async (registration: RegistrationEventResponse) => {
+      console.debug('device registered', registration)
+      this.registrationId.next(registration.registrationId)
+    })
 
-    pushObject.on("error").subscribe((error: Error) => {
-      console.error("Error with Push plugin", error);
-      handleErrorSentry(ErrorCategory.PUSH)(error);
-    });
+    pushObject.on('error').subscribe((error: Error) => {
+      console.error('Error with Push plugin', error)
+      handleErrorSentry(ErrorCategory.PUSH)(error)
+    })
   }
 }

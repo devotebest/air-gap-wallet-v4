@@ -3,7 +3,7 @@ import { AirGapMarketWallet } from 'airgap-coin-lib'
 import { AccountProvider } from '../../services/account/account.provider'
 import { Component } from '@angular/core'
 import { NavController, NavParams } from '@ionic/angular'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
 import { DataService } from '../../services/data/data.service'
@@ -20,16 +20,19 @@ export class SelectWalletPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     public accountProvider: AccountProvider,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   async ionViewWillLoad() {
-    this.address = this.navParams.get('address')
-    this.compatibleWallets = this.navParams.get('compatibleWallets')
-    this.incompatibleWallets = this.navParams.get('incompatibleWallets')
+    if (this.route.snapshot.data['special']) {
+      const info = this.route.snapshot.data['special']
+      this.address = info.address
+      this.compatibleWallets = info.compatibleWallets
+      this.incompatibleWallets = info.incompatibleWallets
+    }
   }
 
   openPreparePage(wallet: AirGapMarketWallet) {

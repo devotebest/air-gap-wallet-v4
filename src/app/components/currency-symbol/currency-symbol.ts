@@ -1,33 +1,33 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core'
 
 @Component({
-  selector: "currency-symbol",
-  templateUrl: "currency-symbol.html"
+  selector: 'currency-symbol',
+  templateUrl: 'currency-symbol.html'
 })
 export class CurrencySymbolComponent {
   @Input()
-  private symbol: string;
+  private symbol: string
 
-  public symbolURL: string = "assets/symbols/generic-coin.svg";
+  public symbolURL: string = 'assets/symbols/generic-coin.svg'
 
   constructor() {
     /* */
   }
 
   ngAfterViewInit() {
-    this.loadImage();
+    this.loadImage()
   }
 
   ngOnChanges() {
-    this.loadImage();
+    this.loadImage()
   }
 
   loadImage() {
-    const imageUrl = "assets/symbols/" + this.symbol.toLowerCase() + ".svg";
-    const img = new Image();
+    const imageUrl = 'assets/symbols/' + this.symbol.toLowerCase() + '.svg'
+    const img = new Image()
     img.onload = () => {
-      this.symbolURL = imageUrl;
-    };
-    img.src = imageUrl;
+      this.symbolURL = imageUrl
+    }
+    img.src = imageUrl
   }
 }
