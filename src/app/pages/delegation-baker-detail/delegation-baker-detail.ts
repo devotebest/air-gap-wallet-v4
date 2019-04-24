@@ -9,6 +9,7 @@ import { RemoteConfigProvider, BakerConfig } from '../../services/remote-config/
 import { Moment } from 'moment'
 import * as moment from 'moment'
 import { ProtocolSymbols } from '../../services/protocols/protocols'
+import { DataService } from '../../services/data/data.service'
 
 const hoursPerCycle = 68
 
@@ -37,7 +38,8 @@ export class DelegationBakerDetailPage {
     private route: ActivatedRoute,
     public toastController: ToastController,
     public operationsProvider: OperationsProvider,
-    public remoteConfigProvider: RemoteConfigProvider
+    public remoteConfigProvider: RemoteConfigProvider,
+    private dataService: DataService
   ) {
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']
@@ -96,11 +98,15 @@ export class DelegationBakerDetailPage {
     try {
       if (this.wallet.protocolIdentifier === ProtocolSymbols.XTZ) {
         const pageOptions = await this.operationsProvider.prepareOriginate(this.wallet, this.bakerConfig.address)
+        this.dataService.setData(1, pageOptions.params)
+        this.router.navigateByUrl('/interaction-selection/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
         // this.navCtrl
         //   .push(pageOptions.page, pageOptions.params)
         //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
       } else {
         const pageOptions = await this.operationsProvider.prepareDelegate(this.wallet, this.bakerConfig.address)
+        this.dataService.setData(1, pageOptions.params)
+        this.router.navigateByUrl('/interaction-selection/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
         // this.navCtrl
         //   .push(pageOptions.page, pageOptions.params)
         //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
