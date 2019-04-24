@@ -45,7 +45,7 @@ export class DelegationBakerDetailPage {
     }
   }
 
-  async ionViewDidLoad() {
+  async ionViewDidEnter() {
     // get baker 0, always airgap for now
     this.bakerConfig = (await this.remoteConfigProvider.tezosBakers())[0]
 
@@ -110,7 +110,7 @@ export class DelegationBakerDetailPage {
 
       this.toastController
         .create({
-          message: error,
+          message: error.message,
           duration: 3000,
           position: 'bottom'
         })

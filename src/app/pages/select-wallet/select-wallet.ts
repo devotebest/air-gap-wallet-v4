@@ -26,7 +26,7 @@ export class SelectWalletPage {
     private route: ActivatedRoute
   ) {}
 
-  async ionViewWillLoad() {
+  async ionViewWillEnter() {
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']
       this.address = info.address
