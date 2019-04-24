@@ -89,7 +89,7 @@
           <ion-label no-margin position="stacked">{{ 'transaction-prepare.amount_label' | translate }}</ion-label>
           <ion-input formControlName="amount" type="number" id="amount-input" placeholder="0.0"></ion-input>
         </ion-item>
-        <p ion-text no-margin color="blackLight">
+        <p ion-text no-margin>
           ${{ transactionForm.get('amount').value * wallet.currentMarketPrice | number: '1.2-2' }}
         </p>
       </ion-col>

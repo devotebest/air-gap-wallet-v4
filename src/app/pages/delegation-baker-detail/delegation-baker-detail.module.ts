@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms'
 import { DelegationBakerDetailPage } from './delegation-baker-detail'
 import { ComponentsModule } from '../../components/components.module'
 import { TranslateModule } from '@ngx-translate/core'
+import { PipesModule } from '../../pipes/pipes.module'
+import { MomentModule } from 'ngx-moment'
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import { TranslateModule } from '@ngx-translate/core'
     FormsModule,
     ComponentsModule,
     TranslateModule,
+    PipesModule,
+    MomentModule,
     RouterModule.forChild([{ path: '', component: DelegationBakerDetailPage }])
   ],
   declarations: [DelegationBakerDetailPage]

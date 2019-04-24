@@ -49,16 +49,15 @@ import { PushProvider } from './services/push/push'
 import { PushBackendProvider } from './services/push-backend/push-backend'
 
 import { AppComponent } from './app.component'
-import { ProtocolSelectPage } from './pages/protocol-select/protocol-select'
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
 }
 
 @NgModule({
-  declarations: [AppComponent, ProtocolSelectPage],
-  entryComponents: [ProtocolSelectPage],
-  exports: [ProtocolSelectPage],
+  declarations: [AppComponent],
+  entryComponents: [],
+  exports: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -61,7 +61,6 @@ export class OperationsProvider {
   }
 
   public refreshAllDelegationStatuses() {
-    debugger
     Array.from(this.delegationStatuses.getValue().entries()).forEach(entry => {
       this.getDelegationStatusOfAddress(entry[0], true).catch(handleErrorSentry(ErrorCategory.OPERATIONS_PROVIDER))
     })
@@ -156,7 +155,6 @@ export class OperationsProvider {
   }
 
   public async addKtAddress(xtzWallet: AirGapMarketWallet, index: number, ktAddresses: string[]): Promise<AirGapMarketWallet> {
-    debugger
     let wallet = this.accountProvider.walletByPublicKeyAndProtocolAndAddressIndex(xtzWallet.publicKey, ProtocolSymbols.XTZ_KT, index)
 
     if (wallet) {
