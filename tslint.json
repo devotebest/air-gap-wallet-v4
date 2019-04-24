@@ -21,7 +21,6 @@
     "no-consecutive-blank-lines": false,
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
     "no-empty": false,
-    "no-inferrable-types": [true, "ignore-params"],
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
@@ -42,6 +41,7 @@
     "use-pipe-transform-interface": true,
     "one-variable-per-declaration": false,
     "component-class-suffix": [true, "Page", "Component"],
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "semicolon": [true, "never"]
   }
 }
