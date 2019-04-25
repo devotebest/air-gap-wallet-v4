@@ -98,7 +98,7 @@ export class SchemeRoutingProvider {
         signedTransactionSync: deserializedSync
       }
       this.dataService.setData(DataServiceKey.TRANSACTION, info)
-      this.router.navigateByUrl('/transation-confirm/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+      this.router.navigateByUrl('/transaction-confirm/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     }
   }
 
