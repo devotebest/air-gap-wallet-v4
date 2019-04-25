@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import { NavController, NavParams } from '@ionic/angular'
+import { NavController } from '@ionic/angular'
 import { AccountProvider } from '../../services/account/account.provider'
 import { AirGapMarketWallet, getProtocolByIdentifier, ICoinProtocol } from 'airgap-coin-lib'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { map } from 'rxjs/operators'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'page-sub-account-import',
@@ -15,10 +16,18 @@ export class SubAccountImportPage {
   public subProtocol: ICoinProtocol
   public subWallets: AirGapMarketWallet[]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private accountProvider: AccountProvider) {
+  constructor(
+    public navCtrl: NavController,
+    private router: Router,
+    private route: ActivatedRoute,
+    private accountProvider: AccountProvider
+  ) {
     this.subWallets = []
-    this.subProtocolIdentifier = this.navParams.get('subProtocolIdentifier')
-    this.subProtocol = getProtocolByIdentifier(this.subProtocolIdentifier)
+    if (this.route.snapshot.data['special']) {
+      const info = this.route.snapshot.data['special']
+      this.subProtocolIdentifier = info.subProtocolIdentifier
+      this.subProtocol = getProtocolByIdentifier(this.subProtocolIdentifier)
+    }
 
     this.accountProvider.wallets
       .pipe(map(mainAccounts => mainAccounts.filter(wallet => wallet.protocolIdentifier === this.subProtocolIdentifier.split('-')[0])))
@@ -52,6 +61,6 @@ export class SubAccountImportPage {
   }
 
   popToRoot() {
-    //this.navCtrl.popToRoot().catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

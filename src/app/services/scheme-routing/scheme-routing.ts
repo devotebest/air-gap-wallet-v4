@@ -3,7 +3,7 @@ import { AccountProvider } from '../account/account.provider'
 import { Injectable } from '@angular/core'
 import { AlertController, NavController } from '@ionic/angular'
 import { Router, NavigationExtras } from '@angular/router'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 import { DeserializedSyncProtocol, SyncProtocolUtils, EncodedType, SyncWalletRequest, AirGapMarketWallet } from 'airgap-coin-lib'
 import { AccountImportPage } from '../../pages/account-import/account-import'
 //import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
@@ -72,15 +72,8 @@ export class SchemeRoutingProvider {
           compatibleWallets,
           incompatibleWallets
         }
-        this.dataService.setData(1, info)
-        this.router.navigateByUrl('/select-wallet/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-        /*this.navController
-          .push(SelectWalletPage, {
-            address: rawString,
-            compatibleWallets,
-            incompatibleWallets
-          })
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+        this.dataService.setData(DataServiceKey.WALLET, info)
+        this.router.navigateByUrl('/select-wallet/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
       }
     }
   }
@@ -95,30 +88,9 @@ export class SchemeRoutingProvider {
       walletSync.derivationPath
     )
     if (this.router) {
-      this.dataService.setData(1, wallet)
-      this.router.navigateByUrl('/account-import/1').then(v => {
-        //this.router.navigateByUrl("/tabs/portfolio");
-      })
+      this.dataService.setData(DataServiceKey.WALLET, wallet)
+      this.router.navigateByUrl('/account-import/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     }
-    //     if (this.router) {
-    //       let navigationExtras: NavigationExtras = {
-    //         state: {
-    //           wallet: wallet
-    //         }
-    //       };
-    //       this.router.navigateByUrl("/account-import", navigationExtras);
-    //       /*this.navController
-    //         .push(AccountImportPage, {
-    //           wallet: wallet
-    //         })
-    //         .then(v => {
-    //           console.log("WalletImportPage openend", v);
-    //           // this.navController.push(PortfolioPage)
-    //         })
-    //         .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-    // */
-
-    //     }
   }
 
   async handleSignedTransaction(deserializedSync: DeserializedSyncProtocol, scanAgainCallback: Function) {
@@ -126,17 +98,8 @@ export class SchemeRoutingProvider {
       const info = {
         signedTransactionSync: deserializedSync
       }
-      this.dataService.setData(1, info)
-      this.router.navigateByUrl('/transation-confirm/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-      /*this.navController
-//        .push(TransactionConfirmPage, {
-          signedTransactionSync: deserializedSync
-        })
-        .then(v => {
-          console.log("TransactionConfirmPage opened", v);
-        })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-        */
+      this.dataService.setData(DataServiceKey.TRANSACTION, info)
+      this.router.navigateByUrl('/transation-confirm/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     }
   }
 

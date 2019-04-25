@@ -9,7 +9,7 @@ import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-ha
 import { AccountProvider } from '../../services/account/account.provider'
 import { ProtocolsProvider } from '../../services/protocols/protocols'
 import { Router } from '@angular/router'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-account-add',
@@ -60,23 +60,23 @@ export class AccountAddPage {
   }
 
   addAccount(protocolIdentifier: string) {
-    this.dataService.setData(1, protocolIdentifier)
-    this.router.navigateByUrl('/account-import-onboarding/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.PROTOCOL, protocolIdentifier)
+    this.router.navigateByUrl('/account-import-onboarding/' + DataServiceKey.PROTOCOL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   addSubAccount(subProtocolIdentifier: string) {
     const mainProtocolIdentifier = subProtocolIdentifier.split('-')[0]
     if (this.accountProvider.getWalletList().filter(protocol => protocol.protocolIdentifier === mainProtocolIdentifier).length > 0) {
       console.log(subProtocolIdentifier)
-      /*this.navCtrl
-        .push(SubAccountImportPage, {
-          subProtocolIdentifier: subProtocolIdentifier
-        })
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+      const info = {
+        subProtocolIdentifier: subProtocolIdentifier
+      }
+      this.dataService.setData(DataServiceKey.PROTOCOL, info)
+      this.router.navigateByUrl('/sub-account-import/' + DataServiceKey.PROTOCOL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     } else {
       console.log(mainProtocolIdentifier)
-      this.dataService.setData(1, mainProtocolIdentifier)
-      this.router.navigateByUrl('/account-import-onboarding/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+      this.dataService.setData(DataServiceKey.PROTOCOL, mainProtocolIdentifier)
+      this.router.navigateByUrl('/account-import-onboarding/' + DataServiceKey.PROTOCOL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     }
   }
 }

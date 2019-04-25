@@ -8,7 +8,7 @@ import { ExchangeConfirmPage } from '../exchange-confirm/exchange-confirm'
 import { StorageProvider, SettingsKey } from '../../services/storage/storage'
 import { AccountProvider } from '../../services/account/account.provider'
 import { BigNumber } from 'bignumber.js'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 enum ExchangePageState {
   LOADING,
@@ -205,8 +205,8 @@ export class ExchangePage {
         exchangeResult: result
       }
 
-      this.dataService.setData(1, info)
-      this.router.navigateByUrl('/exchange-confirm/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+      this.dataService.setData(DataServiceKey.EXCHANGE, info)
+      this.router.navigateByUrl('/exchange-confirm/' + DataServiceKey.EXCHANGE).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     } catch (error) {
       console.error(error)
     }

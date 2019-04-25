@@ -1,4 +1,3 @@
-//import { TransactionQrPage } from "../transaction-qr/transaction-qr";
 import { AirGapMarketWallet, IAirGapTransaction } from 'airgap-coin-lib'
 import { Component } from '@angular/core'
 import { NavController } from '@ionic/angular'
@@ -6,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { DeepLinkProvider } from '../../services/deep-link/deep-link'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-interaction-selection',
@@ -27,7 +26,6 @@ export class InteractionSelectionPage {
   ) {
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']
-      console.log(info)
       this.wallet = info.wallet
       this.airGapTx = info.airGapTx
       this.preparedDataQR = info.data
@@ -42,8 +40,8 @@ export class InteractionSelectionPage {
       airGapTx: this.airGapTx,
       data: this.preparedDataQR
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/transaction-qr/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.TRANSACTION, info)
+    this.router.navigateByUrl('/transaction-qr/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   sameDeviceSign() {

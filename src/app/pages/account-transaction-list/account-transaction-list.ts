@@ -19,7 +19,7 @@ import { OperationsProvider, ActionType } from '../../services/operations/operat
 import { SubAccountAddPage } from '../sub-account-add/sub-account-add'
 import { SubProtocolType } from 'airgap-coin-lib/dist/protocols/ICoinSubProtocol'
 import { ProtocolSymbols } from '../../services/protocols/protocols'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 interface CoinAction {
   type: ActionType
@@ -229,18 +229,18 @@ export class AccountTransactionListPage {
       wallet: this.wallet,
       address: ''
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/transaction-prepare/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.DETAIL, info)
+    this.router.navigateByUrl('/transaction-prepare/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openReceivePage() {
-    this.dataService.setData(1, this.wallet)
-    this.router.navigateByUrl('/account-address/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.DETAIL, this.wallet)
+    this.router.navigateByUrl('/account-address/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openTransactionDetailPage(transaction: IAirGapTransaction) {
-    this.dataService.setData(1, transaction)
-    this.router.navigateByUrl('/transaction-detail/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.DETAIL, transaction)
+    this.router.navigateByUrl('/transaction-detail/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openBlockexplorer() {
@@ -417,13 +417,8 @@ export class AccountTransactionListPage {
     const info = {
       wallet: wallet || this.wallet
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/delegation-baker-detail/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-    // this.navCtrl
-    //   .push(DelegationBakerDetailPage, {
-    //     wallet: wallet || this.wallet
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.dataService.setData(DataServiceKey.DETAIL, info)
+    this.router.navigateByUrl('/delegation-baker-detail/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openAccountAddPage(subProtocolType: SubProtocolType, wallet: AirGapMarketWallet) {
@@ -431,7 +426,7 @@ export class AccountTransactionListPage {
       subProtocolType: subProtocolType,
       wallet: wallet
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/sub-account-add/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+    this.dataService.setData(DataServiceKey.DETAIL, info)
+    this.router.navigateByUrl('/sub-account-add/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

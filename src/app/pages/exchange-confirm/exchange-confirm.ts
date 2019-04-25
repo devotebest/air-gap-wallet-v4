@@ -7,7 +7,7 @@ import { InteractionSelectionPage } from '../interaction-selection/interaction-s
 import { ErrorCategory, handleErrorSentry } from '../../services/sentry-error-handler/sentry-error-handler'
 import BigNumber from 'bignumber.js'
 import { OperationsProvider } from '../../services/operations/operations'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 declare let cordova
 
 @Component({
@@ -73,16 +73,8 @@ export class ExchangeConfirmPage {
         data: 'airgap-vault://?d=' + serializedTx
       }
 
-      this.dataService.setData(1, info)
-      this.router.navigateByUrl('/interaction-selection/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-
-      // this.navCtrl
-      //   .push(InteractionSelectionPage, {
-      //     wallet: wallet,
-      //     airGapTx: airGapTx,
-      //     data: "airgap-vault://?d=" + serializedTx
-      //   })
-      //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+      this.dataService.setData(DataServiceKey.INTERACTION, info)
+      this.router.navigateByUrl('/interaction-selection/' + DataServiceKey.INTERACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     } catch (error) {
       //
     }

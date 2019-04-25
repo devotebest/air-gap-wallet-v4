@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { ClipboardProvider } from '../../services/clipboard/clipboard'
 import { OperationsProvider } from '../../services/operations/operations'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-transaction-prepare',
@@ -149,8 +149,8 @@ export class TransactionPreparePage {
         airGapTx: airGapTx,
         data: 'airgap-vault://?d=' + serializedTx
       }
-      this.dataService.setData(1, info)
-      this.router.navigateByUrl('/interaction-selection/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+      this.dataService.setData(DataServiceKey.INTERACTION, info)
+      this.router.navigateByUrl('/interaction-selection/' + DataServiceKey.INTERACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
     } catch (error) {
       //
     }
@@ -163,13 +163,8 @@ export class TransactionPreparePage {
     const info = {
       callback: callback
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/scan-address/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-    /*this.navController
-      .push(ScanAddressPage, {
-        callback: callback
-      })
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
+    this.dataService.setData(DataServiceKey.SCAN, info)
+    this.router.navigateByUrl('/scan-address/' + DataServiceKey.SCAN).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   public toggleMaxAmount() {

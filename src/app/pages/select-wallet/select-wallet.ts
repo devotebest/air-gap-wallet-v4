@@ -6,7 +6,7 @@ import { NavController, NavParams } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-select-wallet',
@@ -40,13 +40,7 @@ export class SelectWalletPage {
       wallet: wallet,
       address: this.address
     }
-    this.dataService.setData(1, info)
-    this.router.navigateByUrl('/transaction-prepare/1').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-    // this.navCtrl
-    //   .push(TransactionPreparePage, {
-    //     wallet: wallet,
-    //     address: this.address
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.dataService.setData(DataServiceKey.TRANSACTION, info)
+    this.router.navigateByUrl('/transaction-prepare/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

@@ -7,9 +7,7 @@ import { AccountProvider } from '../../services/account/account.provider'
 import { AirGapMarketWallet, ICoinSubProtocol } from 'airgap-coin-lib'
 import { CryptoToFiatPipe } from '../../pipes/crypto-to-fiat/crypto-to-fiat.pipe'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
-//import { AccountAddPage } from "../account-add/account-add";
-//import { AccountTransactionListPage } from "../account-transaction-list/account-transaction-list";
-import { DataService } from '../../services/data/data.service'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 import { OperationsProvider } from '../../services/operations/operations'
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx'
 
@@ -70,49 +68,11 @@ export class PortfolioPage {
 
   ionViewDidEnter() {
     this.doRefresh().catch(handleErrorSentry())
-
-    /*setTimeout(() => {
-      this.startScanner();
-    }, 1000);*/
-  }
-
-  startScanner() {
-    this.qrScanner
-      .prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          this.isOn = true
-
-          // start scanning
-          const scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text)
-
-            this.isOn = false
-            this.qrScanner.hide().then()
-            scanSub.unsubscribe()
-          })
-
-          this.qrScanner.resumePreview()
-
-          this.qrScanner.show().then()
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-          this.qrScanner.openSettings()
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => console.log('Error is', e))
   }
 
   openDetail(wallet: AirGapMarketWallet) {
-    this.dataService.setData(1, wallet)
-    this.router.navigateByUrl('/account-transaction-list/1')
-    // this.navCtrl
-    //   .push(AccountTransactionListPage, { wallet: wallet })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    this.dataService.setData(DataServiceKey.WALLET, wallet)
+    this.router.navigateByUrl('/account-transaction-list/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 
   openAccountAddPage() {
