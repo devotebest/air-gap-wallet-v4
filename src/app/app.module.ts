@@ -49,6 +49,8 @@ import { PushProvider } from './services/push/push'
 import { PushBackendProvider } from './services/push-backend/push-backend'
 
 import { AppComponent } from './app.component'
+import { ProtocolSelectPage } from './pages/protocol-select/protocol-select'
+import { ProtocolSelectPageModule } from './pages/protocol-select/protocol-select.module'
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -56,7 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [ProtocolSelectPage],
   exports: [],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ export function createTranslateLoader(http: HttpClient) {
       driverOrder: ['sqlite', 'webExtensionLocalStorage', 'localstorage']
     }),
     PipesModule,
-    ComponentsModule
+    ComponentsModule,
+    ProtocolSelectPageModule
   ],
   providers: [
     StatusBar,
