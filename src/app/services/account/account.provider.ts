@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Subject, ReplaySubject } from 'rxjs'
 import { AirGapMarketWallet, ICoinProtocol } from 'airgap-coin-lib'
 import { StorageProvider, SettingsKey } from '../storage/storage'
-import { map } from 'rxjs/operators'
+import { map, take } from 'rxjs/operators'
 import { PushProvider } from '../push/push'
 import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
 
@@ -215,6 +215,7 @@ export class AccountProvider {
   }> {
     return this.usedProtocols
       .pipe(
+        take(1),
         map((protocols: any) => {
           const compatibleProtocols: Map<string, ICoinProtocol> = new Map()
 

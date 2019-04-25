@@ -64,7 +64,6 @@ export class SchemeRoutingProvider {
       }
     } catch (error) {
       console.warn(error)
-
       const { compatibleWallets, incompatibleWallets } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(rawString)
       if (compatibleWallets.length > 0) {
         const info = {
