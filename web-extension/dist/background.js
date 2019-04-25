@@ -1,198 +1,220 @@
-var __awaiter =
-  (this && this.__awaiter) ||
-  function(thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value))
-        } catch (e) {
-          reject(e)
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator['throw'](value))
-        } catch (e) {
-          reject(e)
-        }
-      }
-      function step(result) {
-        result.done
-          ? resolve(result.value)
-          : new P(function(resolve) {
-              resolve(result.value)
-            }).then(fulfilled, rejected)
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next())
-    })
+!(function(e) {
+  var n = {}
+  function t(r) {
+    if (n[r]) return n[r].exports
+    var o = (n[r] = { i: r, l: !1, exports: {} })
+    return e[r].call(o.exports, o, o.exports, t), (o.l = !0), o.exports
   }
-var __generator =
-  (this && this.__generator) ||
-  function(thisArg, body) {
-    var _ = {
-        label: 0,
-        sent: function() {
-          if (t[0] & 1) throw t[1]
-          return t[1]
-        },
-        trys: [],
-        ops: []
-      },
-      f,
-      y,
-      t,
-      g
-    return (
-      (g = { next: verb(0), throw: verb(1), return: verb(2) }),
-      typeof Symbol === 'function' &&
-        (g[Symbol.iterator] = function() {
-          return this
-        }),
-      g
-    )
-    function verb(n) {
-      return function(v) {
-        return step([n, v])
-      }
-    }
-    function step(op) {
-      if (f) throw new TypeError('Generator is already executing.')
-      while (_)
-        try {
-          if (
-            ((f = 1),
-            y &&
-              (t = op[0] & 2 ? y['return'] : op[0] ? y['throw'] || ((t = y['return']) && t.call(y), 0) : y.next) &&
-              !(t = t.call(y, op[1])).done)
+  ;(t.m = e),
+    (t.c = n),
+    (t.d = function(e, n, r) {
+      t.o(e, n) || Object.defineProperty(e, n, { enumerable: !0, get: r })
+    }),
+    (t.r = function(e) {
+      'undefined' != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: 'Module' }),
+        Object.defineProperty(e, '__esModule', { value: !0 })
+    }),
+    (t.t = function(e, n) {
+      if ((1 & n && (e = t(e)), 8 & n)) return e
+      if (4 & n && 'object' == typeof e && e && e.__esModule) return e
+      var r = Object.create(null)
+      if ((t.r(r), Object.defineProperty(r, 'default', { enumerable: !0, value: e }), 2 & n && 'string' != typeof e))
+        for (var o in e)
+          t.d(
+            r,
+            o,
+            function(n) {
+              return e[n]
+            }.bind(null, o)
           )
-            return t
-          if (((y = 0), t)) op = [op[0] & 2, t.value]
-          switch (op[0]) {
-            case 0:
-            case 1:
-              t = op
-              break
-            case 4:
-              _.label++
-              return { value: op[1], done: false }
-            case 5:
-              _.label++
-              y = op[1]
-              op = [0]
-              continue
-            case 7:
-              op = _.ops.pop()
-              _.trys.pop()
-              continue
-            default:
-              if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1])) && (op[0] === 6 || op[0] === 2)) {
-                _ = 0
-                continue
-              }
-              if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-                _.label = op[1]
-                break
-              }
-              if (op[0] === 6 && _.label < t[1]) {
-                _.label = t[1]
-                t = op
-                break
-              }
-              if (t && _.label < t[2]) {
-                _.label = t[2]
-                _.ops.push(op)
-                break
-              }
-              if (t[2]) _.ops.pop()
-              _.trys.pop()
-              continue
+      return r
+    }),
+    (t.n = function(e) {
+      var n =
+        e && e.__esModule
+          ? function() {
+              return e.default
+            }
+          : function() {
+              return e
+            }
+      return t.d(n, 'a', n), n
+    }),
+    (t.o = function(e, n) {
+      return Object.prototype.hasOwnProperty.call(e, n)
+    }),
+    (t.p = ''),
+    t((t.s = 388))
+})({
+  388: function(e, n, t) {
+    'use strict'
+    t.r(n)
+    var r = t(9),
+      o = function(e, n, t, r) {
+        return new (t || (t = Promise))(function(o, i) {
+          function c(e) {
+            try {
+              a(r.next(e))
+            } catch (e) {
+              i(e)
+            }
           }
-          op = body.call(thisArg, _)
-        } catch (e) {
-          op = [6, e]
-          y = 0
-        } finally {
-          f = t = 0
-        }
-      if (op[0] & 5) throw op[1]
-      return { value: op[0] ? op[1] : void 0, done: true }
-    }
-  }
-import { Transactions } from './constants'
-var height = 900
-var width = 600
-chrome.runtime.onMessage.addListener(function(request) {
-  return __awaiter(this, void 0, void 0, function() {
-    var rawUnsignedTx_1
-    return __generator(this, function(_a) {
-      if (request.data.type === Transactions.OUTGOING_TRANSACTION) {
-        rawUnsignedTx_1 = request.data.signTransaction
-        rawUnsignedTx_1.chainId = rawUnsignedTx_1.chainId || 1
-        rawUnsignedTx_1.gasLimit = rawUnsignedTx_1.gas || '0x' + (21000).toString(16)
-        chrome.storage.local.get('selectedAccount', function(storage) {
-          return __awaiter(this, void 0, void 0, function() {
-            var ethWallet, identifier, publicKey
-            return __generator(this, function(_a) {
-              ethWallet = storage.selectedAccount
-              identifier = ethWallet.coinProtocol.identifier
-              publicKey = ethWallet.publicKey
-              console.log('publicKey: ', ethWallet.ad)
-              console.log('JSON.stringify(rawUnsignedTx): ', JSON.stringify(rawUnsignedTx_1))
-              chrome.windows.create({
-                url:
-                  'index.html?identifier=' + identifier + '&publicKey=' + publicKey + '&rawUnsignedTx=' + JSON.stringify(rawUnsignedTx_1),
-                type: 'popup',
-                width: width,
-                height: height
-              })
-              /*
-                            chrome.windows.create({
-                              url: 'confirmation.html?payload=' + serializedTx,
-                              type: 'popup',
-                              width,
-                              height
-                            })
-                            */
-              return [2 /*return*/, true]
-            })
-          })
+          function u(e) {
+            try {
+              a(r.throw(e))
+            } catch (e) {
+              i(e)
+            }
+          }
+          function a(e) {
+            e.done
+              ? o(e.value)
+              : new t(function(n) {
+                  n(e.value)
+                }).then(c, u)
+          }
+          a((r = r.apply(e, n || [])).next())
         })
-        return [2 /*return*/, true]
+      },
+      i = function(e, n) {
+        var t,
+          r,
+          o,
+          i,
+          c = {
+            label: 0,
+            sent: function() {
+              if (1 & o[0]) throw o[1]
+              return o[1]
+            },
+            trys: [],
+            ops: []
+          }
+        return (
+          (i = { next: u(0), throw: u(1), return: u(2) }),
+          'function' == typeof Symbol &&
+            (i[Symbol.iterator] = function() {
+              return this
+            }),
+          i
+        )
+        function u(i) {
+          return function(u) {
+            return (function(i) {
+              if (t) throw new TypeError('Generator is already executing.')
+              for (; c; )
+                try {
+                  if (
+                    ((t = 1),
+                    r &&
+                      (o = 2 & i[0] ? r.return : i[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) &&
+                      !(o = o.call(r, i[1])).done)
+                  )
+                    return o
+                  switch (((r = 0), o && (i = [2 & i[0], o.value]), i[0])) {
+                    case 0:
+                    case 1:
+                      o = i
+                      break
+                    case 4:
+                      return c.label++, { value: i[1], done: !1 }
+                    case 5:
+                      c.label++, (r = i[1]), (i = [0])
+                      continue
+                    case 7:
+                      ;(i = c.ops.pop()), c.trys.pop()
+                      continue
+                    default:
+                      if (!(o = (o = c.trys).length > 0 && o[o.length - 1]) && (6 === i[0] || 2 === i[0])) {
+                        c = 0
+                        continue
+                      }
+                      if (3 === i[0] && (!o || (i[1] > o[0] && i[1] < o[3]))) {
+                        c.label = i[1]
+                        break
+                      }
+                      if (6 === i[0] && c.label < o[1]) {
+                        ;(c.label = o[1]), (o = i)
+                        break
+                      }
+                      if (o && c.label < o[2]) {
+                        ;(c.label = o[2]), c.ops.push(i)
+                        break
+                      }
+                      o[2] && c.ops.pop(), c.trys.pop()
+                      continue
+                  }
+                  i = n.call(e, c)
+                } catch (e) {
+                  ;(i = [6, e]), (r = 0)
+                } finally {
+                  t = o = 0
+                }
+              if (5 & i[0]) throw i[1]
+              return { value: i[0] ? i[1] : void 0, done: !0 }
+            })([i, u])
+          }
+        }
       }
-      return [2 /*return*/]
-    })
-  })
+    chrome.runtime.onMessage.addListener(function(e) {
+      return o(this, void 0, void 0, function() {
+        var n
+        return i(this, function(t) {
+          return e.data.type === r.a.OUTGOING_TRANSACTION
+            ? (((n = e.data.signTransaction).chainId = n.chainId || 1),
+              (n.gasLimit = n.gas || '0x' + (21e3).toString(16)),
+              chrome.storage.local.get('selectedAccount', function(e) {
+                return o(this, void 0, void 0, function() {
+                  var t, r, o
+                  return i(this, function(i) {
+                    return (
+                      (t = e.selectedAccount),
+                      (r = t.coinProtocol.identifier),
+                      (o = t.publicKey),
+                      console.log('publicKey: ', t.ad),
+                      console.log('JSON.stringify(rawUnsignedTx): ', JSON.stringify(n)),
+                      chrome.windows.create({
+                        url: 'index.html?identifier=' + r + '&publicKey=' + o + '&rawUnsignedTx=' + JSON.stringify(n),
+                        type: 'popup',
+                        width: 600,
+                        height: 900
+                      }),
+                      [2, !0]
+                    )
+                  })
+                })
+              }),
+              [2, !0])
+            : [2]
+        })
+      })
+    }),
+      chrome.storage.onChanged.addListener(function(e, n) {
+        console.log('changes: ', e), chrome.storage.sync.get({ profileId: 0 }, function(e) {})
+      }),
+      navigator.mediaDevices
+        .getUserMedia({ video: !0 })
+        .then(function() {
+          console.log('ok')
+        })
+        .catch(function(e) {
+          console.error(e),
+            chrome.windows.create({ url: chrome.extension.getURL('html/request_camera.html') }, function(e) {
+              console.log('TAB:'), console.log(e)
+            })
+        })
+  },
+  9: function(e, n, t) {
+    'use strict'
+    var r
+    t.d(n, 'a', function() {
+      return r
+    }),
+      (function(e) {
+        ;(e.INCOMING_TRANSACTION = 'INCOMING_TRANSACTION'),
+          (e.OUTGOING_TRANSACTION = 'OUTGOING_TRANSACTION'),
+          (e.ADDRESSES_RESPONSE = 'ADDRESSES_RESPONSE'),
+          (e.ADDRESSES_REQUEST = 'ADDRESSES_REQUEST')
+      })(r || (r = {}))
+  }
 })
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-  console.log('changes: ', changes)
-  chrome.storage.sync.get(
-    {
-      profileId: 0
-    },
-    function(items) {
-      // Update status bar text here
-    }
-  )
-})
-// otherwise the app has no camera permission!! Not possible to get camera permission differently.
-navigator.mediaDevices
-  .getUserMedia({ video: true })
-  .then(function() {
-    console.log('ok')
-  })
-  .catch(function(error) {
-    console.error(error)
-    createWindow()
-  })
-function createWindow() {
-  chrome.windows.create(
-    {
-      url: chrome.extension.getURL('html/request_camera.html')
-    },
-    function(tab) {
-      console.log('TAB:')
-      console.log(tab)
-      // After the tab has been created, open a window to inject the tab
-    }
-  )
-}
