@@ -3,13 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'add-account.title' | translate }}</ion-title>
+    <ion-title color="whiteSecondaryContrast">{{ 'add-account.title' | translate }}</ion-title>
   </ion-toolbar>
-  <ion-searchbar
-    mode="md"
-    [(ngModel)]="searchTerm"
-    (ionChange)="searchTermChanged()"
-  ></ion-searchbar>
+  <ion-searchbar mode="md" [(ngModel)]="searchTerm" (ionChange)="searchTermChanged()"></ion-searchbar>
 </ion-header>
 
 <ion-content padding>

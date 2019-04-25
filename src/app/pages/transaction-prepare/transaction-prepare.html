@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'transaction-prepare.title' | translate: { title: wallet.protocolIdentifier | uppercase } }}</ion-title>
+    <ion-title color="whiteSecondaryContrast">
+      {{ 'transaction-prepare.title' | translate: { title: wallet.protocolIdentifier | uppercase } }}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 

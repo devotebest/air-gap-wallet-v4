@@ -1,3 +1,5 @@
+.test {
+}
 .loading-header {
   color: white;
   font-weight: 300;
@@ -43,7 +45,7 @@
   bottom: 10px;
 }
 .portfolio--hero {
-  background: url("/assets/img/portfolio-lines.svg") no-repeat;
+  background: url('/assets/img/portfolio-lines.svg') no-repeat;
   height: 25vh;
   background-position: bottom;
   h1 {
