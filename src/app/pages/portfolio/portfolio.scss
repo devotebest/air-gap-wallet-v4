@@ -1,5 +1,3 @@
-.test {
-}
 .loading-header {
   color: white;
   font-weight: 300;
@@ -22,9 +20,10 @@
     height: 28px;
   }
 }
-.card-ios,
-.card-md {
+.sc-ion-card-ios-h,
+.sc-ion-card-md-h {
   padding: 4px 0;
+  margin: 12px;
   p {
     font-weight: inherit;
   }

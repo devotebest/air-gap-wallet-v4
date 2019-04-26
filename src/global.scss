@@ -166,11 +166,11 @@ page-portfolio,
 page-delegation-baker-detail,
 page-account-address,
 page-transaction-qr {
-  .card-ios,
-  .card-md,
+  .sc-ion-card-md-h,
+  .sc-ion-card-ios-h,
   qr-clipboard {
-    //box-shadow: 0 10px 20px 0 rgba(color($colors, secondary), 0.12);
-    //border: 1px solid rgba(color($colors, primary), 0.08);
+    box-shadow: 0 10px 20px 0 rgba(49, 27, 88, 0.12);
+    border: 1px solid rgba(0, 232, 204, 0.08);
   }
 }
 
