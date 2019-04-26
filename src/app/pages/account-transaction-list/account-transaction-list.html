@@ -54,7 +54,9 @@
 
   <ion-row align-items-center>
     <ion-col size="10" padding>
-      <span ion-text color="primary" class="font--weight__bold">{{ 'account-transaction-list.transactions_label' | translate }}</span>
+      <ion-text class="font--weight__bold" color="primary">
+        <span>{{ 'account-transaction-list.transactions_label' | translate }}</span>
+      </ion-text>
     </ion-col>
     <ion-col size="2" no-padding padding-right class="justify--content__end">
       <ion-spinner *ngIf="isRefreshing" color="primary" name="dots"></ion-spinner>
@@ -146,11 +148,13 @@
       </ion-avatar>
       <ion-label>
         <h2>
-          <ion-icon *ngIf="t.isInbound" src="assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
-          <ion-icon *ngIf="!t.isInbound" src="assets/custom-ion-icons/ios-call_made.svg"></ion-icon>
-          <span class="font--weight__bold" ion-text color="black">
-            {{ t.amount | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}
-          </span>
+          <ion-icon *ngIf="t.isInbound" src="../../assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
+          <ion-icon *ngIf="!t.isInbound" src="../../assets/custom-ion-icons/ios-call_made.svg"></ion-icon>
+          <ion-text class="font--weight__bold" color="black">
+            <span>
+              {{ t.amount | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}
+            </span>
+          </ion-text>
         </h2>
         <ion-text color="blackLight">
           <h3 class="typography--mono">
@@ -193,7 +197,7 @@
     <ion-row>
       <ion-col>
         <ion-button expand="full" size="default" color="primary" (click)="openReceivePage()" shape="round">
-          <ion-icon slot="start" src="assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
+          <ion-icon slot="start" src="../../assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
           {{ 'account-transaction-list.receive_label' | translate }}
         </ion-button>
       </ion-col>
