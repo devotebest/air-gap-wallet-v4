@@ -1,8 +1,12 @@
 ion-slides {
   height: calc(100% - 72px);
 }
+.swiper-pagination,
+.swiper-pagination-custom {
+  top: 0px;
+}
 .swiper-pagination-progress .swiper-pagination-progressbar {
-  background: color(--ion-color-primary);
+  background: red;
 }
 .swiper-pagination-progress {
   background: rgba(var(--ion-color-secondary), 0.12);

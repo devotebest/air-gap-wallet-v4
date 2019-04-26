@@ -12,8 +12,8 @@
 <ion-content>
   <p [innerHTML]="'account-import-onboarding.text' | translate: { protocolName: protocol.name }" padding-horizontal></p>
 
-  <ion-slides pager="true" [options]="slideOpts" padding-horizontal #slides (ionSlideDidChange)="ionSlideDidChange()">
-    <ion-slide>
+  <ion-slides pager="true" [options]="slideOpts" #slides (ionSlideDidChange)="ionSlideDidChange()">
+    <ion-slide padding-horizontal>
       <div class="slide-zoom">
         <img src="/assets/img/account-import-onboarding-slide_1.png" />
         <ion-text>
@@ -24,20 +24,20 @@
         </ion-text>
       </div>
     </ion-slide>
-    <ion-slide>
+    <ion-slide padding-horizontal>
       <div class="slide-zoom">
         <img src="/assets/img/account-import-onboarding-slide_2.png" />
         <p text-left [innerHTML]="'account-import-onboarding.slides.slide-2_text' | translate"></p>
       </div>
     </ion-slide>
-    <ion-slide>
+    <ion-slide padding-horizontal>
       <div class="slide-zoom">
         <img src="/assets/img/account-import-onboarding-slide_3.png" />
         <p text-left [innerHTML]="'account-import-onboarding.slides.slide-3.text' | translate"></p>
         <p text-left [innerHTML]="'account-import-onboarding.slides.slide-3.description' | translate"></p>
       </div>
     </ion-slide>
-    <ion-slide>
+    <ion-slide padding-horizontal>
       <div class="slide-zoom">
         <img src="/assets/img/account-import-onboarding-slide_4.png" />
         <p text-left [innerHTML]="'account-import-onboarding.slides.slide-4.text' | translate"></p>
@@ -48,7 +48,7 @@
 </ion-content>
 <ion-footer no-border no-shadow>
   <ion-toolbar no-padding>
-    <ion-buttons *ngIf="!isBegin" slot="start">
+    <ion-buttons *ngIf="!isBegin" slot="end">
       <ion-button flat color="primary" (click)="slides.slidePrev()">
         <ion-icon name="arrow-back"></ion-icon>
         Back

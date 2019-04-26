@@ -18,7 +18,11 @@ export class AccountImportOnboardingPage implements OnInit {
     initialSlide: 0,
     speed: 400,
     pagination: {
-      type: 'progressbar'
+      el: '.swiper-pagination',
+      type: 'custom',
+      renderCustom: (swiper, current, total) => {
+        return this.customProgressBar(current, total)
+      }
     }
   }
   public protocol: ICoinProtocol
@@ -56,5 +60,20 @@ export class AccountImportOnboardingPage implements OnInit {
 
   openVault() {
     this.deeplinkProvider.sameDeviceDeeplink(`${DEEPLINK_VAULT_ADD_ACCOUNT}${this.protocol}`)
+  }
+
+  private customProgressBar(current: number, total: number): string {
+    const ratio: number = current / total
+
+    const progressBarStyle: string =
+      "style='transform: translate3d(0px, 0px, 0px) scaleX(" + ratio + ") scaleY(1); transition-duration: 300ms;'"
+    const progressBar: string = "<span class='swiper-pagination-progressbar-fill' " + progressBarStyle + '></span>'
+
+    let progressBarContainer: string =
+      "<div class='swiper-pagination-progressbar' style='height: 4px; top: 6px; width: calc(100% - 32px);left: 16px;'>"
+    progressBarContainer += progressBar
+    progressBarContainer += '</span></div>'
+
+    return progressBarContainer
   }
 }
