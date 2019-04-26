@@ -10,27 +10,31 @@
 <ion-content>
   <ng-container *ngIf="exchangePageState === exchangePageStates.ONBOARDING">
     <ion-row padding class="onboarding__container">
-      <h3 [innerHTML]="'exchange.onboarding.heading' | translate"></h3>
-      <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
-      <p no-margin padding-bottom>
-        {{ 'exchange.onboarding.description' | translate }}
-      </p>
-      <ion-button (click)="dismissExchangeOnboarding()" shape="round" color="primary" expand="full">
-        {{ 'exchange.onboarding.exchange_label' | translate }}
-      </ion-button>
+      <ion-col size="12">
+        <h3 [innerHTML]="'exchange.onboarding.heading' | translate"></h3>
+        <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
+        <p no-margin padding-bottom>
+          {{ 'exchange.onboarding.description' | translate }}
+        </p>
+        <ion-button (click)="dismissExchangeOnboarding()" shape="round" color="primary" expand="full">
+          {{ 'exchange.onboarding.exchange_label' | translate }}
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ng-container>
 
   <ng-container *ngIf="exchangePageState === exchangePageStates.NOT_ENOUGH_CURRENCIES">
     <ion-row padding class="onboarding__container">
-      <h3 [innerHTML]="'exchange.no-currencies.heading' | translate"></h3>
-      <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
-      <p no-margin padding-bottom>
-        {{ 'exchange.no-currencies.description' | translate }}
-      </p>
-      <ion-button (click)="goToAddCoinPage()" shape="round" color="primary" expand="full">
-        {{ 'exchange.no-currencies.exchange_label' | translate }}
-      </ion-button>
+      <ion-col size="12">
+        <h3 [innerHTML]="'exchange.no-currencies.heading' | translate"></h3>
+        <ion-col no-padding class="content--align__center-center"><img src="assets/img/token_swap.svg" /></ion-col>
+        <p no-margin padding-bottom>
+          {{ 'exchange.no-currencies.description' | translate }}
+        </p>
+        <ion-button (click)="goToAddCoinPage()" shape="round" color="primary" expand="full">
+          {{ 'exchange.no-currencies.exchange_label' | translate }}
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ng-container>
 
