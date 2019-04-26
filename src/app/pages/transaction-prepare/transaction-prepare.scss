@@ -9,11 +9,10 @@ ion-spinner {
     padding: 8px 0 0;
   }
 }
-.label-md[stacked],
-.label-ios[stacked],
+.label-stacked,
 .item-md.item-toggle ion-label,
 .item-ios.item-toggle ion-label {
-  font-size: 14px;
+  font-size: 1.2rem;
 }
 .font--size__large {
   font-size: large;
@@ -78,4 +77,9 @@ ion-avatar {
     width: 48px;
     height: 48px;
   }
+}
+
+.range-slider {
+  --bar-background: #bdbdbd;
+  --bar-background-active: #00e8cc;
 }

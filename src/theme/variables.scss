@@ -103,6 +103,15 @@
   --ion-color-tint: #78c288;
 }
 
+.ion-color-black {
+  --ion-color-base: #000;
+  --ion-color-base-rgb: 0, 0, 0;
+  --ion-color-contrast: #000;
+  --ion-color-contrast-rgb: 255, 255, 255;
+  --ion-color-shade: #5ca56c;
+  --ion-color-tint: #78c288;
+}
+
 .ion-color-whiteLight {
   --ion-color-base: #311b58;
   --ion-color-base-rgb: 49, 27, 88;
