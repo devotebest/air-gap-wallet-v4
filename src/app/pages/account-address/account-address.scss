@@ -1,9 +1,11 @@
 ion-avatar {
   width: 64px;
   height: 64px;
-  img {
-    width: 64px;
-    height: 64px;
+  identicon {
+    img {
+      width: 64px;
+      height: 64px;
+    }
   }
 }
 .symbol--icon {

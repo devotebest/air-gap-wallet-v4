@@ -174,6 +174,15 @@ page-transaction-qr {
   }
 }
 
+page-account-address {
+  ion-avatar {
+    img {
+      width: 64px;
+      height: 64px;
+    }
+  }
+}
+
 .skeleton--loading,
 .skeleton--loading__container {
   h2,
