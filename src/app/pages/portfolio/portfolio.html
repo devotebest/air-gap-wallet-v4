@@ -6,7 +6,7 @@
 
   <ng-container *ngIf="(walletGroups | async) as walletGroupsArray; else loading">
     <ng-container *ngIf="walletGroupsArray.length; else noItems">
-      <ion-list lines="none" margin-top *ngFor="let walletGroup of walletGroupsArray">
+      <ion-list lines="none" no-padding *ngFor="let walletGroup of walletGroupsArray">
         <ion-card>
           <portfolio-item
             [wallet]="walletGroup.mainWallet"
