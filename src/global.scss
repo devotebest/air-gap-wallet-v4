@@ -216,6 +216,13 @@ page-account-address {
     border-radius: 50%;
   }
 }
+
+.ion-padding-left,
+[padding-left] {
+  --padding-left: var(--ion-padding, 16px);
+  padding-left: var(--ion-padding, 16px);
+}
+
 @keyframes bgcolorchange {
   0% {
     background: color($colors, light);
