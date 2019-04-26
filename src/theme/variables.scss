@@ -134,37 +134,7 @@ ion-avatar {
   margin: 8px 16px 8px 0;
 }
 
-$colors: (
-  primary: (
-    base: #00e8cc,
-    contrast: #311b58
-  ),
-  secondary: (
-    base: #311b58,
-    contrast: #00e8cc
-  ),
-  secondaryLight: #440094,
-  secondarydDark: #2d53a1,
-  danger: #f53d3d,
-  light: #f4f4f4,
-  gray: #d3d3d3,
-  dark: #222,
-  muted: #999,
-  whitePrimaryyContrast: (
-    base: #fff,
-    contrast: #00e8cc
-  ),
-  whiteSecondaryContrast: (
-    base: #fff,
-    contrast: #311b58
-  ),
-  white: (
-    base: #fff,
-    contrast: #000
-  ),
-  whiteLight: rgba(255, 255, 255, 0.84),
-  black: #000,
-  blackLight: rgba(0, 0, 0, 0.54),
-  blackLightest: rgba(0, 0, 0, 0.12),
-  transparent: transparent
-);
+/* Set the border with on all ion-button elements */
+ion-button {
+  --border-width: 1px;
+}
