@@ -24,7 +24,7 @@ ion-label {
   height: 24px;
   width: 24px;
   left: 40px;
-  top: 30px;
+  top: 40px;
 }
 .symbol--icon__isToken {
   top: 18px;
@@ -35,4 +35,11 @@ h2,
 }
 p {
   margin: 0px;
+}
+ion-item {
+  ion-avatar {
+    margin: 8px 16px 8px 0;
+    min-height: 48px;
+    min-width: 48px;
+  }
 }

@@ -12,13 +12,15 @@
       <div class="skeleton--loading"><h2></h2></div>
     </ng-template>
     <ng-container *ngIf="!isToken">
-      <h3 *ngIf="wallet.addresses.length > 0; else syncingHeadingLow" ion-text color="blackLight" class="typography--mono">
-        <ion-badge slot="end" color="secondary" *ngIf="isActive">active</ion-badge>
-        {{ wallet.receivingPublicAddress | shortenString }}
-      </h3>
+      <ion-text color="blackLight">
+        <h3 *ngIf="wallet.addresses.length > 0; else syncingHeadingLow" class="typography--mono">
+          <ion-badge slot="end" color="primary" *ngIf="isActive">active</ion-badge>
+          {{ wallet.receivingPublicAddress | shortenString }}
+        </h3>
+      </ion-text>
     </ng-container>
 
-    <ion-badge *ngIf="(isDelegated | async) !== null" color="secondary">
+    <ion-badge *ngIf="(isDelegated | async) !== null" color="badge">
       {{ (isDelegated | async) ? 'delegated' : 'undelegated' }}
     </ion-badge>
 
