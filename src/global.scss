@@ -45,6 +45,11 @@ $colors: (
   transparent: transparent
 );
 
+/* forces the paragraph size */
+p {
+  font-size: 14px;
+}
+
 identicon {
   width: inherit;
   height: inherit;
