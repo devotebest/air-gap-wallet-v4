@@ -67,6 +67,7 @@
       <ion-col size="12" no-padding>
         <ion-text no-margin color="danger">
           <p
+            no-margin
             [innerHTML]="
               'transaction-prepare.error.address_label' | translate: { addressPlaceholder: this.wallet.coinProtocol.addressPlaceholder }
             "
@@ -91,7 +92,7 @@
           <ion-input formControlName="amount" type="number" id="amount-input" placeholder="0.0"></ion-input>
         </ion-item>
         <ion-text no-margin>
-          <p>
+          <p no-margin>
             ${{ transactionForm.get('amount').value * wallet.currentMarketPrice | number: '1.2-2' }}
           </p>
         </ion-text>
@@ -115,7 +116,7 @@
     <ion-row padding-horizontal padding-bottom>
       <ion-col size="12" *ngIf="!transactionForm.controls['amount'].valid" no-padding>
         <ion-text no-margin color="danger">
-          <p>
+          <p no-margin>
             {{ 'transaction-prepare.error.amount_label' | translate }}
           </p>
         </ion-text>
@@ -130,11 +131,11 @@
               {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
             </ion-label>
           </ion-text>
-          <ion-toggle mode="md" formControlName="isAdvancedMode"></ion-toggle>
+          <ion-toggle slot="end" mode="md" formControlName="isAdvancedMode"></ion-toggle>
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row nowrap>
+    <ion-row nowrap padding-horizontal>
       <ion-col size="12" no-padding>
         <ion-item no-padding lines="none">
           <ion-range no-padding min="0" max="2" step="1" snaps="true" formControlName="feeLevel" id="feeLevel-input" class="range-slider">

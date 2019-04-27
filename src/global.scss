@@ -98,22 +98,24 @@ ion-app {
 }
 
 .background--color__primary {
-  background-color: color($colors, primary, base);
+  //background-color: color($colors, primary, base);
+  background-color: color(var(--ion-color-primary));
 }
 .background--color__white {
-  background-color: color($colors, white, base);
+  //background-color: color($colors, white, base);
+  background-color: color(var(--ion-color-white));
 }
 
 .colored-background {
-  color: color($colors, white);
-  background: color($colors, primary);
+  color: color(var(--ion-color-white));
+  background-color: color(var(--ion-color-primary));
 
   p,
   h1,
   h2,
   h3,
   .select-text {
-    color: color($colors, secondary);
+    background-color: color(var(--ion-color-secondary));
   }
 }
 
@@ -235,38 +237,41 @@ page-account-address {
   background: rgba(34, 34, 34, 0.12);
 }
 
+$primary-light: #f4f4f4;
+$primary-gray: #d3d3d3;
+
 @keyframes bgcolorchange {
   0% {
-    background: color($colors, light);
+    background: $primary-light;
   }
   25% {
-    background: color($colors, gray);
+    background: $primary-gray;
   }
   50% {
-    background: color($colors, light);
+    background: $primary-light;
   }
   75% {
-    background: color($colors, gray);
+    background: $primary-gray;
   }
   100% {
-    background: color($colors, light);
+    background: $primary-light;
   }
 }
 
 @-webkit-keyframes bgcolorchange {
   0% {
-    background: color($colors, light);
+    background: $primary-light;
   }
   25% {
-    background: color($colors, gray);
+    background: $primary-gray;
   }
   50% {
-    background: color($colors, light);
+    background: $primary-light;
   }
   75% {
-    background: color($colors, gray);
+    background: $primary-gray;
   }
   100% {
-    background: color($colors, light);
+    background: $primary-light;
   }
 }
