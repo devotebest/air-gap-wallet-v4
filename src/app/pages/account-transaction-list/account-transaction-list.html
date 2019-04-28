@@ -33,9 +33,9 @@
     <ion-row padding-horizontal>
       <ion-col size="12" no-padding padding-top>
         <ion-text color="primary">
-          <span class="font--weight__bold">
+          <p class="font--weight__bold">
             {{ 'account-transaction-list.pending-transactions.label' | translate }}
-          </span>
+          </p>
         </ion-text>
       </ion-col>
       <ion-col size="12" no-padding>
@@ -55,12 +55,13 @@
   <ion-row align-items-center>
     <ion-col size="10" padding>
       <ion-text class="font--weight__bold" color="primary">
-        <span>{{ 'account-transaction-list.transactions_label' | translate }}</span>
+        <p>{{ 'account-transaction-list.transactions_label' | translate }}</p>
       </ion-text>
     </ion-col>
-    <ion-col size="2" no-padding padding-right class="justify--content__end">
+    <ion-col size="1" no-padding class="justify--content__end">
       <ion-spinner *ngIf="isRefreshing" color="primary" name="dots"></ion-spinner>
     </ion-col>
+    <ion-col size="1"></ion-col>
   </ion-row>
   <ion-refresher (ionRefresh)="doRefresh($event)"><ion-refresher-content></ion-refresher-content></ion-refresher>
 
