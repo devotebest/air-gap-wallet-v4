@@ -107,6 +107,13 @@
     --icon-margin-end: 0;
     --color: var(--ion-color-secondary);
   }
+
+  /* Set the border with on all ion-button elements */
+  ion-button {
+    --border-width: 1px;
+    --padding-start: 1.5rem;
+    --padding-end: 1.5rem;
+  }
 }
 
 .ion-color-white {
@@ -161,9 +168,4 @@ ion-avatar {
 
 .item__image[slot='start'] {
   margin: 8px 16px 8px 0;
-}
-
-/* Set the border with on all ion-button elements */
-ion-button {
-  --border-width: 1px;
 }
