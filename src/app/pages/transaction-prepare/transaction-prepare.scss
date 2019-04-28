@@ -39,7 +39,7 @@ ion-avatar {
   flex-direction: column;
 }
 .to-address__item {
-  textarea {
+  ion-textarea {
     font-size: 12px;
   }
 }
@@ -82,4 +82,8 @@ ion-avatar {
 .range-slider {
   --bar-background: #bdbdbd;
   --bar-background-active: #00e8cc;
+}
+
+.advanced-item {
+  --border-color: var(--ion-color-primary);
 }

@@ -23,12 +23,13 @@
       </p>
     </ion-text>
     <ion-row padding-top *ngIf="swapSell && !exchangeAmount?.isZero() && exchangeAmount?.isLessThan(minExchangeAmount)">
-      <p
-        ion-text
-        no-margin
-        color="danger"
-        [innerHTML]="'swap.min-amount-error_label' | translate: { minExchangeAmount: minExchangeAmount.toString() }"
-      ></p>
+      <ion-text no-margin color="danger">
+        <p
+          no-margin
+          color="danger"
+          [innerHTML]="'swap.min-amount-error_label' | translate: { minExchangeAmount: minExchangeAmount.toString() }"
+        ></p>
+      </ion-text>
     </ion-row>
     <ion-row
       padding-top

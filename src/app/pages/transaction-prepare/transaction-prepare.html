@@ -154,13 +154,15 @@
       </ion-col>
     </ion-row>
     <ion-row padding-horizontal *ngIf="transactionForm.get('isAdvancedMode').value">
-      <ion-item no-padding lines="none">
-        <ion-label position="stacked"></ion-label>
-        <ion-input id="fee-input" formControlName="fee" type="string"></ion-input>
-        <span slot="end" class="input--placeholder">
-          {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
-        </span>
-      </ion-item>
+      <ion-col size="12">
+        <ion-item class="advanced-item" no-padding>
+          <ion-label position="stacked"></ion-label>
+          <ion-input id="fee-input" formControlName="fee" type="string" no-padding></ion-input>
+          <span slot="end" class="input--placeholder">
+            {{ 'transaction-prepare.fee.label' | translate }} ({{ wallet.coinProtocol.feeSymbol | uppercase }})
+          </span>
+        </ion-item>
+      </ion-col>
     </ion-row>
     <ion-row padding-horizontal class="fee-amount__help">
       <ion-text color="blackLight">
