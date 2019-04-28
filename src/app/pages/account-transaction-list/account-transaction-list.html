@@ -148,7 +148,7 @@
       </ion-avatar>
       <ion-label>
         <h2>
-          <ion-icon *ngIf="t.isInbound" src="../../assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
+          <ion-icon *ngIf="t.isInbound" src="../../assets/custom-ion-icons/md-call_received.svg"></ion-icon>
           <ion-icon *ngIf="!t.isInbound" src="../../assets/custom-ion-icons/ios-call_made.svg"></ion-icon>
           <ion-text class="font--weight__bold" color="black">
             <span>
@@ -197,7 +197,7 @@
     <ion-row>
       <ion-col>
         <ion-button expand="full" size="default" color="primary" (click)="openReceivePage()" shape="round">
-          <ion-icon slot="start" src="../../assets/custom-ion-icons/ios-call_received.svg"></ion-icon>
+          <ion-icon slot="start" src="../../assets/custom-ion-icons/md-call_received.svg"></ion-icon>
           {{ 'account-transaction-list.receive_label' | translate }}
         </ion-button>
       </ion-col>

@@ -1,6 +1,6 @@
 .background--color__gradient--reverse {
-  background: linear-gradient(90deg, var(--ion-color-primary), 55%, var(--ion-color-secondary));
+  background: linear-gradient(90deg, var(--ion-color-primary), 55%, var(--ion-color-secondaryLight));
 }
 .background--color__gradient {
-  background: linear-gradient(90deg, var(--ion-color-secondary), 45%, var(--ion-color-primary));
+  background: linear-gradient(90deg, var(--ion-color-secondaryLight), 45%, var(--ion-color-primary));
 }

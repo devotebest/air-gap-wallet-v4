@@ -242,41 +242,38 @@ page-account-address {
   background: rgba(34, 34, 34, 0.12);
 }
 
-$primary-light: #f4f4f4;
-$primary-gray: #d3d3d3;
-
 @keyframes bgcolorchange {
   0% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
   25% {
-    background: $primary-gray;
+    background: var(--ion-color-gray);
   }
   50% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
   75% {
-    background: $primary-gray;
+    background: var(--ion-color-gray);
   }
   100% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
 }
 
 @-webkit-keyframes bgcolorchange {
   0% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
   25% {
-    background: $primary-gray;
+    background: var(--ion-color-gray);
   }
   50% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
   75% {
-    background: $primary-gray;
+    background: var(--ion-color-gray);
   }
   100% {
-    background: $primary-light;
+    background: var(--ion-color-grayLight);
   }
 }
