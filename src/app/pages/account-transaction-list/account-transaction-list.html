@@ -1,11 +1,9 @@
 <ion-header no-border no-shadow>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="whiteSecondaryContrast"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title color="whiteSecondaryContrast">
-      {{ wallet?.coinProtocol.symbol | uppercase }} {{ 'account-transaction-list.title' | translate }}
-    </ion-title>
+    <ion-title>{{ wallet?.coinProtocol.symbol | uppercase }} {{ 'account-transaction-list.title' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="presentEditPopover($event)"><ion-icon slot="icon-only" name="more"></ion-icon></ion-button>
     </ion-buttons>
