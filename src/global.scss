@@ -10,41 +10,6 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-$colors: (
-  primary: (
-    base: #00e8cc,
-    contrast: #311b58
-  ),
-  secondary: (
-    base: #311b58,
-    contrast: #00e8cc
-  ),
-  secondaryLight: #440094,
-  secondarydDark: #2d53a1,
-  danger: #f53d3d,
-  light: #f4f4f4,
-  gray: #d3d3d3,
-  dark: #222,
-  muted: #999,
-  whitePrimaryyContrast: (
-    base: #fff,
-    contrast: #00e8cc
-  ),
-  whiteSecondaryContrast: (
-    base: #fff,
-    contrast: #311b58
-  ),
-  white: (
-    base: #fff,
-    contrast: #000
-  ),
-  whiteLight: rgba(255, 255, 255, 0.84),
-  black: #000,
-  blackLight: rgba(0, 0, 0, 0.54),
-  blackLightest: rgba(0, 0, 0, 0.12),
-  transparent: transparent
-);
-
 /* forces the paragraph size */
 p {
   font-size: 14px;
@@ -57,25 +22,16 @@ identicon {
   min-height: 48px;
 }
 
+/* Styling of translated messages */
+.color__primary {
+  color: var(--ion-color-primary);
+}
 .style__strong {
   font-weight: bold;
 }
 
-// Styling of translated messages
-.color__primary {
-  color: var(--ion-color-primary);
-}
-
-ion-app {
-  background: none !important;
-}
-
 .scanning {
   background: none !important;
-}
-
-.nav-decor {
-  background-color: transparent !important;
 }
 
 /* Content in item is not shortened */
@@ -102,28 +58,6 @@ ion-app {
   font-weight: 700 !important;
 }
 
-.background--color__primary {
-  //background-color: color($colors, primary, base);
-  background-color: color(var(--ion-color-primary));
-}
-.background--color__white {
-  //background-color: color($colors, white, base);
-  background-color: color(var(--ion-color-white));
-}
-
-.colored-background {
-  color: color(var(--ion-color-white));
-  background-color: color(var(--ion-color-primary));
-
-  p,
-  h1,
-  h2,
-  h3,
-  .select-text {
-    background-color: color(var(--ion-color-secondary));
-  }
-}
-
 .font--weight__med {
   font-weight: 500;
 }
@@ -135,7 +69,7 @@ ion-app {
   word-wrap: break-word;
 }
 
-.typography--uppercase {
+.ion-text-capitalize {
   text-transform: uppercase;
 }
 
@@ -151,12 +85,6 @@ qr-clipboard {
   background-color: white;
 }
 
-.platform-android .placeholder--container,
-.platform-ios .placeholder--container {
-  min-width: 48px;
-  min-height: 48px;
-}
-
 /* FAB with a button, bottom padding fix for ios devices */
 .content-ios ion-fab[bottom] {
   bottom: calc(10px + env(safe-area-inset-bottom));
@@ -169,6 +97,7 @@ ion-card {
   padding: 8px 0;
 }
 
+/* Card Styling */
 page-portfolio,
 page-delegation-baker-detail,
 page-account-address,
@@ -182,12 +111,16 @@ page-transaction-qr {
   }
 }
 
-page-account-address {
-  ion-avatar {
-    img {
-      width: 64px;
-      height: 64px;
-    }
+/* Account onboarding progress bar styling */
+page-account-import-onboarding {
+  .swiper-pagination-custom {
+    top: 0;
+  }
+  .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: var(--ion-color-primary);
+  }
+  .swiper-pagination-progressbar {
+    background: rgba(var(--ion-color-secondary-rgb), 0.12);
   }
 }
 
@@ -223,24 +156,6 @@ page-account-address {
     height: 48px;
     border-radius: 50%;
   }
-}
-
-.ion-padding-left,
-[padding-left] {
-  --padding-left: var(--ion-padding, 16px);
-  padding-left: var(--ion-padding, 16px);
-}
-
-.swiper-pagination-custom {
-  top: 0px;
-}
-
-.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background: var(--ion-color-primary);
-}
-
-.swiper-pagination-progressbar {
-  background: rgba(34, 34, 34, 0.12);
 }
 
 @keyframes bgcolorchange {
