@@ -4,7 +4,7 @@
   </ion-row>
   <ion-refresher (ionRefresh)="doRefresh($event)"><ion-refresher-content></ion-refresher-content></ion-refresher>
 
-  <ng-container *ngIf="(walletGroups | async) as walletGroupsArray; else loading">
+  <ng-container *ngIf="walletGroups | async as walletGroupsArray; else loading">
     <ng-container *ngIf="walletGroupsArray.length; else noItems">
       <ion-list lines="none" no-padding *ngFor="let walletGroup of walletGroupsArray">
         <ion-card>
@@ -49,11 +49,11 @@
   </ng-template>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ng-container *ngIf="(wallets | async) as walletsArray">
-      <ion-fab-button *ngIf="walletsArray.length > 0" color="whiteSecondaryContrast" (click)="openAccountAddPage()">
+    <ng-container *ngIf="wallets | async as walletsArray">
+      <ion-fab-button *ngIf="walletsArray.length > 0" color="secondary" (click)="openAccountAddPage()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-      <ion-button *ngIf="walletsArray.length === 0" color="whiteSecondaryContrast" (click)="openAccountAddPage()" shape="round">
+      <ion-button *ngIf="walletsArray.length === 0" color="secondary" (click)="openAccountAddPage()" shape="round">
         <ion-icon slot="start" name="add"></ion-icon>
         {{ 'portfolio.add-coins_label' | translate }}
       </ion-button>

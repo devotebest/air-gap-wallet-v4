@@ -6,16 +6,16 @@
   /** primary **/
   --ion-color-primary: #00e8cc;
   --ion-color-primary-rgb: 0, 232, 204;
-  --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-contrast: #311b58;
+  --ion-color-primary-contrast-rgb: 49, 27, 88;
   --ion-color-primary-shade: #00ccb4;
   --ion-color-primary-tint: #1aead1;
 
   /** secondary **/
   --ion-color-secondary: #311b58;
   --ion-color-secondary-rgb: 49, 27, 88;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-contrast: #00e8cc;
+  --ion-color-secondary-contrast-rgb: 0, 232, 204;
   --ion-color-secondary-shade: #2b184d;
   --ion-color-secondary-tint: #463269;
 
@@ -98,15 +98,22 @@
   --ion-color-grayLight-contrast-rgb: 255, 255, 255;
   --ion-color-grayLight-shade: #d7d7d7;
   --ion-color-grayLight-tint: #f5f5f5;
-}
 
-.ion-color-whiteSecondaryContrast {
-  --ion-color-base: #311b58;
-  --ion-color-base-rgb: 49, 27, 88;
-  --ion-color-contrast: #00e8cc;
-  --ion-color-contrast-rgb: 0, 232, 204;
-  --ion-color-shade: #2b184d;
-  --ion-color-tint: #463269;
+  ion-title {
+    --color: var(--ion-color-secondary);
+  }
+
+  ion-back-button {
+    --icon-margin-end: 0;
+    --color: var(--ion-color-secondary);
+  }
+
+  /* Set the border with on all ion-button elements */
+  ion-button {
+    --border-width: 1px;
+    --padding-start: 1.5rem;
+    --padding-end: 1.5rem;
+  }
 }
 
 .ion-color-white {
@@ -154,10 +161,6 @@
   --ion-color-tint: #78c288;
 }
 
-[slot='start'] {
-  margin: 8px 16px 8px 0;
-}
-
 ion-avatar {
   min-width: 48px;
   min-height: 48px;
@@ -165,9 +168,4 @@ ion-avatar {
 
 .item__image[slot='start'] {
   margin: 8px 16px 8px 0;
-}
-
-/* Set the border with on all ion-button elements */
-ion-button {
-  --border-width: 1px;
 }

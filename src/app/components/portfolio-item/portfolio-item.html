@@ -24,7 +24,7 @@
       </ion-text>
     </ng-container>
 
-    <ion-badge *ngIf="(isDelegated | async) !== null" color="whiteSecondaryContrast">
+    <ion-badge *ngIf="(isDelegated | async) !== null" color="secondary">
       {{ (isDelegated | async) ? 'delegated' : 'undelegated' }}
     </ion-badge>
 
@@ -58,9 +58,7 @@
     <ion-col size="12" no-padding text-right>
       <p *ngIf="wallet.currentBalance; else syncingPrice">
         <ion-text color="blackLight">
-          <span *ngIf="wallet.currentBalance?.toNumber() > 0">
-            ${{ wallet.currentMarketPrice?.toNumber() | number: '1.2-4' }}
-          </span>
+          <span *ngIf="wallet.currentBalance?.toNumber() > 0">${{ wallet.currentMarketPrice?.toNumber() | number: '1.2-4' }}</span>
         </ion-text>
         <!-- <span ion-text [ngClass]="wallet.change24hour >= 0 ? 'green' : 'red'">{{ wallet.change24hour }}%</span> -->
       </p>
