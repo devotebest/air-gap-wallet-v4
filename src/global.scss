@@ -190,40 +190,6 @@ page-account-address {
   }
 }
 
-.skeleton--loading,
-.skeleton--loading__container {
-  h2,
-  h3,
-  p,
-  ion-avatar,
-  .symbol--icon {
-    -webkit-animation: infinite bgcolorchange 4s;
-    animation: 4s infinite bgcolorchange;
-    opacity: 0.5;
-  }
-  .symbol--icon {
-    border-radius: 50%;
-  }
-  h2 {
-    height: 19px;
-    width: 80%;
-  }
-  h3 {
-    height: 40px;
-    width: 40%;
-  }
-  p {
-    height: 1.4rem;
-    width: 80%;
-    min-width: 25px;
-  }
-  ion-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-  }
-}
-
 .ion-padding-left,
 [padding-left] {
   --padding-left: var(--ion-padding, 16px);
