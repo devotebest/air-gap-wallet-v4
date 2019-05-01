@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { LoadingController, NavController, NavParams, ToastController, AlertController, Platform } from '@ionic/angular'
+import { LoadingController, ToastController, AlertController, Platform } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import {
@@ -39,7 +39,6 @@ export class TransactionConfirmPage {
   constructor(
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    public navController: NavController,
     private router: Router,
     private route: ActivatedRoute,
     private alertCtrl: AlertController,
@@ -50,9 +49,6 @@ export class TransactionConfirmPage {
 
   dismiss() {
     this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-    /*this.navController
-      .popToRoot()
-      .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
   }
 
   async ionViewWillEnter() {
@@ -60,7 +56,6 @@ export class TransactionConfirmPage {
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']
       this.signedTransactionSync = info.signedTransactionSync
-      //this.signedTransactionSync = this.navParams.get("signedTransactionSync");
     }
 
     // tslint:disable-next-line:no-unnecessary-type-assertion
@@ -100,9 +95,6 @@ export class TransactionConfirmPage {
         })
 
       this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-      /*this.navController
-        .popToRoot()
-        .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
     }, TIMEOUT_TRANSACTION_QUEUED)
 
     this.protocol
@@ -179,18 +171,12 @@ export class TransactionConfirmPage {
                       })
                   }
                   this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-                  /*this.navController
-                  .popToRoot()
-                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
                 }
               },
               {
                 text: 'Ok',
                 handler: () => {
                   this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-                  /*this.navController
-                  .popToRoot()
-                  .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
                 }
               }
             ]
@@ -219,9 +205,6 @@ export class TransactionConfirmPage {
             toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
           })
         this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-        /*this.navController
-          .popToRoot()
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));*/
       })
   }
 

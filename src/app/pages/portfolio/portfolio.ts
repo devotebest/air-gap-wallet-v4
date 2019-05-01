@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { NavController } from '@ionic/angular'
 import { Observable, ReplaySubject } from 'rxjs'
 import { Router } from '@angular/router'
 
@@ -32,7 +31,6 @@ export class PortfolioPage {
   isOn = false
   constructor(
     private router: Router,
-    public navCtrl: NavController,
     private walletsProvider: AccountProvider,
     private operationsProvider: OperationsProvider,
     private dataService: DataService,

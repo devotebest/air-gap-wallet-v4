@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NavController, Platform } from '@ionic/angular'
+import { Platform } from '@ionic/angular'
 import { ActivatedRoute } from '@angular/router'
 import { Transaction } from '../../models/transaction.model'
 
@@ -13,7 +13,7 @@ export class TransactionDetailPage {
   public transaction: Transaction
   lottieConfig: any
 
-  constructor(public navController: NavController, private platform: Platform, private route: ActivatedRoute) {
+  constructor(private platform: Platform, private route: ActivatedRoute) {
     if (this.route.snapshot.data['special']) {
       this.transaction = this.route.snapshot.data['special']
       console.log(this.transaction)

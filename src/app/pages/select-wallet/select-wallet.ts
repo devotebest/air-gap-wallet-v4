@@ -2,7 +2,6 @@ import { ErrorCategory, handleErrorSentry } from '../../services/sentry-error-ha
 import { AirGapMarketWallet } from 'airgap-coin-lib'
 import { AccountProvider } from '../../services/account/account.provider'
 import { Component } from '@angular/core'
-import { NavController, NavParams } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { TransactionPreparePage } from '../transaction-prepare/transaction-prepare'
@@ -19,7 +18,6 @@ export class SelectWalletPage {
   private address: string
 
   constructor(
-    public navCtrl: NavController,
     public accountProvider: AccountProvider,
     private dataService: DataService,
     private router: Router,

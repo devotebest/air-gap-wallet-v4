@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { NavController } from '@ionic/angular'
 import { AccountProvider } from '../../services/account/account.provider'
 import { AirGapMarketWallet, getProtocolByIdentifier, ICoinProtocol } from 'airgap-coin-lib'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
@@ -16,12 +15,7 @@ export class SubAccountImportPage {
   public subProtocol: ICoinProtocol
   public subWallets: AirGapMarketWallet[]
 
-  constructor(
-    public navCtrl: NavController,
-    private router: Router,
-    private route: ActivatedRoute,
-    private accountProvider: AccountProvider
-  ) {
+  constructor(private router: Router, private route: ActivatedRoute, private accountProvider: AccountProvider) {
     this.subWallets = []
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']

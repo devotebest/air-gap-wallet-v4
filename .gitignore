@@ -31,6 +31,7 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 e2e-reports/*
+report*
 
 airgap_cordova_secure_storage_deploy
 airgap_cordova_secure_storage_deploy.pub

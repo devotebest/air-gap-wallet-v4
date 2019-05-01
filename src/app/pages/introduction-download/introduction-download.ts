@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Platform, NavController, ModalController } from '@ionic/angular'
+import { Platform, ModalController } from '@ionic/angular'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 
 @Component({
@@ -7,7 +7,7 @@ import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-ha
   templateUrl: 'introduction-download.html'
 })
 export class IntroductionDownloadPage {
-  constructor(public navCtrl: NavController, private platform: Platform, public viewController: ModalController) {}
+  constructor(private platform: Platform, public viewController: ModalController) {}
 
   public dismiss(shouldCloseAllModals = false) {
     this.viewController.dismiss(shouldCloseAllModals).catch(handleErrorSentry(ErrorCategory.NAVIGATION))

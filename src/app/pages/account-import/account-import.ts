@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Location } from '@angular/common'
-import { ModalController, LoadingController, Platform, NavController, AlertController } from '@ionic/angular'
+import { ModalController, LoadingController, Platform, AlertController } from '@ionic/angular'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AirGapMarketWallet } from 'airgap-coin-lib'
 import { AccountProvider } from '../../services/account/account.provider'
@@ -29,7 +29,6 @@ export class AccountImportPage {
     private route: ActivatedRoute,
     private router: Router,
     private wallets: AccountProvider,
-    public navCtrl: NavController,
     private webExtensionProvider: WebExtensionProvider,
     private alertCtrl: AlertController
   ) {
@@ -50,7 +49,6 @@ export class AccountImportPage {
         this.loading.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
 
         this.walletAlreadyExists = false
-        //this.wallet = this.navParams.get("wallet"); // TODO: Catch error if wallet cannot be imported
 
         if (this.wallets.walletExists(this.wallet)) {
           this.wallet = this.wallets.walletByPublicKeyAndProtocolAndAddressIndex(

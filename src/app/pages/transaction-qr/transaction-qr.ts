@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NavController, Platform } from '@ionic/angular'
+import { Platform } from '@ionic/angular'
 import { Transaction } from '../../models/transaction.model'
 import { AirGapMarketWallet } from 'airgap-coin-lib'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
@@ -18,7 +18,6 @@ export class TransactionQrPage {
   public qrDataTooBig: boolean = false
 
   constructor(
-    public navCtrl: NavController,
     private router: Router,
     private route: ActivatedRoute,
     private platform: Platform,

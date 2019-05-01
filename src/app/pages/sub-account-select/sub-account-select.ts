@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import { NavController, NavParams } from '@ionic/angular'
+import { Router, ActivatedRoute } from '@angular/router'
+
 import { AirGapMarketWallet, ICoinProtocol } from 'airgap-coin-lib'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { AccountProvider } from '../../services/account/account.provider'
-import { DelegationBakerDetailPage } from '../delegation-baker-detail/delegation-baker-detail'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 @Component({
   selector: 'page-sub-account-select',
@@ -14,9 +15,17 @@ export class SubAccountSelectPage {
   public protocol: ICoinProtocol
   public subWallets: AirGapMarketWallet[]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private accountProvider: AccountProvider) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private accountProvider: AccountProvider,
+    private dataService: DataService
+  ) {
+    if (this.route.snapshot.data['special']) {
+      const info = this.route.snapshot.data['special']
+      this.wallet = info.wallet
+    }
     this.subWallets = []
-    this.wallet = this.navParams.get('wallet')
 
     this.accountProvider.subWallets.subscribe(subWallets => {
       this.subWallets = subWallets.filter(subWallet => subWallet.publicKey === this.wallet.publicKey)
@@ -24,10 +33,10 @@ export class SubAccountSelectPage {
   }
 
   async goToDelegateSelection(subWallet: AirGapMarketWallet) {
-    // this.navCtrl
-    //   .push(DelegationBakerDetailPage, {
-    //     wallet: subWallet
-    //   })
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    const info = {
+      wallet: subWallet
+    }
+    this.dataService.setData(DataServiceKey.DETAIL, info)
+    this.router.navigateByUrl('/delegation-baker-detail/' + DataServiceKey.DETAIL).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

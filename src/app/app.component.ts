@@ -19,6 +19,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx'
 
 import { DeepLinkProvider } from './services/deep-link/deep-link'
 import { PushProvider } from './services/push/push'
+import { DataService, DataServiceKey } from './services/data/data.service'
 
 @Component({
   selector: 'app-root',
@@ -39,7 +40,8 @@ export class AppComponent {
     private accountProvider: AccountProvider,
     private deepLinkProvider: DeepLinkProvider,
     private pushProvider: PushProvider,
-    private router: Router
+    private router: Router,
+    private dataService: DataService
   ) {
     this.initializeApp()
   }
@@ -136,10 +138,12 @@ export class AppComponent {
   // TODO: Move to provider
   async walletDeeplink() {
     let deeplinkInfo = await this.deepLinkProvider.walletDeepLink()
-    /*this.nav.push(TransactionQrPage, {
+    const info = {
       wallet: deeplinkInfo.wallet,
       airGapTx: deeplinkInfo.airGapTx,
       data: 'airgap-vault://?d=' + deeplinkInfo.serializedTx
-    })*/
+    }
+    this.dataService.setData(DataServiceKey.TRANSACTION, info)
+    this.router.navigateByUrl('/transaction-qr/' + DataServiceKey.TRANSACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }

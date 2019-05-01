@@ -1,6 +1,5 @@
 import { AirGapMarketWallet, IAirGapTransaction } from 'airgap-coin-lib'
 import { Component } from '@angular/core'
-import { NavController } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
@@ -18,7 +17,6 @@ export class InteractionSelectionPage {
   private airGapTx: IAirGapTransaction
 
   constructor(
-    public navController: NavController,
     private router: Router,
     private route: ActivatedRoute,
     private deepLinkProvider: DeepLinkProvider,

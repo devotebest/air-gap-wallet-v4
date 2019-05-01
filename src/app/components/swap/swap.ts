@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { NavController, ModalController, AlertController } from '@ionic/angular'
+import { ModalController, AlertController } from '@ionic/angular'
 import { AccountProvider } from '../../services/account/account.provider'
 import { AirGapMarketWallet, ICoinProtocol, getProtocolByIdentifier } from 'airgap-coin-lib'
 import { Observable, ReplaySubject } from 'rxjs'
@@ -61,12 +61,7 @@ export class SwapComponent {
   @Output()
   private readonly amountSetEmitter: EventEmitter<string> = new EventEmitter()
 
-  constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    public modalController: ModalController,
-    private walletsProvider: AccountProvider
-  ) {}
+  constructor(public alertCtrl: AlertController, public modalController: ModalController, private walletsProvider: AccountProvider) {}
 
   amountSet(amount: string) {
     this._amount = amount

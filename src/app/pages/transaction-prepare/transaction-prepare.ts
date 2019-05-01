@@ -4,7 +4,7 @@ import { Component, NgZone } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { RegexValidator } from '../../validators/RegexValidator'
 import { BigNumber } from 'bignumber.js'
-import { NavController, ToastController, LoadingController } from '@ionic/angular'
+import { ToastController, LoadingController } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { ScanAddressPage } from '../scan-address/scan-address'
@@ -30,7 +30,6 @@ export class TransactionPreparePage {
   constructor(
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    private navController: NavController,
     private router: Router,
     private route: ActivatedRoute,
     private _ngZone: NgZone,

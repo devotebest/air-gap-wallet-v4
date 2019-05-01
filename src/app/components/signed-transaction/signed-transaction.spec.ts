@@ -5,7 +5,7 @@ import { AddressRowComponent } from './../address-row/address-row'
 import { FromToComponent } from './../from-to/from-to'
 import { SignedTransactionComponent } from './signed-transaction'
 import { CurrencySymbolComponent } from '../../components/currency-symbol/currency-symbol'
-import { UnitHelper } from '../../../test-config/unit-test-helper'
+import { UnitHelper } from '../../../../test-config/unit-test-helper'
 import { SyncProtocolUtils, EncodedType } from 'airgap-coin-lib'
 
 fdescribe('SignedTransactionComponent', () => {

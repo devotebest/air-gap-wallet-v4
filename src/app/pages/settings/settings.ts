@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { ModalController, NavController, Platform, AlertController } from '@ionic/angular'
+import { ModalController, Platform, AlertController } from '@ionic/angular'
 import { Router } from '@angular/router'
 
 import { AboutPage } from '../about/about'
@@ -18,7 +18,6 @@ declare var cordova: any
 })
 export class SettingsPage {
   constructor(
-    public navCtrl: NavController,
     private router: Router,
     private modalController: ModalController,
     private translateService: TranslateService,

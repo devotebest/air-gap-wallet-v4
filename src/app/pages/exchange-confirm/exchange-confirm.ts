@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NavController, Platform } from '@ionic/angular'
+import { Platform } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 import { AirGapMarketWallet, EncodedType, SyncProtocolUtils } from 'airgap-coin-lib'
 import { CreateTransactionResponse } from '../../services/exchange/exchange'
@@ -27,7 +27,6 @@ export class ExchangeConfirmPage {
   public exchangeResult: CreateTransactionResponse
 
   constructor(
-    public navCtrl: NavController,
     private router: Router,
     private route: ActivatedRoute,
     public platform: Platform,

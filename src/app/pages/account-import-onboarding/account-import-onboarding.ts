@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core'
-import { NavController, Platform, IonSlides } from '@ionic/angular'
+import { Platform, IonSlides } from '@ionic/angular'
 import { ActivatedRoute } from '@angular/router'
 import { getProtocolByIdentifier, ICoinProtocol } from 'airgap-coin-lib'
 import { DeepLinkProvider } from '../../services/deep-link/deep-link'
@@ -29,12 +29,7 @@ export class AccountImportOnboardingPage implements OnInit {
   isBegin: boolean = true
   isEnd: boolean = false
 
-  constructor(
-    public navCtrl: NavController,
-    private route: ActivatedRoute,
-    public platform: Platform,
-    private deeplinkProvider: DeepLinkProvider
-  ) {}
+  constructor(private route: ActivatedRoute, public platform: Platform, private deeplinkProvider: DeepLinkProvider) {}
 
   ngOnInit() {
     if (this.route.snapshot.data['special']) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { AlertController, NavParams, PopoverController, NavController } from '@ionic/angular'
+import { AlertController, NavParams, PopoverController } from '@ionic/angular'
 import { AirGapMarketWallet } from 'airgap-coin-lib'
 import { AccountProvider } from '../../services/account/account.provider'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
@@ -39,7 +39,6 @@ export class AccountEditPopoverComponent {
 
   constructor(
     private alertCtrl: AlertController,
-    private navCtrl: NavController,
     private navParams: NavParams,
     private walletsProvider: AccountProvider,
     private viewCtrl: PopoverController,

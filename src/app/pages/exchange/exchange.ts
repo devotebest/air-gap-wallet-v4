@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { NavController } from '@ionic/angular'
 import { Router } from '@angular/router'
 import { ExchangeProvider } from '../../services/exchange/exchange'
 import { AirGapMarketWallet, ICoinProtocol, getProtocolByIdentifier } from 'airgap-coin-lib'
@@ -43,7 +42,6 @@ export class ExchangePage {
 
   constructor(
     private router: Router,
-    public navCtrl: NavController,
     private exchangeProvider: ExchangeProvider,
     private storageProvider: StorageProvider,
     private accountProvider: AccountProvider,

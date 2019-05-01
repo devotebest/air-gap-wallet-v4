@@ -1,7 +1,7 @@
 //import { SelectWalletPage } from "../../pages/select-wallet/select-wallet";
 import { AccountProvider } from '../account/account.provider'
 import { Injectable } from '@angular/core'
-import { AlertController, NavController } from '@ionic/angular'
+import { AlertController } from '@ionic/angular'
 import { Router, NavigationExtras } from '@angular/router'
 import { DataService, DataServiceKey } from '../../services/data/data.service'
 import { DeserializedSyncProtocol, SyncProtocolUtils, EncodedType, SyncWalletRequest, AirGapMarketWallet } from 'airgap-coin-lib'
@@ -13,7 +13,6 @@ import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry
   providedIn: 'root'
 })
 export class SchemeRoutingProvider {
-  private navController: NavController
   private router: Router
   /* TS 2.7 feature
   private syncSchemeHandlers: {

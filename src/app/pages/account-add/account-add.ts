@@ -1,6 +1,4 @@
 import { Component } from '@angular/core'
-import { NavController } from '@ionic/angular'
-import { NavigationExtras } from '@angular/router'
 import { supportedProtocols, ICoinProtocol } from 'airgap-coin-lib'
 import { AccountImportOnboardingPage } from '../account-import-onboarding/account-import-onboarding'
 import { SubAccountImportPage } from '../sub-account-import/sub-account-import'
@@ -24,7 +22,6 @@ export class AccountAddPage {
   filteredSubAccountProtocols: ICoinProtocol[] = []
 
   constructor(
-    public navCtrl: NavController,
     private accountProvider: AccountProvider,
     private protocolsProvider: ProtocolsProvider,
     private router: Router,
