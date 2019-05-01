@@ -61,8 +61,8 @@
         </ion-col>
         <ion-col size="6" text-right no-padding>
           <small *ngIf="bakerInfo; else bakerInfoBalanceSkeleton">
-            {{ bakerInfo?.stakingBalance.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }} /
-            {{ bakerInfo?.bakerCapacity.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '3' } }}
+            {{ bakerInfo?.stakingBalance.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 3 } }} /
+            {{ bakerInfo?.bakerCapacity.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 3 } }}
           </small>
           <ng-template #bakerInfoBalanceSkeleton>
             <div class="justify--content__end">
@@ -130,7 +130,7 @@
           </ion-avatar>
           <ion-label>
             <h2 class="font--weight__bold" ion-text color="black">
-              {{ wallet.currentBalance?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}
+              {{ wallet.currentBalance?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
             </h2>
             <h3>{{ 'delegation-baker-detail.your-balance' | translate }}</h3>
           </ion-label>
@@ -141,7 +141,7 @@
           </ion-avatar>
           <ion-label>
             <h2 class="font--weight__bold" ion-text color="black" *ngIf="avgRoIPerCycle; else avgRoiSkeleton">
-              {{ avgRoIPerCycle?.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' } }}
+              {{ avgRoIPerCycle?.toFixed() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
             </h2>
             <ng-template #avgRoiSkeleton>
               <div>

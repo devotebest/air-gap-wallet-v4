@@ -141,3 +141,14 @@ page-account-import-onboarding {
 .swiper-pagination-progressbar {
   background: rgba(34, 34, 34, 0.12);
 }
+
+.typography--mono {
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+  font-weight: 600 !important;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.typography--uppercase {
+  text-transform: uppercase;
+}

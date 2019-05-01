@@ -9,14 +9,16 @@
       <ion-label stacked class="typography--uppercase">{{ 'from-to.amount_label' | translate }}</ion-label>
       <div class="typography--mono" item-content>
         <span class="typography--mono">
-          {{ transaction.amount | amountConverter: { protocolIdentifier: transaction.protocolIdentifier } }}
+          {{ transaction.amount?.toNumber() | amountConverter: { protocolIdentifier: transaction.protocolIdentifier, maxDigits: 10 } }}
         </span>
       </div>
 
       <ng-container *ngIf="transaction.fee">
         <ion-label stacked class="typography--uppercase">{{ 'from-to.fee_label' | translate }}</ion-label>
         <div class="typography--mono" item-content>
-          <span class="typography--mono">{{ transaction.fee | feeConverter: { protocolIdentifier: transaction.protocolIdentifier } }}</span>
+          <span class="typography--mono">
+            {{ transaction.fee?.toNumber() | feeConverter: { protocolIdentifier: transaction.protocolIdentifier } }}
+          </span>
         </div>
       </ng-container>
 

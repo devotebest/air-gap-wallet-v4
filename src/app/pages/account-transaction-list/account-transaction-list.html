@@ -67,7 +67,7 @@
     <img padding-vertical src="../../assets/img/ae-token-migration.svg" />
     <ion-text color="primary">
       <h5>
-        {{ aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' } }}
+        {{ aeMigratedTokens?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
       </h5>
     </ion-text>
     <p
@@ -76,7 +76,7 @@
           | translate
             : {
                 migratedTokens:
-                  aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' },
+                  aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 },
                 phaseEnd: aePhaseEnd | amFromUnix | amDateFormat: 'MMMM'
               }
       "
@@ -94,7 +94,7 @@
             | translate
               : {
                   migratedTokens:
-                    aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' },
+                    aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 },
                   phaseEnd: aePhaseEnd | amFromUnix | amDateFormat: 'MMMM'
                 }
         "
@@ -105,7 +105,7 @@
         <p>
           Your balance of
           <strong ion-text color="primary">
-            {{ aeMigratedTokens | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: '10' } }}
+            {{ aeMigratedTokens | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
           </strong>
           will become available with the next hardfork at
           <strong ion-text color="primary">{{ aePhaseEnd | amFromUnix | amDateFormat: 'LL' }}</strong>
@@ -148,10 +148,10 @@
       <ion-label>
         <h2>
           <ion-icon *ngIf="t.isInbound" src="../../assets/custom-ion-icons/md-call_received.svg"></ion-icon>
-          <ion-icon *ngIf="!t.isInbound" src="../../assets/custom-ion-icons/ios-call_made.svg"></ion-icon>
+          <ion-icon *ngIf="!t.isInbound" src="../../assets/custom-ion-icons/md-call_made.svg"></ion-icon>
           <ion-text class="font--weight__bold" color="black">
             <span>
-              {{ t.amount | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}
+              {{ t.amount | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
             </span>
           </ion-text>
         </h2>

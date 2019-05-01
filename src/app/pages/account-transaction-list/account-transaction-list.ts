@@ -147,7 +147,7 @@ export class AccountTransactionListPage {
         if (ktAddresses.length === 0) {
           this.showToast('No accounts to import.')
         } else {
-          for (const [index, element] of Object.entries(ktAddresses)) {
+          for (const [index, element] of ktAddresses.entries()) {
             await this.operationsProvider.addKtAddress(this.wallet, parseInt(index), ktAddresses)
           }
 

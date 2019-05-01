@@ -17,7 +17,10 @@
           <ion-col no-padding class="balance__container">
             <ion-row>
               <p no-margin class="font--size__large">
-                <strong>{{ wallet.currentBalance | amountConverter: { protocolIdentifier: wallet.protocolIdentifier } }}</strong>
+                <strong>
+                  {{ wallet.currentBalance?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 }
+                  }}
+                </strong>
               </p>
             </ion-row>
             <ion-row>
@@ -92,7 +95,7 @@
           <ion-input formControlName="amount" type="number" id="amount-input" placeholder="0.0"></ion-input>
         </ion-item>
         <ion-text no-margin>
-          <p no-margin>${{ transactionForm.get('amount').value * wallet.currentMarketPrice | number: '1.2-2' }}</p>
+          <p no-margin>${{ (transactionForm.get('amount').value) * (wallet.currentMarketPrice).toNumber() | number: '1.2-2' }}</p>
         </ion-text>
       </ion-col>
       <ion-col size="3" no-padding>
