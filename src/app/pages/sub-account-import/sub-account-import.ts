@@ -15,6 +15,8 @@ export class SubAccountImportPage {
   public subProtocol: ICoinProtocol
   public subWallets: AirGapMarketWallet[]
 
+  public typeLabel: string = ''
+
   constructor(private router: Router, private route: ActivatedRoute, private accountProvider: AccountProvider) {
     this.subWallets = []
     if (this.route.snapshot.data['special']) {
