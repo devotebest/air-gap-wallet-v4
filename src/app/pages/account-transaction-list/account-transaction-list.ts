@@ -360,19 +360,22 @@ export class AccountTransactionListPage {
         wallet: this.wallet,
         onDelete: () => {
           this.navCtrl.pop().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+        },
+        onUndelegate: async () => {
+          const pageOptions = await this.operationsProvider.prepareDelegate(this.wallet)
+          const info = {
+            wallet: pageOptions.params.wallet,
+            airGapTx: pageOptions.params.airGapTx,
+            data: pageOptions.params.data
+          }
+          this.dataService.setData(DataServiceKey.INTERACTION, info)
+          this.router
+            .navigateByUrl('/interaction-selection/' + DataServiceKey.INTERACTION)
+            .catch(handleErrorSentry(ErrorCategory.NAVIGATION))
         }
       },
       event: event,
       translucent: true
-      /*
-      onUndelegate: async () => {
-        const pageOptions = await this.operationsProvider.prepareDelegate(
-          this.wallet
-        );
-        this.navCtrl
-          .push(pageOptions.page, pageOptions.params)
-          .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
-    }*/
     })
     return popover.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
