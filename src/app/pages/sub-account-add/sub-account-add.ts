@@ -8,6 +8,7 @@ import { OperationsProvider } from '../../services/operations/operations'
 import { SubProtocolType } from 'airgap-coin-lib/dist/protocols/ICoinSubProtocol'
 import { AccountProvider } from '../../services/account/account.provider'
 import { ProtocolsProvider, ProtocolSymbols } from '../../services/protocols/protocols'
+import { DataService, DataServiceKey } from '../../services/data/data.service'
 
 interface IAccountWrapper {
   selected: boolean
@@ -34,7 +35,8 @@ export class SubAccountAddPage {
     private route: ActivatedRoute,
     private accountProvider: AccountProvider,
     private operationsProvider: OperationsProvider,
-    private protocolsProvider: ProtocolsProvider
+    private protocolsProvider: ProtocolsProvider,
+    private dataService: DataService
   ) {
     if (this.route.snapshot.data['special']) {
       const info = this.route.snapshot.data['special']
@@ -113,9 +115,12 @@ export class SubAccountAddPage {
 
   async prepareOriginate() {
     const pageOptions = await this.operationsProvider.prepareOriginate(this.wallet)
-
-    // this.navCtrl
-    //   .push(pageOptions.page, pageOptions.params)
-    //   .catch(handleErrorSentry(ErrorCategory.NAVIGATION));
+    const info = {
+      wallet: pageOptions.params.wallet,
+      airGapTx: pageOptions.params.airGapTx,
+      data: pageOptions.params.data
+    }
+    this.dataService.setData(DataServiceKey.INTERACTION, info)
+    this.router.navigateByUrl('/interaction-selection/' + DataServiceKey.INTERACTION).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
   }
 }
