@@ -67,7 +67,7 @@
     <img padding-vertical src="../../assets/img/ae-token-migration.svg" />
     <ion-text color="primary">
       <h5>
-        {{ aeMigratedTokens?.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
+        {{ aeMigratedTokens.toNumber() | amountConverter: { protocolIdentifier: wallet.protocolIdentifier, maxDigits: 10 } }}
       </h5>
     </ion-text>
     <p

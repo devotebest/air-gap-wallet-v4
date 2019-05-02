@@ -3,6 +3,7 @@ import { Platform, IonSlides } from '@ionic/angular'
 import { ActivatedRoute } from '@angular/router'
 import { getProtocolByIdentifier, ICoinProtocol } from 'airgap-coin-lib'
 import { DeepLinkProvider } from '../../services/deep-link/deep-link'
+import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 
 const DEEPLINK_VAULT_ADD_ACCOUNT = `airgap-vault://add-account/`
 
@@ -54,7 +55,9 @@ export class AccountImportOnboardingPage implements OnInit {
   }
 
   openVault() {
-    this.deeplinkProvider.sameDeviceDeeplink(`${DEEPLINK_VAULT_ADD_ACCOUNT}${this.protocol}`)
+    this.deeplinkProvider
+      .sameDeviceDeeplink(`${DEEPLINK_VAULT_ADD_ACCOUNT}${this.protocol.identifier}`)
+      .catch(handleErrorSentry(ErrorCategory.DEEPLINK_PROVIDER))
   }
 
   private customProgressBar(current: number, total: number): string {

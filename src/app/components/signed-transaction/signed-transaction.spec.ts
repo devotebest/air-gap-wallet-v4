@@ -1,3 +1,4 @@
+/*
 import { async, TestBed, ComponentFixture } from '@angular/core/testing'
 
 import { IdenticonComponent } from './../identicon/identicon'
@@ -77,3 +78,4 @@ fdescribe('SignedTransactionComponent', () => {
     expect(signedTransaction.fallbackActivated).toBe(true)
   }))
 })
+*/

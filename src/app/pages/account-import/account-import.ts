@@ -19,7 +19,7 @@ export class AccountImportPage {
   // WebExtension
   walletImportable = true
 
-  loading: any
+  loading: HTMLIonLoadingElement
 
   constructor(
     private platform: Platform,

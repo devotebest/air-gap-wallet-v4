@@ -20,7 +20,6 @@ import { map } from 'rxjs/operators'
 import BigNumber from 'bignumber.js'
 import { AccountProvider } from '../account/account.provider'
 import { ProtocolSymbols } from '../protocols/protocols'
-import { load } from '@angular/core/src/render3'
 
 export enum ActionType {
   IMPORT_ACCOUNT,
@@ -205,12 +204,12 @@ export class OperationsProvider {
     const loader = await this.loadingController.create({
       message: 'Preparing transaction...'
     })
-    //await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER));
-    await loader.present()
+
+    await loader.present().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER))
     return loader
   }
 
-  private hideLoader(loader: any) {
+  private hideLoader(loader: HTMLIonLoadingElement) {
     loader.dismiss().catch(handleErrorSentry(ErrorCategory.IONIC_LOADER))
   }
 

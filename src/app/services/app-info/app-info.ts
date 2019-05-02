@@ -9,7 +9,7 @@ export class AppInfoProvider {
   public appName = 'APP_NAME'
   public packageName = 'PACKAGE_NAME'
   public versionNumber = 'VERSION_NUMBER'
-  public versionCode: any = 'VERSION_CODE'
+  public versionCode: string | number = 'VERSION_CODE'
 
   private isInitialized: Promise<void>
 

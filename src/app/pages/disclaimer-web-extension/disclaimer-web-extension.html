@@ -17,16 +17,8 @@
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar padding transparent>
-    <ion-row justify-content-end>
-      <ion-button
-        size="default"
-        color="primary"
-        (click)="accept()"
-        shape="round"
-        slot="end"
-      >
-        {{ 'web-extension-disclaimer.accept_label' | translate }}
-      </ion-button>
-    </ion-row>
+    <ion-button size="default" color="primary" (click)="accept()" shape="round" slot="end">
+      {{ 'web-extension-disclaimer.accept_label' | translate }}
+    </ion-button>
   </ion-toolbar>
 </ion-footer>

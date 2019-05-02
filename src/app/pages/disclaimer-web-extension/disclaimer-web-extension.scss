@@ -1,7 +1,7 @@
 ul {
   list-style: none;
   li:before {
-    content: "\00AC";
+    content: '\00AC';
     padding-right: 4px;
   }
 }

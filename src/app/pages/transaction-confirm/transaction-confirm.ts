@@ -70,17 +70,6 @@ export class TransactionConfirmPage {
 
     loading.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
 
-    let blockexplorer = '' // TODO: Move to coinlib
-    if (this.protocol.identifier.startsWith('btc')) {
-      blockexplorer = 'https://live.blockcypher.com/btc/tx/{{txId}}/'
-    } else if (this.protocol.identifier.startsWith('eth')) {
-      blockexplorer = 'https://etherscan.io/tx/{{txId}}'
-    } else if (this.protocol.identifier.startsWith('ae')) {
-      blockexplorer = 'https://explorer.aepps.com/#/tx/{{txId}}'
-    } else if (this.protocol.identifier.startsWith('xtz')) {
-      blockexplorer = 'https://tzscan.io/{{txId}}'
-    }
-
     let interval = setTimeout(() => {
       loading.dismiss().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
       let toast = this.toastCtrl
@@ -156,20 +145,9 @@ export class TransactionConfirmPage {
               {
                 text: 'Open Blockexplorer',
                 handler: () => {
-                  if (blockexplorer) {
-                    this.openUrl(blockexplorer.replace('{{txId}}', txId))
-                  } else {
-                    let toast = this.toastCtrl
-                      .create({
-                        duration: TOAST_DURATION,
-                        message: 'Unable to open blockexplorer',
-                        showCloseButton: true,
-                        position: 'bottom'
-                      })
-                      .then(toast => {
-                        toast.present().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
-                      })
-                  }
+                  const blockexplorer = this.protocol.getBlockExplorerLinkForTxId(txId)
+                  this.openUrl(blockexplorer)
+
                   this.router.navigateByUrl('/tabs/portfolio').catch(handleErrorSentry(ErrorCategory.NAVIGATION))
                 }
               },

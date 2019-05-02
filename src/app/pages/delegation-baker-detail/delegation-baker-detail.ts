@@ -6,10 +6,12 @@ import BigNumber from 'bignumber.js'
 import { OperationsProvider } from '../../services/operations/operations'
 import { handleErrorSentry, ErrorCategory } from '../../services/sentry-error-handler/sentry-error-handler'
 import { RemoteConfigProvider, BakerConfig } from '../../services/remote-config/remote-config'
-import { Moment } from 'moment'
 import * as moment from 'moment'
+
 import { ProtocolSymbols } from '../../services/protocols/protocols'
 import { DataService, DataServiceKey } from '../../services/data/data.service'
+
+type Moment = moment.Moment
 
 const hoursPerCycle = 68
 

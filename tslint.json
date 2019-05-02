@@ -1,6 +1,6 @@
 {
-  "extends": ["tslint-config-prettier", "tslint:recommended"],
-  "rulesDirectory": ["codelyzer"],
+  "extends": ["tslint-config-standard", "tslint:recommended"],
+  "rulesDirectory": ["tslint-config-prettier", "codelyzer"],
   "rules": {
     "array-type": false,
     "arrow-parens": false,

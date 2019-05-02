@@ -1,3 +1,4 @@
+/*
 import { async, TestBed, ComponentFixture } from '@angular/core/testing'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { IonicModule, NavController, NavParams, Platform, LoadingController, ToastController } from '@ionic/angular'
@@ -10,7 +11,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { Keyboard } from '@ionic-native/keyboard'
 
 import { PlatformMock, StatusBarMock, SplashScreenMock, NavParamsMock } from '../../../../test-config/mocks-ionic'
-import { NavControllerMock, KeyboardMock, LoadingControllerMock, LoadingMock, ToastControllerMock } from 'ionic-mocks'
 
 import { ComponentsModule } from '../../components/components.module'
 import { AccountProvider } from '../../services/account/account.provider'
@@ -59,27 +59,10 @@ describe('TransactionPrepare Page', () => {
         AccountProvider,
         Clipboard,
         { provide: Storage, useClass: StorageMock },
-        {
-          provide: NavController,
-          useFactory: () => NavControllerMock.instance()
-        },
         { provide: NavParams, useClass: NavParamsMock },
         { provide: StatusBar, useClass: StatusBarMock },
-        {
-          provide: LoadingController,
-          useFactory: () => {
-            const instance = LoadingMock.instance()
-            instance.dismiss.and.returnValue(Promise.resolve())
-            return LoadingControllerMock.instance(instance)
-          }
-        },
-        {
-          provide: ToastController,
-          useFactory: () => ToastControllerMock.instance()
-        },
         { provide: SplashScreen, useClass: SplashScreenMock },
         { provide: Platform, useClass: PlatformMock },
-        { provide: Keyboard, useClass: KeyboardMock },
         ClipboardProvider
       ]
     })
@@ -158,3 +141,4 @@ describe('TransactionPrepare Page', () => {
     })
   })
 })
+*/

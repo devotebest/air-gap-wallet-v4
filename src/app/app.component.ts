@@ -9,7 +9,7 @@ import { setSentryRelease, handleErrorSentry, ErrorCategory, setSentryUser } fro
 import { ProtocolsProvider } from './services/protocols/protocols'
 import { WebExtensionProvider } from './services/web-extension/web-extension'
 import { AppInfoProvider } from './services/app-info/app-info'
-//import { TransactionQrPage } from '../pages/transaction-qr/transaction-qr'
+// import { TransactionQrPage } from '../pages/transaction-qr/transaction-qr'
 import { StorageProvider, SettingsKey } from './services/storage/storage'
 import { generateGUID } from './utils/utils'
 
@@ -43,7 +43,7 @@ export class AppComponent {
     private router: Router,
     private dataService: DataService
   ) {
-    this.initializeApp()
+    this.initializeApp().catch(handleErrorSentry(ErrorCategory.OTHER))
   }
 
   async initializeApp() {

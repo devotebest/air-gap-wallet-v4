@@ -115,6 +115,7 @@ export class SubAccountAddPage {
 
   async prepareOriginate() {
     const pageOptions = await this.operationsProvider.prepareOriginate(this.wallet)
+
     const info = {
       wallet: pageOptions.params.wallet,
       airGapTx: pageOptions.params.airGapTx,

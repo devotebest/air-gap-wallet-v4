@@ -173,7 +173,6 @@ export class ExchangePage {
       this.minExchangeAmount = new BigNumber(
         await this.exchangeProvider.getMinAmountForCurrency(this.fromWallet.protocolIdentifier, this.toWallet.protocolIdentifier)
       )
-      //this.minExchangeAmount = new BigNumber(0.0001)
     }
     if (this.fromWallet && this.toWallet && this.amount.isGreaterThan(0)) {
       this.exchangeAmount = new BigNumber(

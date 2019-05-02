@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Subject, ReplaySubject } from 'rxjs'
 import { AirGapMarketWallet, ICoinProtocol } from 'airgap-coin-lib'
 import { StorageProvider, SettingsKey } from '../storage/storage'
-import { map, take } from 'rxjs/operators'
+import { map, take, auditTime } from 'rxjs/operators'
 import { PushProvider } from '../push/push'
 import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
 
@@ -23,7 +23,7 @@ export class AccountProvider {
   private walletChangedBehaviour: Subject<void> = new Subject()
 
   get walledChangedObservable() {
-    return this.walletChangedBehaviour.asObservable()
+    return this.walletChangedBehaviour.asObservable().pipe(auditTime(50))
   }
 
   constructor(private storageProvider: StorageProvider, private pushProvider: PushProvider) {
@@ -216,7 +216,7 @@ export class AccountProvider {
     return this.usedProtocols
       .pipe(
         take(1),
-        map((protocols: any) => {
+        map(protocols => {
           const compatibleProtocols: Map<string, ICoinProtocol> = new Map()
 
           protocols.forEach(protocol => {

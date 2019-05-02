@@ -28,7 +28,7 @@ export class PortfolioPage {
 
   wallets: Observable<AirGapMarketWallet[]>
   walletGroups: ReplaySubject<WalletGroup[]> = new ReplaySubject(1)
-  isOn = false
+
   constructor(
     private router: Router,
     private walletsProvider: AccountProvider,

@@ -38,7 +38,6 @@ export class ScanBasePage {
   }
 
   ionViewDidEnter() {
-    console.log('scan base did enter')
     if (!this.platform.is('cordova')) {
       this.hasCameraPermission = true
       this.zxingScanner.camerasNotFound.subscribe((devices: MediaDeviceInfo[]) => {
