@@ -14,6 +14,8 @@
 p {
   font-size: 14px;
 }
+
+/* forces the ion-label size */
 ion-label {
   font-size: 12px;
 }
@@ -125,24 +127,6 @@ page-account-import-onboarding {
   .swiper-pagination-progressbar {
     background: rgba(var(--ion-color-secondary-rgb), 0.12);
   }
-}
-
-.ion-padding-left,
-[padding-left] {
-  --padding-left: var(--ion-padding, 16px);
-  padding-left: var(--ion-padding, 16px);
-}
-
-.swiper-pagination-custom {
-  top: 0px;
-}
-
-.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background: var(--ion-color-primary);
-}
-
-.swiper-pagination-progressbar {
-  background: rgba(34, 34, 34, 0.12);
 }
 
 .typography--mono {
