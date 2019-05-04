@@ -94,7 +94,7 @@
           <ion-label color="blackLight" no-margin position="stacked">{{ 'transaction-prepare.amount_label' | translate }}</ion-label>
           <ion-input formControlName="amount" type="number" id="amount-input" placeholder="0.0"></ion-input>
         </ion-item>
-        <ion-text no-margin>
+        <ion-text no-margin color="blackLight">
           <p no-margin>${{ transactionForm.get('amount').value * wallet.currentMarketPrice.toNumber() | number: '1.2-2' }}</p>
         </ion-text>
       </ion-col>
@@ -115,7 +115,7 @@
       </ion-col>
     </ion-row>
     <ion-row padding-horizontal padding-bottom>
-      <ion-col size="12" *ngIf="!transactionForm.controls['amount'].valid" no-padding>
+      <ion-col size="12" *ngIf="!transactionForm.controls['amount'].valid">
         <ion-text no-margin color="danger">
           <p no-margin>
             {{ 'transaction-prepare.error.amount_label' | translate }}
@@ -137,7 +137,7 @@
     <ion-row nowrap padding-horizontal>
       <ion-col size="12" no-padding>
         <ion-item no-padding lines="none">
-          <ion-range no-padding min="0" max="2" step="1" snaps="true" formControlName="feeLevel" id="feeLevel-input" class="range-slider">
+          <ion-range no-padding min="0" max="2" step="3" snaps="true" formControlName="feeLevel" id="feeLevel-input" class="range-slider">
             <ion-icon slot="start" color="black" name="hourglass"></ion-icon>
             <ion-icon slot="end" color="black" name="jet"></ion-icon>
           </ion-range>
