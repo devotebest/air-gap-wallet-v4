@@ -16,6 +16,13 @@ export interface BakerConfig {
   }
 }
 
+export interface AeFirstVote {
+  enabled: boolean
+  showSelfVoted: boolean
+  startDate: number
+  endDate: number
+}
+
 @Injectable({
   providedIn: 'root'
 })

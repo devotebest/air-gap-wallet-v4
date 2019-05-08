@@ -119,13 +119,14 @@ export class OperationsProvider {
     wallet: AirGapMarketWallet,
     address: string,
     amount: BigNumber,
-    fee: BigNumber
+    fee: BigNumber,
+    data?: any
   ): Promise<{ airGapTx: IAirGapTransaction; serializedTx: string }> {
     const loader = await this.getAndShowLoader()
 
     try {
       // TODO: This is an UnsignedTransaction, not an IAirGapTransaction
-      const rawUnsignedTx: any = await wallet.prepareTransaction([address], [amount], fee)
+      const rawUnsignedTx: any = await wallet.prepareTransaction([address], [amount], fee, data)
 
       const airGapTx = await wallet.coinProtocol.getTransactionDetails({
         publicKey: wallet.publicKey,

@@ -4,7 +4,14 @@ import { Injectable } from '@angular/core'
 import { AlertController } from '@ionic/angular'
 import { Router, NavigationExtras } from '@angular/router'
 import { DataService, DataServiceKey } from '../../services/data/data.service'
-import { DeserializedSyncProtocol, SyncProtocolUtils, EncodedType, SyncWalletRequest, AirGapMarketWallet } from 'airgap-coin-lib'
+import {
+  DeserializedSyncProtocol,
+  SyncProtocolUtils,
+  EncodedType,
+  SyncWalletRequest,
+  AirGapMarketWallet,
+  supportedProtocols
+} from 'airgap-coin-lib'
 import { AccountImportPage } from '../../pages/account-import/account-import'
 //import { TransactionConfirmPage } from "../../pages/transaction-confirm/transaction-confirm";
 import { handleErrorSentry, ErrorCategory } from '../sentry-error-handler/sentry-error-handler'
@@ -49,29 +56,81 @@ export class SchemeRoutingProvider {
       let data = rawString // Fallback to support raw data QRs
       data = url.searchParams.get('d')
 
-      try {
-        const deserializedSync = await syncProtocol.deserialize(data)
+      // try {
+      const deserializedSync = await syncProtocol.deserialize(data)
 
-        if (deserializedSync.type in EncodedType) {
-          // Only handle types that we know
-          return this.syncSchemeHandlers[deserializedSync.type](deserializedSync, scanAgainCallback)
-        } else {
-          return this.syncTypeNotSupportedAlert(deserializedSync, scanAgainCallback)
-        }
-      } catch (error) {
+      if (deserializedSync.type in EncodedType) {
+        // Only handle types that we know
+        return this.syncSchemeHandlers[deserializedSync.type](deserializedSync, scanAgainCallback)
+      } else {
+        return this.syncTypeNotSupportedAlert(deserializedSync, scanAgainCallback)
+      }
+      // }
+      /* Temporarily comment out to catch bitcoin:xxx cases
+      catch (error) {
         console.error('Deserialization of sync failed', error)
       }
+      */
     } catch (error) {
       console.warn(error)
-      const { compatibleWallets, incompatibleWallets } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(rawString)
-      if (compatibleWallets.length > 0) {
-        const info = {
-          address: rawString,
-          compatibleWallets,
-          incompatibleWallets
+
+      const splits = rawString.split(':')
+      if (splits.length > 1) {
+        const [address] = splits[1].split('?')
+        const wallets = this.accountProvider.getWalletList()
+        let foundMatch = false
+        for (const protocol of supportedProtocols()) {
+          if (splits[0].toLowerCase() === protocol.symbol.toLowerCase() || splits[0].toLowerCase() === protocol.name.toLowerCase()) {
+            // TODO: Move to utils
+            const partition = <T>(array: T[], isValid: (element: T) => boolean): [T[], T[]] => {
+              const pass: T[] = []
+              const fail: T[] = []
+              array.forEach(element => {
+                if (isValid(element)) {
+                  pass.push(element)
+                } else {
+                  fail.push(element)
+                }
+              })
+              return [pass, fail]
+            }
+
+            const [compatibleWallets, incompatibleWallets] = partition(
+              wallets,
+              (wallet: AirGapMarketWallet) => wallet.protocolIdentifier === protocol.identifier
+            )
+
+            if (compatibleWallets.length > 0) {
+              foundMatch = true
+              const info = {
+                address: address,
+                compatibleWallets,
+                incompatibleWallets
+              }
+              this.dataService.setData(DataServiceKey.WALLET, info)
+              this.router.navigateByUrl('/select-wallet/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+            }
+            break
+          }
         }
-        this.dataService.setData(DataServiceKey.WALLET, info)
-        this.router.navigateByUrl('/select-wallet/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+        if (!foundMatch) {
+          return scanAgainCallback()
+        }
+      } else {
+        const { compatibleWallets, incompatibleWallets } = await this.accountProvider.getCompatibleAndIncompatibleWalletsForAddress(
+          rawString
+        )
+        if (compatibleWallets.length > 0) {
+          const info = {
+            address: rawString,
+            compatibleWallets,
+            incompatibleWallets
+          }
+          this.dataService.setData(DataServiceKey.WALLET, info)
+          this.router.navigateByUrl('/select-wallet/' + DataServiceKey.WALLET).catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+        } else {
+          return scanAgainCallback()
+        }
       }
     }
   }
