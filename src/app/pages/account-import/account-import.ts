@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, NgZone } from '@angular/core'
 import { Location } from '@angular/common'
 import { ModalController, LoadingController, Platform, AlertController } from '@ionic/angular'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -30,11 +30,11 @@ export class AccountImportPage {
     private router: Router,
     private wallets: AccountProvider,
     private webExtensionProvider: WebExtensionProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private ngZone: NgZone
   ) {
     if (this.route.snapshot.data['special']) {
       this.wallet = this.route.snapshot.data['special']
-      console.log(this.wallet)
     }
   }
 
@@ -88,7 +88,9 @@ export class AccountImportPage {
           this.wallet
             .synchronize()
             .then(() => {
-              this.wallets.triggerWalletChanged()
+              this.ngZone.run(() => {
+                this.wallets.triggerWalletChanged()
+              })
             })
             .catch(handleErrorSentry(ErrorCategory.WALLET_PROVIDER))
           this.loading.dismiss().catch(handleErrorSentry(ErrorCategory.NAVIGATION))

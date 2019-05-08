@@ -28,9 +28,12 @@ export class ScanPage extends ScanBasePage {
     this.isBrowser = !this.platform.is('cordova')
   }
 
-  checkScan(resultString: string) {
+  async checkScan(resultString: string) {
     console.log('got new text', resultString)
-
-    this.schemeRouting.handleNewSyncRequest(this.router, resultString).catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))
+    this.schemeRouting
+      .handleNewSyncRequest(this.router, resultString, () => {
+        this.startScan()
+      })
+      .catch(handleErrorSentry(ErrorCategory.SCHEME_ROUTING))
   }
 }

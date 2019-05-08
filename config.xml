@@ -148,5 +148,5 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <engine name="android" spec="7.1.0" />
-    <engine name="ios" spec="^5.0.0" />
+    <engine name="ios" spec="5.0.1" />
 </widget>

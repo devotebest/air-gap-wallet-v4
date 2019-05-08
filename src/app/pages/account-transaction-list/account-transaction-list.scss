@@ -41,7 +41,10 @@ ion-fab {
   width: 100%;
 }
 ion-header {
-  background-color: white;
+  ion-toolbar,
+  ion-row {
+    background-color: white;
+  }
 }
 p {
   margin: 0px;
