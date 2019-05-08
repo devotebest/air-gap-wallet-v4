@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
+import { Location } from '@angular/common'
 import { IAirGapTransaction, AirGapMarketWallet, TezosKtProtocol } from 'airgap-coin-lib'
-import { Platform, NavController, PopoverController, ToastController } from '@ionic/angular'
+import { Platform, PopoverController, ToastController } from '@ionic/angular'
 import { Router, ActivatedRoute } from '@angular/router'
 //import 'core-js/es7/object'
 
@@ -66,7 +67,7 @@ export class AccountTransactionListPage {
   private TRANSACTION_LIMIT = 10
 
   constructor(
-    public navCtrl: NavController,
+    private location: Location,
     private router: Router,
     private route: ActivatedRoute,
     public popoverCtrl: PopoverController,
@@ -142,16 +143,16 @@ export class AccountTransactionListPage {
       icon: 'add',
       action: async () => {
         const protocol = new TezosKtProtocol()
-        const ktAddresses = await protocol.getAddressesFromPublicKey(this.wallet.publicKey)
+        const ktAddresses: any = await protocol.getAddressesFromPublicKey(this.wallet.publicKey)
 
         if (ktAddresses.length === 0) {
           this.showToast('No accounts to import.')
         } else {
-          for (const [index, ktAddress] of ktAddresses.entries()) {
-            await this.operationsProvider.addKtAddress(this.wallet, index, ktAddresses)
+          for (const [index, element] of ktAddresses.entries()) {
+            await this.operationsProvider.addKtAddress(this.wallet, parseInt(index), ktAddresses)
           }
 
-          await this.navCtrl.pop()
+          await this.location.back()
           this.showToast('Accounts imported')
         }
       }
@@ -244,9 +245,17 @@ export class AccountTransactionListPage {
   }
 
   openBlockexplorer() {
-    const blockexplorer = this.wallet.coinProtocol.getBlockExplorerLinkForAddress(this.wallet.addresses[0])
-
-    this.openUrl(blockexplorer)
+    let blockexplorer = ''
+    if (this.protocolIdentifier.startsWith('btc')) {
+      blockexplorer = 'https://live.blockcypher.com/btc/address/{{address}}/'
+    } else if (this.protocolIdentifier.startsWith('eth')) {
+      blockexplorer = 'https://etherscan.io/address/{{address}}'
+    } else if (this.protocolIdentifier.startsWith('ae')) {
+      blockexplorer = 'https://explorer.aepps.com/#/account/{{address}}'
+    } else if (this.protocolIdentifier.startsWith('xtz')) {
+      blockexplorer = 'https://tzscan.io/{{address}}'
+    }
+    this.openUrl(blockexplorer.replace('{{address}}', this.wallet.addresses[0]))
   }
 
   private openUrl(url: string) {
@@ -351,7 +360,7 @@ export class AccountTransactionListPage {
       componentProps: {
         wallet: this.wallet,
         onDelete: () => {
-          this.navCtrl.pop().catch(handleErrorSentry(ErrorCategory.NAVIGATION))
+          this.location.back()
         },
         onUndelegate: async () => {
           const pageOptions = await this.operationsProvider.prepareDelegate(this.wallet)
